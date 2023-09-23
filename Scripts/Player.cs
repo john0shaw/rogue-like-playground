@@ -8,46 +8,37 @@ public partial class Player : CharacterBody2D
 
 	private AnimationPlayer _animationPlayer;
 	private Sprite2D _sprite2D;
-	private Sprite2D _swordSprite;
 
 	private Weapon _equippedWeapon;
-	private bool _isAttacking;
+	private WeaponNode _weaponNode;
 
     public override void _Ready()
     {
         base._Ready();
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_sprite2D = GetNode<Sprite2D>("Sprite2D");
-		_swordSprite = GetNode<Sprite2D>("Sprite2D/SwordSprite2D");
+		_weaponNode = GetNode<WeaponNode>("Weapon");
 
-		SetWeapon(StartingWeapon);
+		_weaponNode.SetWeapon(StartingWeapon);
     }
-
-	public void SetWeapon(Weapon weapon)
-	{
-		_swordSprite.Texture = weapon.Texture;
-		_equippedWeapon = weapon;
-	}
 
 	public void Attack()
 	{
-		_isAttacking = true;
-		_animationPlayer.Play("Attack");
+		_weaponNode.Attack();
 		GD.Print("Attack!");
 	}
 
-	public void FinishAttack()
+	private void RotateWeapon()
 	{
-		_isAttacking = false;
+        Vector2 mousePosition = GetGlobalMousePosition();
+		_weaponNode.RotateWeapon(Mathf.Atan2(mousePosition.Y - Position.Y, mousePosition.X - Position.X) + 1.571f);
 	}
 
     public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
-        Vector2 mousePosition = GetGlobalMousePosition();
-		float radsToRotate = Mathf.Atan2(mousePosition.Y - Position.Y, mousePosition.X - Position.X);
 
-		_swordSprite.Rotation = 1.571f + radsToRotate;
+		RotateWeapon();
 
         // Get the input direction and handle the movement/deceleration.
         // As good practice, you should replace UI actions with custom gameplay actions.
@@ -57,7 +48,7 @@ public partial class Player : CharacterBody2D
 			velocity.X = direction.X * Speed;
 			velocity.Y = direction.Y * Speed;
 
-			if (!_isAttacking && direction.X > 0)
+			if (direction.X > 0)
 				_animationPlayer.Play("Walk");
 			else
 				_animationPlayer.PlayBackwards("Walk");
@@ -65,8 +56,7 @@ public partial class Player : CharacterBody2D
 		else
 		{
 			velocity = Vector2.Zero;
-			if (!_isAttacking)
-				_animationPlayer.Play("Idle");
+			_animationPlayer.Play("Idle");
 		}
 
 		if (Input.IsActionJustPressed("Attack"))

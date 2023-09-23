@@ -7,3 +7,4 @@
 script = ExtResource("1_uhvis")
 Texture = ExtResource("1_l4uqc")
 Name = "Sword"
+AttackType = 1
