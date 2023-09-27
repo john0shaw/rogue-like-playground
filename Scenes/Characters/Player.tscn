@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dk48k57ophom0"]
+[gd_scene load_steps=11 format=3 uid="uid://dk48k57ophom0"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_erdfq"]
 [ext_resource type="Resource" uid="uid://c28hyly8jh442" path="res://Resources/Weapons/Sword.tres" id="2_7g5xm"]
@@ -124,8 +124,12 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u88sc"]
 size = Vector2(18, 16)
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_vqblh"]
+radius = 20.0
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 position = Vector2(469, 349)
+collision_layer = 9
 script = ExtResource("1_erdfq")
 StartingWeapon = ExtResource("2_7g5xm")
 
@@ -147,3 +151,12 @@ position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_u88sc")
 
 [node name="Weapon" parent="." instance=ExtResource("4_2jo8h")]
+
+[node name="InteractableNode" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableNode"]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_vqblh")
+debug_color = Color(0.662745, 0.231373, 0, 0.196078)

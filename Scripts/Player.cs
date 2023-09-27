@@ -1,10 +1,19 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Player : CharacterBody2D
 {
+	public static Player player;
+
 	[Export] public const float Speed = 100.0f;
 	[Export] public Weapon StartingWeapon;
+	[Export] private int StartingHealth = 3;
+
+	public int Health;
+	public int Gold;
+
+	private List<Item> _inventory = new List<Item>();
 
 	private AnimationPlayer _animationPlayer;
 	private Sprite2D _sprite2D;
@@ -18,14 +27,45 @@ public partial class Player : CharacterBody2D
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_sprite2D = GetNode<Sprite2D>("Sprite2D");
 		_weaponNode = GetNode<WeaponNode>("Weapon");
+		player = this;
 
 		_weaponNode.SetWeapon(StartingWeapon);
+        Health = StartingHealth;
     }
+
+	public int GetItemCountByID(int ID)
+	{
+		for (int i = 0; i < _inventory.Count; i++)
+		{
+			if (_inventory[i].ID == ID)
+				return _inventory[i].Count;
+		}
+
+		return 0;
+	}
+
+	public void AddItem(Item item)
+	{
+		for (int i = 0; i < _inventory.Count; i++)
+		{
+			if (_inventory[i].ID == item.ID)
+			{
+				_inventory[i].Count += item.Count;
+				return;
+			}
+		}
+
+		_inventory.Add(item);
+	}
+
+	public void TakeDamage(int damage)
+	{
+		Health -= damage;
+	}
 
 	public void Attack()
 	{
 		_weaponNode.Attack();
-		GD.Print("Attack!");
 	}
 
 	private void RotateWeapon()

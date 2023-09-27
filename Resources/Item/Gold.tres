@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://c064i4g6qqpdw"]
+
+[ext_resource type="Texture2D" uid="uid://bjbqfiu4qmon8" path="res://Art/Items/Coin_Single.png" id="1_nmf6p"]
+[ext_resource type="Script" path="res://Scripts/Resources/Item.cs" id="1_vmdju"]
+
+[resource]
+script = ExtResource("1_vmdju")
+ID = 0
+Name = "Gold"
+Value = 1
+Count = 1
+SpawnChance = 0.1
+SpawnMax = 10
+Texture = ExtResource("1_nmf6p")

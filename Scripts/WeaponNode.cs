@@ -3,7 +3,7 @@ using System;
 
 public partial class WeaponNode : Node2D
 {
-	private RigidBody2D _colliderOrigin;
+	private Area2D _colliderOrigin;
 	private Sprite2D _sprite2D;
 	private Node2D _spriteOrigin;
 	private CollisionShape2D _collider;
@@ -14,7 +14,7 @@ public partial class WeaponNode : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_colliderOrigin = GetNode<RigidBody2D>("ColliderOrigin");
+		_colliderOrigin = GetNode<Area2D>("ColliderOrigin");
 		_sprite2D = GetNode<Sprite2D>("SpriteOrigin/Sprite2D");
 		_collider = GetNode<CollisionShape2D>("ColliderOrigin/CollisionShape2D");
 		_spriteOrigin = GetNode<Node2D>("SpriteOrigin");
@@ -42,8 +42,16 @@ public partial class WeaponNode : Node2D
         }
 		else if (_weapon.AttackType == Weapon.AttackTypeEnum.Swing)
 		{
-			_animationPlayer.Play("Swing");
+            _animationPlayer.Play("Swing");
+        }
+	}
+
+	public void _on_collider_origin_body_entered(Node2D node)
+	{
+		if (node is Enemy)
+		{
+			Enemy enemy = (Enemy)node;
+			enemy.TakeDamage(_weapon.Damage);
 		}
-		
 	}
 }

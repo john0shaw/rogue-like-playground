@@ -7,3 +7,5 @@
 script = ExtResource("2_47ctc")
 Texture = ExtResource("1_vv3r0")
 Name = "Hammer"
+AttackType = 0
+Damage = 1

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://cffbxgew22v5s"]
+
+[ext_resource type="Script" path="res://Scripts/Pickupable.cs" id="1_x0k10"]
+[ext_resource type="Resource" uid="uid://c064i4g6qqpdw" path="res://Resources/Item/Gold.tres" id="2_wus17"]
+[ext_resource type="Texture2D" uid="uid://bjbqfiu4qmon8" path="res://Art/Items/Coin_Single.png" id="3_auska"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qwcsy"]
+size = Vector2(16, 16)
+
+[node name="Coin" type="Area2D"]
+position = Vector2(378, 427)
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_x0k10")
+Item = ExtResource("2_wus17")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qwcsy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_auska")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
