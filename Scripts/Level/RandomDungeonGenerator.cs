@@ -37,16 +37,12 @@ public partial class RandomDungeonGenerator : Node2D
         _finishRoomPackedScene = ResourceLoader.Load<PackedScene>("res://Scenes/Levels/SpecialRooms/Finish.tscn");
 
         _numberRoomsToGenerate = MaxRooms;
+        _rng = new RandomNumberGenerator();
+        _rng.Randomize();
 
-        _availableRooms = new RoomDefinitionList();
+        _availableRooms = new RoomDefinitionList(_rng);
         LoadRoomDefinitions();
 	}
-
-    public void SetRng(RandomNumberGenerator rng)
-    {
-        _rng = rng;
-        _availableRooms.SetRng(rng);
-    }
 
     public void Clear()
     {
@@ -143,6 +139,11 @@ public partial class RandomDungeonGenerator : Node2D
                     break;
             }
         }
+
+        Player.player.GlobalPosition = new Vector2(
+            RoomTileSize * TileSize / 2,
+            RoomTileSize * TileSize / 2
+        );
     }
 
     private void AddRoom(Room room, Vector2 mapPosition)
