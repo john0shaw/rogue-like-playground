@@ -51,14 +51,32 @@ public partial class Enemy : CharacterBody2D
 
 	public void Die()
 	{
+		SpawnLoot();
 		QueueFree();
 	}
 
 	public void SpawnLoot()
 	{
+		Node2D worldNode = GetTree().Root.GetNode<Node2D>("TestLevel");
+
 		for (int i = 0; i < Loot.Count; i++)
 		{
-
+			float r = _rng.RandfRange(0, 1);
+			if (r < Loot[i].SpawnChance)
+			{
+				int amount = _rng.RandiRange(1, Loot[i].SpawnMax);
+                PackedScene packedScene = (PackedScene)ResourceLoader.Load(Loot[i].ScenePath);
+                for (int ii = 0; ii < amount; ii++)
+				{
+                    Node2D node = (Node2D)packedScene.Instantiate();
+                    node.GlobalPosition = new Vector2(
+                        GlobalPosition.X + _rng.RandiRange(-10, 10),
+                        GlobalPosition.Y + _rng.RandiRange(-10, 10)
+                    );
+                    worldNode.AddChild(node);
+                }
+				
+			}
 		}
 	}
 

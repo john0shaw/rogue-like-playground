@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Rogue Like"
-run/main_scene="res://Scenes/Levels/TestLevel.tscn"
+run/main_scene="res://Scenes/Levels/Dungeon.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -51,3 +51,7 @@ Attack={
 
 2d_physics/layer_1="PhysicalCollision"
 2d_physics/layer_4="Interactable"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.462745, 0.231373, 0.211765, 1)

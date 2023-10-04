@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System;
 using System.ComponentModel;
 
@@ -11,6 +11,7 @@ public partial class Pickupable : Area2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        _sprite2D = GetNode<Sprite2D>("Sprite2D");
         _sprite2D.Texture = Item.Texture;
     }
 
@@ -24,7 +25,8 @@ public partial class Pickupable : Area2D
     {
         if (node is Player)
         {
-            Player.player.AddItem(Item);
+            Item clonedItem = Item.Duplicate() as Item;
+            Player.player.AddItem(clonedItem);
             QueueFree();
         }
     }

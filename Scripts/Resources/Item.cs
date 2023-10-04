@@ -11,4 +11,5 @@ public partial class Item : Resource
     [Export] public float SpawnChance = 0.1f;
     [Export] public int SpawnMax = 1;
     [Export] public Texture2D Texture;
+    [Export] public string ScenePath;
 }

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgq4ak8hjvqa8"]
+
+[ext_resource type="Script" path="res://Scripts/OverviewCamera.cs" id="1_j1pfm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_87qsj"]
+
+[node name="OverviewCamera" type="CharacterBody2D"]
+script = ExtResource("1_j1pfm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_87qsj")
+disabled = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.1, 0.1)
