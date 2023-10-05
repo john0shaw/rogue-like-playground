@@ -1,16 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://rsqiq66hi8dn"]
 
-[ext_resource type="Script" path="res://Scripts/Level/Level.cs" id="1_io0ra"]
+[ext_resource type="Script" path="res://Scripts/Level/Dungeon.cs" id="1_6t468"]
 [ext_resource type="Script" path="res://Scripts/Level/RandomDungeonGenerator.cs" id="2_6opxo"]
 [ext_resource type="PackedScene" uid="uid://dk48k57ophom0" path="res://Scenes/Characters/Player.tscn" id="2_jdpaw"]
 
 [node name="Dungeon" type="Node2D"]
-script = ExtResource("1_io0ra")
+script = ExtResource("1_6t468")
 
 [node name="RandomDungeonGenerator" type="Node2D" parent="."]
 script = ExtResource("2_6opxo")
 DungeonPartsLocation = "res://Scenes/Levels/RandomRooms"
-MaxRooms = 20
+BaseGroundTile = Vector2i(0, 4)
+AlternateGroundTiles = [Vector2i(1, 4), Vector2i(6, 3)]
+BaseWallTile = Vector2i(4, 3)
+AlternateWallTiles = [Vector2i(2, 1), Vector2i(5, 2), Vector2i(4, 2)]
 
 [node name="Player" parent="." instance=ExtResource("2_jdpaw")]
 

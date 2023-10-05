@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 using System.Collections.Generic;
 
@@ -9,12 +10,18 @@ public partial class RandomDungeonGenerator : Node2D
     [ExportGroup("Tile Configuration")]
     [Export] public int RoomTileSize = 40;
     [Export] public int TileSize = 16;
+    [Export] public Vector2I BaseGroundTile;
+    [Export] public Array<Vector2I> AlternateGroundTiles = new Array<Vector2I>();
+    [Export] public Vector2I BaseWallTile;
+    [Export] public Array<Vector2I> AlternateWallTiles = new Array<Vector2I>();
 
     [ExportGroup("Dungeon Generator")]
     [Export] public int MaxRooms = 10;
     [Export] public int MaxContinuousPath = 5;
     [Export] public int MaxWidth = 5;
     [Export] public int MaxHeight = 5;
+
+    public static RandomDungeonGenerator Instance;
 
     RandomNumberGenerator _rng;
     RoomDefinitionList _availableRooms;
@@ -35,6 +42,8 @@ public partial class RandomDungeonGenerator : Node2D
 	{
         _spawnRoomPackedScene = ResourceLoader.Load<PackedScene>("res://Scenes/Levels/SpecialRooms/Spawn.tscn");
         _finishRoomPackedScene = ResourceLoader.Load<PackedScene>("res://Scenes/Levels/SpecialRooms/Finish.tscn");
+
+        Instance = this;
 
         _numberRoomsToGenerate = MaxRooms;
         _rng = new RandomNumberGenerator();
@@ -154,10 +163,9 @@ public partial class RandomDungeonGenerator : Node2D
         }
 
         AddChild(room);
-        room.MapPosition = _generateTrackPosition;
-        room.GlobalPosition = GetRoomGlobalPosition(room);
-        _continuousPath++;
+        room.Setup(_generateTrackPosition, _rng);
 
+        _continuousPath++;
         _rooms.Add(room);
         _previousRoom = room;
     }
@@ -231,54 +239,30 @@ public partial class RandomDungeonGenerator : Node2D
 
     private Direction GetRandomRoomDirection(Room room)
     {
-        List<Direction> possibleDirections = new List<Direction>();
+        Array<Direction> possibleDirections = new Array<Direction>();
 
         if (room.AvailableConnections.North && !room.UsedConnections.North)
         {
-            if (IsRoomAt(GetRelativeLocation(room, Direction.North)))
-            {
-                //GD.Print("Room already exist to north at: " + GetRelativeLocation(room, Direction.North).ToString());
-            }
-            else
-            {
+            if (!IsRoomAt(GetRelativeLocation(room, Direction.North)))
                 possibleDirections.Add(Direction.North);
-            }
         }
 
         if (room.AvailableConnections.East && !room.UsedConnections.East)
         {
-            if (IsRoomAt(GetRelativeLocation(room, Direction.East)))
-            {
-                //GD.Print("Room already exists to east at: " + GetRelativeLocation(room, Direction.East).ToString());
-            }
-            else
-            {
+            if (!IsRoomAt(GetRelativeLocation(room, Direction.East)))
                 possibleDirections.Add(Direction.East);
-            }
         }
             
         if (room.AvailableConnections.South && !room.UsedConnections.South)
         {
-            if (IsRoomAt(GetRelativeLocation(room, Direction.South)))
-            {
-                //GD.Print("Room already exists to south at: " + GetRelativeLocation(room, Direction.South).ToString());
-            }
-            else
-            {
+            if (!IsRoomAt(GetRelativeLocation(room, Direction.South)))
                 possibleDirections.Add(Direction.South);
-            }
         }
             
         if (room.AvailableConnections.West && !room.UsedConnections.West)
         {
-            if (IsRoomAt(GetRelativeLocation(room, Direction.West)))
-            {
-                //GD.Print("Room already exists to west at: " + GetRelativeLocation(room, Direction.West).ToString());
-            }
-            else
-            {
+            if (!IsRoomAt(GetRelativeLocation(room, Direction.West)))
                 possibleDirections.Add(Direction.West);
-            }
         }
 
         if (possibleDirections.Count == 0)
@@ -287,7 +271,7 @@ public partial class RandomDungeonGenerator : Node2D
             return Direction.Unknown;
         }
         
-        return possibleDirections[_rng.RandiRange(0, possibleDirections.Count - 1)];
+        return possibleDirections.PickRandom();
     }
 
     /// <summary>

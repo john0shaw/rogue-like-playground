@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://dcuf2fnacpf5g"]
+[gd_scene load_steps=17 format=3 uid="uid://dcuf2fnacpf5g"]
 
-[ext_resource type="Script" path="res://Scripts/Enemy.cs" id="1_22snb"]
+[ext_resource type="Script" path="res://Scripts/Characters/Enemies/Enemy.cs" id="1_22snb"]
+[ext_resource type="Resource" uid="uid://c064i4g6qqpdw" path="res://Resources/Item/Gold.tres" id="2_26sfh"]
 [ext_resource type="Texture2D" uid="uid://ocipujfxu7ah" path="res://Art/Characters/Rat.png" id="2_krdym"]
 [ext_resource type="AudioStream" uid="uid://baagtbbqqgj8v" path="res://Sounds/RatDeath.mp3" id="3_6lb5j"]
 [ext_resource type="AudioStream" uid="uid://dx1ehgrl13ro8" path="res://Sounds/Damage.wav" id="4_nxm2y"]
@@ -254,6 +255,7 @@ color = Color(1, 0, 0, 1)
 position = Vector2(604, 414)
 collision_mask = 3
 script = ExtResource("1_22snb")
+Loot = [ExtResource("2_26sfh")]
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

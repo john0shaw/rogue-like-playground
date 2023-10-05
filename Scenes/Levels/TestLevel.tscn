@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://7gv7ccbnjfw7"]
+[gd_scene load_steps=8 format=3 uid="uid://bqnotp4trnq1s"]
 
 [ext_resource type="Texture2D" uid="uid://i17q4jngd7to" path="res://Art/Tilemaps/Dungeon.png" id="1_4wd7c"]
 [ext_resource type="PackedScene" uid="uid://dk48k57ophom0" path="res://Scenes/Characters/Player.tscn" id="2_306vf"]
-[ext_resource type="PackedScene" uid="uid://dcuf2fnacpf5g" path="res://Scenes/Enemy.tscn" id="4_c3ei0"]
+[ext_resource type="PackedScene" uid="uid://dcuf2fnacpf5g" path="res://Scenes/Characters/Enemies/Enemy.tscn" id="4_c3ei0"]
 [ext_resource type="Resource" uid="uid://c064i4g6qqpdw" path="res://Resources/Item/Gold.tres" id="4_ylksh"]
 [ext_resource type="Script" path="res://Scripts/InGameUI.cs" id="6_phocx"]
 

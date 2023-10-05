@@ -3,7 +3,7 @@ using Godot.Collections;
 using System;
 using System.Collections.Generic;
 
-public partial class Level : Node2D
+public partial class Dungeon : Node2D
 {
     private RandomDungeonGenerator _randomDungeonGenerator;
 

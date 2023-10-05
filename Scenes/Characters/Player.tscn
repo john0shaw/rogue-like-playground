@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://dk48k57ophom0"]
 
-[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_erdfq"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player.cs" id="1_piuhg"]
 [ext_resource type="Resource" uid="uid://c28hyly8jh442" path="res://Resources/Weapons/Sword.tres" id="2_7g5xm"]
 [ext_resource type="Texture2D" uid="uid://dfo6xvwnt0eyd" path="res://Art/Characters/Player.png" id="2_jt5nk"]
 [ext_resource type="PackedScene" uid="uid://gr483yme2cvr" path="res://Scenes/Characters/Weapon.tscn" id="4_2jo8h"]
@@ -130,7 +130,7 @@ radius = 20.0
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 position = Vector2(469, 349)
 collision_layer = 9
-script = ExtResource("1_erdfq")
+script = ExtResource("1_piuhg")
 StartingWeapon = ExtResource("2_7g5xm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

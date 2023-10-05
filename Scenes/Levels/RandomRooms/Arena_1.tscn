@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cw6ktufdcpimm"]
+[gd_scene load_steps=4 format=3 uid="uid://cw6ktufdcpimm"]
 
 [ext_resource type="TileSet" uid="uid://bx36xmtqopq22" path="res://Art/Tilemaps/DungeonTiles.tres" id="1_qh3rg"]
 [ext_resource type="Script" path="res://Scripts/Room.cs" id="2_y561h"]
+[ext_resource type="Resource" uid="uid://hknlxjin6u1x" path="res://Resources/Enemies/Spawners/Rat.tres" id="3_00kh6"]
 
 [node name="Room" type="TileMap"]
 position = Vector2(0, 1)
@@ -42,3 +43,4 @@ HasNorthConnection = true
 HasEastConnection = true
 HasSouthConnection = true
 HasWestConnection = true
+Enemies = [ExtResource("3_00kh6")]
