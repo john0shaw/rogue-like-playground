@@ -12,4 +12,4 @@ shape = SubResource("CircleShape2D_87qsj")
 disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.1, 0.1)
+zoom = Vector2(0.25, 0.25)

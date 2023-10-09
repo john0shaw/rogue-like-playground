@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dqg58c1jao45j"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/EnemyResource.cs" id="1_mo7ck"]
+[ext_resource type="Resource" uid="uid://d2eo5io6d3vmy" path="res://Resources/Loot/2-4_Gold.tres" id="1_p1mlm"]
+
+[resource]
+script = ExtResource("1_mo7ck")
+Name = "Rat"
+MaxHealth = 2
+MoveSpeed = 50.0
+DetectionDistance = 150.0
+AttackDamage = 1
+AttackRange = 30.0
+AttackSpeed = 1.0
+Loot = [ExtResource("1_p1mlm")]

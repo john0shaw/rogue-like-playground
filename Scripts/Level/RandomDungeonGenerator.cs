@@ -14,6 +14,7 @@ public partial class RandomDungeonGenerator : Node2D
     [Export] public Array<Vector2I> AlternateGroundTiles = new Array<Vector2I>();
     [Export] public Vector2I BaseWallTile;
     [Export] public Array<Vector2I> AlternateWallTiles = new Array<Vector2I>();
+    [Export] public Vector2I EnemySpawnTile;
 
     [ExportGroup("Dungeon Generator")]
     [Export] public int MaxRooms = 10;
@@ -149,10 +150,14 @@ public partial class RandomDungeonGenerator : Node2D
             }
         }
 
-        Player.player.GlobalPosition = new Vector2(
-            RoomTileSize * TileSize / 2,
-            RoomTileSize * TileSize / 2
-        );
+        if (Player.player is Player)
+        {
+            Player.player.GlobalPosition = new Vector2(
+                RoomTileSize * TileSize / 2,
+                RoomTileSize * TileSize / 2
+            );
+        }
+        
     }
 
     private void AddRoom(Room room, Vector2 mapPosition)

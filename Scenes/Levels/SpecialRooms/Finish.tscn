@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cl6ip5x068vhg"]
 
 [ext_resource type="TileSet" uid="uid://bx36xmtqopq22" path="res://Art/Tilemaps/DungeonTiles.tres" id="1_lme3j"]
-[ext_resource type="Script" path="res://Scripts/Room.cs" id="2_i7bsf"]
+[ext_resource type="Script" path="res://Scripts/Level/Room.cs" id="2_i7bsf"]
 
 [node name="Room" type="TileMap"]
 position = Vector2(0, 1)
@@ -44,4 +44,11 @@ layer_5/y_sort_enabled = false
 layer_5/y_sort_origin = 0
 layer_5/z_index = 0
 layer_5/tile_data = PackedInt32Array(1310740, 1, 7, 1245203, 1, 8, 1245205, 1, 8)
+layer_6/name = "EnemySpawn"
+layer_6/enabled = true
+layer_6/modulate = Color(1, 1, 1, 1)
+layer_6/y_sort_enabled = false
+layer_6/y_sort_origin = 0
+layer_6/z_index = 0
+layer_6/tile_data = PackedInt32Array()
 script = ExtResource("2_i7bsf")
