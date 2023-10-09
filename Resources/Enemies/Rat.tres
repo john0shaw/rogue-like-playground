@@ -1,15 +1,20 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dqg58c1jao45j"]
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://dqg58c1jao45j"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/EnemyResource.cs" id="1_mo7ck"]
-[ext_resource type="Resource" uid="uid://d2eo5io6d3vmy" path="res://Resources/Loot/2-4_Gold.tres" id="1_p1mlm"]
+[ext_resource type="AnimationLibrary" uid="uid://cip2gjb85d3hy" path="res://Resources/Enemies/Rat/AnimationLibrary.res" id="1_r5vbc"]
+[ext_resource type="Resource" uid="uid://cctimqvqbrw3x" path="res://Resources/Loot/Sword.tres" id="2_n1rp6"]
+[ext_resource type="SpriteFrames" uid="uid://clfe5q8xfv2f3" path="res://Resources/Enemies/Rat/SpriteFrames.tres" id="2_pdu4e"]
 
 [resource]
 script = ExtResource("1_mo7ck")
 Name = "Rat"
 MaxHealth = 2
 MoveSpeed = 50.0
+SpriteFrames = ExtResource("2_pdu4e")
+AnimationLibrary = ExtResource("1_r5vbc")
 DetectionDistance = 150.0
 AttackDamage = 1
 AttackRange = 30.0
 AttackSpeed = 1.0
-Loot = [ExtResource("1_p1mlm")]
+IsRanged = false
+Loot = Array[Resource]([ExtResource("2_n1rp6")])

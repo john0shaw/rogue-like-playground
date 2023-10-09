@@ -11,10 +11,9 @@ public partial class EnemyController : CharacterBody2D
     public const string DIE_ANIMATION = "Die";
 
     [Export] public EnemyResource EnemyResource;
-    [Export] public PackedScene PickupableItemScene;
 
-    public int Health;
-    public int MaxHealth;
+    public float Health;
+    public float MaxHealth;
 
     // UI
     Label _stateNameLabel;
@@ -27,6 +26,8 @@ public partial class EnemyController : CharacterBody2D
 
     // Internal
     RandomNumberGenerator _rng;
+    PackedScene _pickupableItemScene;
+    PackedScene _projectileScene;
 
     public override void _Ready()
     {
@@ -38,7 +39,13 @@ public partial class EnemyController : CharacterBody2D
         _healthBar = GetNode<HealthBar>("HealthBar");
 
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        _animationPlayer.AddAnimationLibrary("Enemy", EnemyResource.AnimationLibrary);
+
         _animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        _animatedSprite2D.SpriteFrames = EnemyResource.SpriteFrames;
+
+        _pickupableItemScene = ResourceLoader.Load<PackedScene>("res://Scenes/Interactable/PickupableItem.tscn");
+        _projectileScene = ResourceLoader.Load<PackedScene>("res://Scenes/Interactable/Projectile.tscn");
 
         MaxHealth = EnemyResource.MaxHealth;
         Health = MaxHealth;
@@ -73,7 +80,7 @@ public partial class EnemyController : CharacterBody2D
 
     public void SpawnLoot(Item item)
     {
-        Pickupable lootItem = (Pickupable)PickupableItemScene.Instantiate();
+        Pickupable lootItem = (Pickupable)_pickupableItemScene.Instantiate();
         lootItem.Item = item;
         lootItem.GlobalPosition = new Vector2(
             GlobalPosition.X + _rng.RandiRange(-15, 15),
@@ -93,8 +100,26 @@ public partial class EnemyController : CharacterBody2D
         }
     }
 
+    public void MeleeAttackPlayer()
+    {
+        Player.player.TakeDamage(EnemyResource.AttackDamage);
+    }
+
+    public void RangedAttackPlayer()
+    {
+        Vector2 directionToPlayer = GlobalPosition.DirectionTo(Player.player.GlobalPosition);
+
+        Projectile projectile = (Projectile)_projectileScene.Instantiate();
+        projectile.Target = Player.player.GlobalPosition;
+        projectile.Origin = GlobalPosition;
+        projectile.ProjectileResource = EnemyResource.ProjectileResource;
+        Owner.AddChild(projectile);
+    }
+
     public float GetAnimationLength(string animationName)
     {
+        animationName = "Enemy/" + animationName;
+
         float animationPlayerLength = 0f;
         float animatedSpriteLength = 0f;
 
@@ -113,6 +138,8 @@ public partial class EnemyController : CharacterBody2D
 
     public void PlayAnimation(string animationName, bool forwards = true)
     {
+        animationName = "Enemy/" + animationName;
+
         if (_animationPlayer.HasAnimation(animationName))
         {
             if (forwards)

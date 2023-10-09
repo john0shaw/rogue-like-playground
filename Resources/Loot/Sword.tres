@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cctimqvqbrw3x"]
+
+[ext_resource type="Resource" uid="uid://d281piwbn84bb" path="res://Resources/Item/Weapons/Sword.tres" id="1_mra5b"]
+[ext_resource type="Script" path="res://Scripts/Resources/Loot.cs" id="2_jqwab"]
+
+[resource]
+script = ExtResource("2_jqwab")
+Item = ExtResource("1_mra5b")
+SpawnChance = 1.0
+MinSpawn = 1
+MaxSpawn = 1

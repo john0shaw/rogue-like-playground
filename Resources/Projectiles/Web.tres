@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cyk5f6ogl08ua"]
+
+[ext_resource type="Texture2D" uid="uid://c3tm00fglwnsp" path="res://Art/Effects/Scratch.png" id="1_fpbms"]
+[ext_resource type="Script" path="res://Scripts/Resources/ProjectileResource.cs" id="2_t04vp"]
+
+[resource]
+script = ExtResource("2_t04vp")
+Sprite = ExtResource("1_fpbms")
+Speed = 200.0
+Range = 200.0
+Damage = 1.0

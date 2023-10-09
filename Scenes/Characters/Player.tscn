@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dk48k57ophom0"]
+[gd_scene load_steps=15 format=3 uid="uid://dk48k57ophom0"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/Player.cs" id="1_xud6c"]
-[ext_resource type="Resource" uid="uid://c28hyly8jh442" path="res://Resources/Weapons/Sword.tres" id="2_7g5xm"]
+[ext_resource type="Resource" uid="uid://d281piwbn84bb" path="res://Resources/Item/Weapons/Sword.tres" id="2_56d4m"]
 [ext_resource type="Texture2D" uid="uid://dfo6xvwnt0eyd" path="res://Art/Characters/Player.png" id="2_jt5nk"]
 [ext_resource type="PackedScene" uid="uid://gr483yme2cvr" path="res://Scenes/Characters/Weapon.tscn" id="4_2jo8h"]
+[ext_resource type="AudioStream" uid="uid://rrekdsq0l5kh" path="res://Sounds/12_Player_Movement_SFX/61_Hit_03.wav" id="4_mu4df"]
 
 [sub_resource type="Animation" id="Animation_nul5h"]
 resource_name = "Idle"
@@ -121,6 +122,122 @@ _data = {
 "Walk": SubResource("Animation_k70mn")
 }
 
+[sub_resource type="Animation" id="Animation_p5cnr"]
+resource_name = "Hit"
+length = 0.2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.1, 0.2)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.1, 0.2)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.1, 0.2)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0.784314, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.1, 0.2)
+}
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer2D")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_mu4df")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
+
+[sub_resource type="Animation" id="Animation_resye"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hc2ve"]
+_data = {
+"Hit": SubResource("Animation_p5cnr"),
+"RESET": SubResource("Animation_resye")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u88sc"]
 size = Vector2(18, 16)
 
@@ -128,11 +245,12 @@ size = Vector2(18, 16)
 radius = 20.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-position = Vector2(469, 349)
-collision_layer = 9
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_xud6c")
-StartingWeapon = ExtResource("2_7g5xm")
-MaxHealth = 10
+StartingWeapon = ExtResource("2_56d4m")
+MaxHealth = 10.0
+MaxMana = 10
 Strength = 1
 Defence = 1
 Magic = 1
@@ -151,6 +269,11 @@ libraries = {
 "": SubResource("AnimationLibrary_22lbf")
 }
 
+[node name="EffectAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hc2ve")
+}
+
 [node name="BodyCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_u88sc")
@@ -165,3 +288,5 @@ collision_mask = 8
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_vqblh")
 debug_color = Color(0.662745, 0.231373, 0, 0.196078)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

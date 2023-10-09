@@ -3,8 +3,8 @@ using System;
 
 public partial class HealthBar : Node2D
 {
-	public int MaxHealth;
-	public int Health;
+	public float MaxHealth;
+	public float Health;
 
 	ColorRect _backgroundBar;
     ColorRect _healthBar;
@@ -25,6 +25,6 @@ public partial class HealthBar : Node2D
 		if (MaxHealth == 0)
 			return;
 
-		_healthBar.SetSize(new Vector2(((float)Health / (float)MaxHealth) * _maxWidth, _healthBar.Size.Y));
+		_healthBar.SetSize(new Vector2((Health / MaxHealth) * _maxWidth, _healthBar.Size.Y));
 	}
 }

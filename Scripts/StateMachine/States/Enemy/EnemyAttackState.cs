@@ -25,7 +25,10 @@ public partial class EnemyAttackState : EnemyState
 
         if (_waitTime <= 0f)
         {
-            Player.player.TakeDamage(_enemyController.EnemyResource.AttackDamage);
+            if (!_enemyController.EnemyResource.IsRanged)
+                _enemyController.MeleeAttackPlayer();
+            else
+                _enemyController.RangedAttackPlayer();
             _waitTime = _attackSpeed;
             return;
         }

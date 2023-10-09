@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cgq4ak8hjvqa8"]
 
-[ext_resource type="Script" path="res://Scripts/OverviewCamera.cs" id="1_03t1o"]
+[ext_resource type="Script" path="res://Scripts/Util/OverviewCamera.cs" id="1_03t1o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_87qsj"]
 

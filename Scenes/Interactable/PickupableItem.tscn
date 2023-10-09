@@ -1,34 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://dl3ihcho40qa"]
 
-[ext_resource type="Script" path="res://Scripts/Pickupable.cs" id="1_8vf6l"]
+[ext_resource type="Script" path="res://Scripts/Interactable/Pickupable.cs" id="1_2d7h0"]
 [ext_resource type="Resource" uid="uid://c064i4g6qqpdw" path="res://Resources/Item/Gold.tres" id="2_pb8kq"]
 [ext_resource type="Texture2D" uid="uid://bjbqfiu4qmon8" path="res://Art/Items/Coin_Single.png" id="3_cul23"]
-
-[sub_resource type="Animation" id="Animation_gex0h"]
-resource_name = "Spawn"
-length = 0.8
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Item:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.4, 0.6, 0.8)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Item:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(-30, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.4, 0.6, 0.8)
-}
 
 [sub_resource type="Animation" id="Animation_0wyg8"]
 length = 0.001
@@ -55,6 +29,32 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0)
 }
 
+[sub_resource type="Animation" id="Animation_gex0h"]
+resource_name = "Spawn"
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Item:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Item:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-30, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_emdnc"]
 _data = {
 "RESET": SubResource("Animation_0wyg8"),
@@ -65,7 +65,7 @@ _data = {
 size = Vector2(16, 16)
 
 [node name="PickupableItem" type="Node2D"]
-script = ExtResource("1_8vf6l")
+script = ExtResource("1_2d7h0")
 Item = ExtResource("2_pb8kq")
 metadata/_edit_group_ = true
 

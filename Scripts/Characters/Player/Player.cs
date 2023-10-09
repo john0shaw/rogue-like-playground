@@ -1,50 +1,63 @@
 using Godot;
+using Godot.Collections;
 using System;
 using System.Collections.Generic;
 
 public partial class Player : CharacterBody2D
 {
-	public static Player player;
+	public const int INVENTORY_SIZE = 25;
+
+    [Signal] public delegate void InventoryUpdatedEventHandler();
+	[Signal] public delegate void ChangedWeaponEventHandler();
+
+    public static Player player;
 
 	[Export] public const float Speed = 100.0f;
 	[Export] public Weapon StartingWeapon;
 
-	[Export] public int MaxHealth;
+	[Export] public float MaxHealth;
+	[Export] public int MaxMana;
     [Export] public int Strength;
 	[Export] public int Defence;
 	[Export] public int Magic;
 	[Export] public int Luck;
 
-    public int Health;
+    public float Health;
+	public int Mana;
 	public int Keys;
 	public int Gold;
 
-	private List<Item> _inventory = new List<Item>();
+	public bool TrackMouseEvents = true;
+	public List<Item> Inventory = new List<Item>();
 
 	private AnimationPlayer _animationPlayer;
+	private AnimationPlayer _effectAnimationPlayer;
 	private Sprite2D _sprite2D;
 
-	private Weapon _equippedWeapon;
+	public Weapon EquipedWeapon;
 	private WeaponNode _weaponNode;
 
     public override void _Ready()
     {
         base._Ready();
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		_effectAnimationPlayer = GetNode<AnimationPlayer>("EffectAnimationPlayer");
 		_sprite2D = GetNode<Sprite2D>("Sprite2D");
 		_weaponNode = GetNode<WeaponNode>("Weapon");
 		player = this;
 
-		_weaponNode.SetWeapon(StartingWeapon);
+		SetWeapon(StartingWeapon);
+		AddItem(StartingWeapon);
         Health = MaxHealth;
+		Mana = MaxMana;
     }
 
 	public int GetItemCountByID(int ID)
 	{
-		for (int i = 0; i < _inventory.Count; i++)
+		for (int i = 0; i < Inventory.Count; i++)
 		{
-			if (_inventory[i].ID == ID)
-				return _inventory[i].Count;
+			if (Inventory[i].ID == ID)
+				return Inventory[i].Count;
 		}
 
 		return 0;
@@ -58,28 +71,37 @@ public partial class Player : CharacterBody2D
 		}
 		else
 		{
-            for (int i = 0; i < _inventory.Count; i++)
+            for (int i = 0; i < Inventory.Count; i++)
             {
-                if (_inventory[i].ID == item.ID)
+                if (Inventory[i].ID == item.ID)
                 {
-                    _inventory[i].Count += item.Count;
+                    Inventory[i].Count += item.Count;
                     return;
                 }
             }
 
-            _inventory.Add(item);
+            Inventory.Add(item);
+			EmitSignal("InventoryUpdated");
         }
 	}
 
-	public void TakeDamage(int damage)
+	public void TakeDamage(float damage)
 	{
 		Logger.Log("Took " + damage + " damage");
+		_effectAnimationPlayer.Play("Hit");
 		Health -= damage;
 	}
 
 	public void Attack()
 	{
 		_weaponNode.Attack();
+	}
+
+	public void SetWeapon(Weapon weapon)
+	{
+		_weaponNode.SetWeapon(weapon);
+		EquipedWeapon = weapon;
+		EmitSignal("ChangedWeapon");
 	}
 
 	private void RotateWeapon()
@@ -113,10 +135,13 @@ public partial class Player : CharacterBody2D
 			_animationPlayer.Play("Idle");
 		}
 
-		if (Input.IsActionJustPressed("Attack"))
+		if (TrackMouseEvents)
 		{
-			Attack();
-		}
+            if (Input.IsActionJustPressed("Attack"))
+            {
+                Attack();
+            }
+        }
 
 		Velocity = velocity;
 		MoveAndSlide();

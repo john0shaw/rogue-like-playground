@@ -35,6 +35,7 @@ public partial class EnemyDieState : EnemyState
     {
         Logger.Log("DieEnter");
         _animationRemainingLength = _enemyController.GetAnimationLength(EnemyController.DIE_ANIMATION);
+        _enemyController.PlayAnimation("RESET");
     }
 
     public override void Exit()

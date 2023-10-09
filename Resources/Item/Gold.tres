@@ -9,7 +9,4 @@ ID = 0
 Name = "Gold"
 Value = 1
 Count = 1
-SpawnChance = 0.5
-SpawnMax = 10
 Texture = ExtResource("1_nmf6p")
-ScenePath = "res://Scenes/Item/Coin.tscn"
