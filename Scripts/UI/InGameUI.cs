@@ -3,8 +3,6 @@ using System;
 
 public partial class InGameUI : CanvasLayer
 {
-	
-
 	Label _statsHealth;
 	Label _statsStrength;
 	Label _statsDefence;
@@ -16,6 +14,8 @@ public partial class InGameUI : CanvasLayer
     RichTextLabel _debugPanel;
     TileMap _statsPanel;
 	TileMap _inventoryPanel;
+	InventoryGrid _inventoryGrid;
+	HUD _hud;
 
 	ColorRect _healthBar;
 	float _healthBarMaxWidth;
@@ -32,6 +32,8 @@ public partial class InGameUI : CanvasLayer
 	{
 		_debugPanel = GetNode<RichTextLabel>("Debug");
 		_inventoryPanel = GetNode<TileMap>("Inventory");
+		_inventoryGrid = GetNode<InventoryGrid>("Inventory/InventoryGrid");
+		_hud = GetNode<HUD>("HUD");
 
 		_statsPanel = GetNode<TileMap>("Stats");
 		_statsHealth = GetNode<Label>("Stats/Health");
@@ -106,5 +108,15 @@ public partial class InGameUI : CanvasLayer
 	{
 		_healthBar.SetSize(new Vector2((Player.player.Health / Player.player.MaxHealth) * _healthBarMaxWidth, _healthBar.Size.Y));
 		_manaBar.SetSize(new Vector2((Player.player.Mana / Player.player.MaxMana) * _manaBarMaxWidth, _manaBar.Size.Y));
+	}
+
+	public void _on_player_changed_weapon()
+	{
+		_hud.SetWeapon(Player.player.EquipedWeapon);
+	}
+
+	public void _on_player_inventory_updated()
+	{
+		_inventoryGrid.Update();
 	}
 }

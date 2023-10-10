@@ -1,10 +1,10 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://bmo7b8akcdern"]
 
 [ext_resource type="Texture2D" uid="uid://js6vvkiwulnx" path="res://Art/Weapons/Hammer.png" id="1_vv3r0"]
-[ext_resource type="Script" path="res://Scripts/Resources/Weapon.cs" id="2_47ctc"]
+[ext_resource type="Script" path="res://Scripts/Resources/Item/Weapon.cs" id="2_6k1fk"]
 
 [resource]
-script = ExtResource("2_47ctc")
+script = ExtResource("2_6k1fk")
 AttackType = 0
 Damage = 1
 ID = 2

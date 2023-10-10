@@ -11,8 +11,8 @@ public partial class HUD : TileMap
 		_activeWeaponSprite = GetNode<Sprite2D>("ActiveWeapon");
 	}
 
-	public void _on_player_changed_weapon()
+	public void SetWeapon(Weapon weapon)
 	{
-		_activeWeaponSprite.Texture = Player.player.EquipedWeapon.Texture;
+		_activeWeaponSprite.Texture = weapon.Texture;
 	}
 }

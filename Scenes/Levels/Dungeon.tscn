@@ -10,10 +10,10 @@ script = ExtResource("1_6t468")
 [node name="RandomDungeonGenerator" type="Node2D" parent="."]
 script = ExtResource("2_6opxo")
 DungeonPartsLocation = "res://Scenes/Levels/RandomRooms"
-BaseGroundTile = Vector2i(0, 4)
-AlternateGroundTiles = [Vector2i(1, 4), Vector2i(6, 3)]
+RoomTileSize = 27
+BaseGroundTile = Vector2i(5, 1)
+AlternateGroundTiles = [Vector2i(4, 3), Vector2i(5, 3), Vector2i(6, 3)]
 BaseWallTile = Vector2i(4, 3)
-AlternateWallTiles = [Vector2i(2, 1), Vector2i(5, 2), Vector2i(4, 2)]
 EnemySpawnTile = Vector2i(0, 5)
 
 [node name="UI" type="CanvasLayer" parent="."]

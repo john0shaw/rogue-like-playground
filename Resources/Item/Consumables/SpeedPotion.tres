@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cpgpalg5ru2n1"]
+
+[ext_resource type="Texture2D" uid="uid://c5bykfgr0mk7x" path="res://Art/Items/SpeedPotion.png" id="1_svyg3"]
+[ext_resource type="Script" path="res://Scripts/Resources/Item/Potion.cs" id="2_wk0bh"]
+
+[resource]
+script = ExtResource("2_wk0bh")
+Duration = 15.0
+Strength = 1.0
+Effect = 3
+ID = 6
+Name = "Speed Potion"
+Value = 5
+Count = 1
+Texture = ExtResource("1_svyg3")

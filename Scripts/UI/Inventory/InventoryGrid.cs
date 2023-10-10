@@ -15,17 +15,22 @@ public partial class InventoryGrid : HFlowContainer
 		for (int i = 0; i < Player.INVENTORY_SIZE; i++)
 		{
 			InventoryButton _button = (InventoryButton)_inventoryItemButton.Instantiate();
+			_button.InventoryIndex = i;
 			_inventoryButtons.Add(_button);
 			AddChild(_button);
 		}
 	}
 
-	public void _on_player_inventory_updated()
+	public void Update()
 	{
 		int positionTrack = 0;
-		foreach (Item item in Player.player.Inventory)
+		foreach (InventoryButton _button in _inventoryButtons)
 		{
-			_inventoryButtons[positionTrack].SetItem(item);
+			if (positionTrack < Player.player.Inventory.Count)
+				_button.SetItem(Player.player.Inventory[positionTrack]);
+			else
+				_button.Clear();
+
 			positionTrack++;
 		}
 	}

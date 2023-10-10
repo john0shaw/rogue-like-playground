@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://c867rd57mt2b5"]
+
+[ext_resource type="Resource" uid="uid://din75sfjvqvem" path="res://Resources/Item/Consumables/DefencePotion.tres" id="1_mtbu2"]
+[ext_resource type="Script" path="res://Scripts/Resources/Loot.cs" id="2_ykaqs"]
+
+[resource]
+script = ExtResource("2_ykaqs")
+Item = ExtResource("1_mtbu2")
+SpawnChance = 0.2
+MinSpawn = 1
+MaxSpawn = 1

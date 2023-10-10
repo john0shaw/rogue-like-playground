@@ -239,7 +239,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u88sc"]
-size = Vector2(18, 16)
+size = Vector2(8, 6)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vqblh"]
 radius = 20.0
@@ -250,7 +250,7 @@ collision_mask = 3
 script = ExtResource("1_xud6c")
 StartingWeapon = ExtResource("2_56d4m")
 MaxHealth = 10.0
-MaxMana = 10
+MaxMana = 10.0
 Strength = 1
 Defence = 1
 Magic = 1
@@ -275,7 +275,7 @@ libraries = {
 }
 
 [node name="BodyCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_u88sc")
 
 [node name="Weapon" parent="." instance=ExtResource("4_2jo8h")]
@@ -290,3 +290,14 @@ shape = SubResource("CircleShape2D_vqblh")
 debug_color = Color(0.662745, 0.231373, 0, 0.196078)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="SpeedPotion" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="DefensePotion" type="Timer" parent="Timers"]
+one_shot = true
+
+[connection signal="timeout" from="Timers/SpeedPotion" to="." method="_on_speed_potion_timeout"]
+[connection signal="timeout" from="Timers/DefensePotion" to="." method="_on_defense_potion_timeout"]

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://din75sfjvqvem"]
+
+[ext_resource type="Texture2D" uid="uid://sg1tmdxmycjl" path="res://Art/Items/DefencePotion.png" id="1_ym8hw"]
+[ext_resource type="Script" path="res://Scripts/Resources/Item/Potion.cs" id="2_et2se"]
+
+[resource]
+script = ExtResource("2_et2se")
+Duration = 10.0
+Strength = 5.0
+Effect = 2
+ID = 3
+Name = "Defence Potion"
+Value = 5
+Count = 1
+Texture = ExtResource("1_ym8hw")

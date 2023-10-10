@@ -7,7 +7,7 @@ public partial class Room : TileMap
     const int BASE_LAYER = 0;
     const int DUNGEON_SOURCE = 1;
     const int TILE_SIZE = 16;
-    const int ROOM_TILES = 40;
+    const int ROOM_TILES = 27;
 
 	[ExportGroup("Available Connections")]
 	[Export] public bool HasNorthConnection { get; private set; }
@@ -95,11 +95,11 @@ public partial class Room : TileMap
         MapPosition = mapPosition;
 
         _baseTiles = GetUsedCellsById(BASE_LAYER, DUNGEON_SOURCE, atlasCoords: _dungeon.BaseGroundTile);
+
         if (_tileLayerMap.ContainsKey("EnemySpawn"))
             SetLayerModulate(_tileLayerMap["EnemySpawn"], new Color(1f, 1f, 1f, 0f));
 
         RandomizeGround();
-        RandomizeWalls();
         SpawnEnemies();
     }
 
@@ -110,20 +110,6 @@ public partial class Room : TileMap
             if (_rng.Randf() < 0.1f)
             {
                 SetCell(BASE_LAYER, cellPosition, DUNGEON_SOURCE, _dungeon.AlternateGroundTiles.PickRandom());
-            }
-        }
-    }
-
-    public void RandomizeWalls()
-    {
-        for (int layer = 0; layer < GetLayersCount(); layer++)
-        {
-            foreach (Vector2I cellPosition in GetUsedCellsById(layer, DUNGEON_SOURCE, _dungeon.BaseWallTile))
-            {
-                if (_rng.Randf() < 0.1f)
-                {
-                    SetCell(layer, cellPosition, DUNGEON_SOURCE, _dungeon.AlternateWallTiles.PickRandom());
-                }
             }
         }
     }

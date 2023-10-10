@@ -1,10 +1,10 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://d281piwbn84bb"]
 
 [ext_resource type="Texture2D" uid="uid://fcdyo3sc8mwr" path="res://Art/Weapons/Sword.png" id="1_orcif"]
-[ext_resource type="Script" path="res://Scripts/Resources/Weapon.cs" id="2_sne6s"]
+[ext_resource type="Script" path="res://Scripts/Resources/Item/Weapon.cs" id="2_hls4f"]
 
 [resource]
-script = ExtResource("2_sne6s")
+script = ExtResource("2_hls4f")
 AttackType = 1
 Damage = 1
 ID = 1

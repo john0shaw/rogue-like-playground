@@ -23,8 +23,8 @@ public partial class Pickupable : Node2D
         if (node is Player)
         {
             Item clonedItem = Item.Duplicate() as Item;
-            Player.player.AddItem(clonedItem);
-            QueueFree();
+            if (Player.player.AddItem(clonedItem))
+                QueueFree();
         }
     }
 }

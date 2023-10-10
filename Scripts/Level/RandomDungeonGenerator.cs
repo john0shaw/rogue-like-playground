@@ -56,7 +56,7 @@ public partial class RandomDungeonGenerator : Node2D
 
     public void Clear()
     {
-        GD.Print("Clearing Map...");
+        Logger.Log("Clearing Map...");
         _continuousPath = 0;
         foreach (Room room in _rooms)
         {
@@ -70,7 +70,7 @@ public partial class RandomDungeonGenerator : Node2D
         if (roomSize == -1)
             roomSize = MaxRooms;
 
-        GD.Print("Generating Map...");
+        Logger.Log("Generating Map...");
 
         _generateTrackPosition = Vector2.Zero;
         _previousRoomConnection = Direction.North;
@@ -88,7 +88,7 @@ public partial class RandomDungeonGenerator : Node2D
                 _generateTrackPosition.Y += 1;
                 _previousRoomConnection = Direction.South;
 
-                GD.Print("Spawn Room Added");
+                Logger.Log("Spawn Room Added");
                 continue;
             }
 
@@ -99,13 +99,13 @@ public partial class RandomDungeonGenerator : Node2D
                 AddRoom(finishRoom, _generateTrackPosition);
                 finishRoom.SetConnection(Connection.GetOppositeDirection(_previousRoomConnection), true);
 
-                GD.Print("Finish Room Added at " + _generateTrackPosition.ToString());
+                Logger.Log("Finish Room Added at " + _generateTrackPosition.ToString());
                 break;
             }
 
             if (_continuousPath >= MaxContinuousPath)
             {
-                GD.Print("Max track length achieved - resetting node");
+                Logger.Log("Max track length achieved - resetting node");
                 PickNewPathNode();
             }
 
@@ -118,13 +118,13 @@ public partial class RandomDungeonGenerator : Node2D
             AddRoom(newRoom, _generateTrackPosition);
 
             newRoom.SetConnection(entranceFromPreviousRoom, true);
-            GD.Print("Added Room: " + newRoomDefinition.Name + " at " + _generateTrackPosition.ToString());
+            Logger.Log("Added Room: " + newRoomDefinition.Name + " at " + _generateTrackPosition.ToString());
 
             // Pick a random direction to travel
             _previousRoomConnection = GetRandomRoomDirection(newRoom);
             if (_previousRoomConnection == Direction.Unknown)
             {
-                GD.Print("No available next location - resetting node");
+                Logger.Log("No available next location - resetting node");
                 PickNewPathNode();
                 // subtract from roomIdx to not "lose" a room, as we'll run through the loop again
                 roomIdx--;
@@ -164,7 +164,7 @@ public partial class RandomDungeonGenerator : Node2D
     {
         if (IsRoomAt(mapPosition))
         {
-            GD.Print("Duplicated room at " + mapPosition.ToString());
+            Logger.Log("Duplicated room at " + mapPosition.ToString());
         }
 
         AddChild(room);
@@ -191,7 +191,7 @@ public partial class RandomDungeonGenerator : Node2D
             retries++;
             if (retries > 10)
             {
-                GD.Print("Could not determine a new room location after ten tries");
+                Logger.Log("Could not determine a new room location after ten tries");
                 break;
             }
         } while (newDirection == Direction.Unknown);
@@ -272,7 +272,7 @@ public partial class RandomDungeonGenerator : Node2D
 
         if (possibleDirections.Count == 0)
         {
-            GD.Print("There are no available connections for this room!");
+            Logger.Log("There are no available connections for this room!");
             return Direction.Unknown;
         }
         
@@ -287,7 +287,7 @@ public partial class RandomDungeonGenerator : Node2D
         DirAccess dirAccess = DirAccess.Open(DungeonPartsLocation);
         if (dirAccess == null)
         {
-            GD.Print("Level: Dungeon Parts Location Not Opened: " + DungeonPartsLocation);
+            Logger.Log("Level: Dungeon Parts Location Not Opened: " + DungeonPartsLocation);
             return;
         }
 

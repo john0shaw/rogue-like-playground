@@ -16,14 +16,15 @@ public partial class Player : CharacterBody2D
 	[Export] public Weapon StartingWeapon;
 
 	[Export] public float MaxHealth;
-	[Export] public int MaxMana;
+	[Export] public float MaxMana;
     [Export] public int Strength;
 	[Export] public int Defence;
 	[Export] public int Magic;
 	[Export] public int Luck;
 
     public float Health;
-	public int Mana;
+	public float Mana;
+
 	public int Keys;
 	public int Gold;
 
@@ -34,20 +35,30 @@ public partial class Player : CharacterBody2D
 	private AnimationPlayer _effectAnimationPlayer;
 	private Sprite2D _sprite2D;
 
+	private Timer _speedPotionTimer;
+	private Timer _defensePotionTimer;
+
+	private float _tempSpeed;
+	private float _tempDefense;
+
 	public Weapon EquipedWeapon;
 	private WeaponNode _weaponNode;
 
     public override void _Ready()
     {
-        base._Ready();
-		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        player = this;
+
+        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_effectAnimationPlayer = GetNode<AnimationPlayer>("EffectAnimationPlayer");
 		_sprite2D = GetNode<Sprite2D>("Sprite2D");
 		_weaponNode = GetNode<WeaponNode>("Weapon");
-		player = this;
+
+		_speedPotionTimer = GetNode<Timer>("Timers/SpeedPotion");
+		_defensePotionTimer = GetNode<Timer>("Timers/DefensePotion");
 
 		SetWeapon(StartingWeapon);
 		AddItem(StartingWeapon);
+
         Health = MaxHealth;
 		Mana = MaxMana;
     }
@@ -63,26 +74,21 @@ public partial class Player : CharacterBody2D
 		return 0;
 	}
 
-	public void AddItem(Item item)
+	public bool AddItem(Item item)
 	{
 		if (item.ID == 0)
 		{
 			Gold += item.Count;
+			return true;
 		}
-		else
-		{
-            for (int i = 0; i < Inventory.Count; i++)
-            {
-                if (Inventory[i].ID == item.ID)
-                {
-                    Inventory[i].Count += item.Count;
-                    return;
-                }
-            }
-
+        else if(Inventory.Count < INVENTORY_SIZE)
+        {
             Inventory.Add(item);
-			EmitSignal("InventoryUpdated");
+            EmitSignal("InventoryUpdated");
+			return true;
         }
+
+		return false;
 	}
 
 	public void TakeDamage(float damage)
@@ -104,6 +110,36 @@ public partial class Player : CharacterBody2D
 		EmitSignal("ChangedWeapon");
 	}
 
+	public void DrinkPotion(Potion potion)
+	{
+        
+        switch (potion.Effect)
+		{
+			case Potion.PotionEffect.Health:
+				Health = Mathf.Min((Health + potion.Strength), MaxHealth);
+				break;
+			case Potion.PotionEffect.Mana:
+				Mana = Mathf.Min((Mana + potion.Strength), MaxMana);
+				break;
+			case Potion.PotionEffect.Defense:
+				_tempDefense = potion.Strength;
+				_defensePotionTimer.Start(potion.Duration);
+				break;
+			case Potion.PotionEffect.Speed:
+				_tempSpeed = potion.Strength * Speed;
+				_speedPotionTimer.Start(potion.Duration);
+				break;
+		}
+
+		Logger.Log("Drank a " + potion.Effect.ToString() + " potion");
+	}
+
+	public void RemoveItemAt(int index)
+	{
+		Inventory.RemoveAt(index);
+		EmitSignal("InventoryUpdated");
+	}
+
 	private void RotateWeapon()
 	{
         Vector2 mousePosition = GetGlobalMousePosition();
@@ -121,8 +157,8 @@ public partial class Player : CharacterBody2D
         Vector2 direction = Input.GetVector("Left", "Right", "Up", "Down");
 		if (direction != Vector2.Zero)
 		{
-			velocity.X = direction.X * Speed;
-			velocity.Y = direction.Y * Speed;
+			velocity.X = direction.X * (Speed + _tempSpeed);
+			velocity.Y = direction.Y * (Speed + _tempSpeed);
 
 			if (direction.X > 0)
 				_animationPlayer.Play("Walk");
@@ -145,5 +181,17 @@ public partial class Player : CharacterBody2D
 
 		Velocity = velocity;
 		MoveAndSlide();
+	}
+
+	public void _on_speed_potion_timeout()
+	{
+		Logger.Log("Speed Potion Ended");
+		_tempSpeed = 0f;
+	}
+
+	public void _on_defense_potion_timeout()
+	{
+		Logger.Log("Defense Potion Ended");
+		_tempDefense = 0;
 	}
 }

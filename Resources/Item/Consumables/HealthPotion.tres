@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://3rr7it5b7hpo"]
+
+[ext_resource type="Texture2D" uid="uid://06ceyt4nv2bt" path="res://Art/Items/HealthPotion.png" id="1_jm61p"]
+[ext_resource type="Script" path="res://Scripts/Resources/Item/Potion.cs" id="1_uq07n"]
+
+[resource]
+script = ExtResource("1_uq07n")
+Duration = 0.0
+Strength = 3.0
+ID = 4
+Name = "Health Potion"
+Value = 5
+Count = 1
+Texture = ExtResource("1_jm61p")
