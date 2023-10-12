@@ -10,9 +10,9 @@ public partial class Dungeon : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
-        _randomDungeonGenerator = GetNode<RandomDungeonGenerator>("RandomDungeonGenerator");
-        if (_randomDungeonGenerator != null)
-            _randomDungeonGenerator.Generate();
+        //_randomDungeonGenerator = GetNode<RandomDungeonGenerator>("RandomDungeonGenerator");
+        //if (_randomDungeonGenerator != null)
+        //    _randomDungeonGenerator.Generate();
 	}
 
 	/// <summary>

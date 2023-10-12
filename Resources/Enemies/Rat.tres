@@ -1,13 +1,8 @@
-[gd_resource type="Resource" load_steps=9 format=3 uid="uid://dqg58c1jao45j"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://dqg58c1jao45j"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/EnemyResource.cs" id="1_mo7ck"]
 [ext_resource type="AnimationLibrary" uid="uid://cip2gjb85d3hy" path="res://Resources/Enemies/Rat/AnimationLibrary.res" id="1_r5vbc"]
 [ext_resource type="SpriteFrames" uid="uid://clfe5q8xfv2f3" path="res://Resources/Enemies/Rat/SpriteFrames.tres" id="2_pdu4e"]
-[ext_resource type="Resource" uid="uid://d2eo5io6d3vmy" path="res://Resources/Loot/Gold (2-4).tres" id="2_x76yj"]
-[ext_resource type="Resource" uid="uid://33ahitcmd6xm" path="res://Resources/Loot/Potion - Health (0.2).tres" id="3_j4vxs"]
-[ext_resource type="Resource" uid="uid://dadadl6d26kxi" path="res://Resources/Loot/Potion - Mana (0.2).tres" id="4_s6h1h"]
-[ext_resource type="Resource" uid="uid://c867rd57mt2b5" path="res://Resources/Loot/Potion - Defence (0.1).tres" id="5_i1oey"]
-[ext_resource type="Resource" uid="uid://ysohpxjiilds" path="res://Resources/Loot/Potion - Speed (0.1).tres" id="6_067r6"]
 
 [resource]
 script = ExtResource("1_mo7ck")
@@ -21,4 +16,4 @@ AttackDamage = 1
 AttackRange = 30.0
 AttackSpeed = 1.0
 IsRanged = false
-Loot = Array[Resource]([ExtResource("2_x76yj"), ExtResource("3_j4vxs"), ExtResource("4_s6h1h"), ExtResource("5_i1oey"), ExtResource("6_067r6")])
+Loot = null

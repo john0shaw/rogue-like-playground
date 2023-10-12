@@ -1,8 +1,7 @@
-[gd_resource type="Resource" load_steps=6 format=3 uid="uid://dliglrots2n8v"]
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://dliglrots2n8v"]
 
 [ext_resource type="AnimationLibrary" uid="uid://ruw1h4gkfnty" path="res://Resources/Enemies/Spider/AnimationLibrary.res" id="1_10wau"]
 [ext_resource type="SpriteFrames" uid="uid://defe0cdql43sd" path="res://Resources/Enemies/Spider/SpriteFrames.tres" id="2_1kjs3"]
-[ext_resource type="Resource" uid="uid://d2eo5io6d3vmy" path="res://Resources/Loot/Gold (2-4).tres" id="2_pkk5s"]
 [ext_resource type="Resource" uid="uid://cyk5f6ogl08ua" path="res://Resources/Projectiles/Web.tres" id="2_s0e01"]
 [ext_resource type="Script" path="res://Scripts/Resources/EnemyResource.cs" id="3_v1m6r"]
 
@@ -19,4 +18,4 @@ AttackRange = 100.0
 AttackSpeed = 1.0
 IsRanged = true
 ProjectileResource = ExtResource("2_s0e01")
-Loot = Array[Resource]([ExtResource("2_pkk5s")])
+Loot = null

@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxuxidqnhxoh"]
+[gd_scene load_steps=5 format=3 uid="uid://bxuxidqnhxoh"]
 
 [ext_resource type="TileSet" uid="uid://bx36xmtqopq22" path="res://Art/Tilemaps/DungeonTiles.tres" id="1_cdgaj"]
 [ext_resource type="Script" path="res://Scripts/Level/Room.cs" id="2_bwsww"]
+[ext_resource type="Script" path="res://Scripts/Level/RandomEnemiesComponent.cs" id="3_dsdmu"]
+[ext_resource type="TileSet" uid="uid://b2jmwey6366jk" path="res://Art/Tilemaps/Symbols.tres" id="4_h150g"]
 
 [node name="Room" type="TileMap"]
 position = Vector2(0, 1)
@@ -56,3 +58,18 @@ HasNorthConnection = true
 HasEastConnection = true
 HasSouthConnection = true
 HasWestConnection = true
+
+[node name="RandomEnemiesComponent" type="Node" parent="."]
+script = ExtResource("3_dsdmu")
+
+[node name="SpawnLocations" type="TileMap" parent="RandomEnemiesComponent"]
+tile_set = ExtResource("4_h150g")
+format = 2
+layer_0/enabled = false
+layer_0/modulate = Color(1, 0, 0, 0.501961)
+layer_0/tile_data = PackedInt32Array(917508, 0, 0, 983044, 0, 0, 1048580, 0, 0, 1114116, 0, 0, 917509, 0, 0, 983045, 0, 0, 1048581, 0, 0, 1114117, 0, 0, 917510, 0, 0, 983046, 0, 0, 1048582, 0, 0, 1114118, 0, 0, 917511, 0, 0, 983047, 0, 0, 1048583, 0, 0, 1114119, 0, 0, 917512, 0, 0, 983048, 0, 0, 1048584, 0, 0, 1114120, 0, 0, 917513, 0, 0, 983049, 0, 0, 1048585, 0, 0, 1114121, 0, 0, 917514, 0, 0, 983050, 0, 0, 1048586, 0, 0, 1114122, 0, 0, 917515, 0, 0, 983051, 0, 0, 1048587, 0, 0, 1114123, 0, 0, 917516, 0, 0, 983052, 0, 0, 1048588, 0, 0, 1114124, 0, 0, 917517, 0, 0, 983053, 0, 0, 1048589, 0, 0, 1114125, 0, 0, 917518, 0, 0, 983054, 0, 0, 1048590, 0, 0, 1114126, 0, 0, 917519, 0, 0, 983055, 0, 0, 1048591, 0, 0, 1114127, 0, 0, 917520, 0, 0, 983056, 0, 0, 1048592, 0, 0, 1114128, 0, 0, 917521, 0, 0, 983057, 0, 0, 1048593, 0, 0, 1114129, 0, 0, 917522, 0, 0, 983058, 0, 0, 1048594, 0, 0, 1114130, 0, 0, 917523, 0, 0, 983059, 0, 0, 1048595, 0, 0, 1114131, 0, 0, 917524, 0, 0, 983060, 0, 0, 1048596, 0, 0, 1114132, 0, 0, 917525, 0, 0, 983061, 0, 0, 1048597, 0, 0, 1114133, 0, 0, 917526, 0, 0, 983062, 0, 0, 1048598, 0, 0, 1114134, 0, 0, 917527, 0, 0, 983063, 0, 0, 1048599, 0, 0, 1114135, 0, 0)
+
+[node name="Enemies" type="Node" parent="RandomEnemiesComponent"]
+
+[connection signal="child_entered_tree" from="RandomEnemiesComponent" to="RandomEnemiesComponent" method="_on_child_entered_tree"]
+[connection signal="child_exiting_tree" from="RandomEnemiesComponent" to="RandomEnemiesComponent" method="_on_child_exiting_tree"]

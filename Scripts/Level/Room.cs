@@ -4,10 +4,10 @@ using System;
 
 public partial class Room : TileMap
 {
-    const int BASE_LAYER = 0;
-    const int DUNGEON_SOURCE = 1;
-    const int TILE_SIZE = 16;
-    const int ROOM_TILES = 27;
+    public const int TILE_SIZE = 16;
+    public const int BASE_LAYER = 0;
+    public const int ROOM_SOURCE = 1;
+    public const int ROOM_TILES = 27;
 
 	[ExportGroup("Available Connections")]
 	[Export] public bool HasNorthConnection { get; private set; }
@@ -80,10 +80,10 @@ public partial class Room : TileMap
         return new Vector2(mapPosition.X * TILE_SIZE * ROOM_TILES, mapPosition.Y * TILE_SIZE * ROOM_TILES);
     }
 
-    private Vector2 CalculateTilePosition(Vector2 tilePosition)
+    public static Vector2 GetTilePosition(Vector2 tilePosition)
     {
         return new Vector2(
-            (tilePosition.X * TILE_SIZE) + (TILE_SIZE / 2), 
+            (tilePosition.X * TILE_SIZE) + (TILE_SIZE / 2),
             (tilePosition.Y * TILE_SIZE) + (TILE_SIZE / 2)
         );
     }
@@ -94,13 +94,12 @@ public partial class Room : TileMap
         GlobalPosition = CalculateGlobalPosition(mapPosition);
         MapPosition = mapPosition;
 
-        _baseTiles = GetUsedCellsById(BASE_LAYER, DUNGEON_SOURCE, atlasCoords: _dungeon.BaseGroundTile);
+        _baseTiles = GetUsedCellsById(BASE_LAYER, ROOM_SOURCE, atlasCoords: _dungeon.BaseGroundTile);
 
         if (_tileLayerMap.ContainsKey("EnemySpawn"))
             SetLayerModulate(_tileLayerMap["EnemySpawn"], new Color(1f, 1f, 1f, 0f));
 
         RandomizeGround();
-        SpawnEnemies();
     }
 
     public void RandomizeGround()
@@ -109,30 +108,7 @@ public partial class Room : TileMap
         {
             if (_rng.Randf() < 0.1f)
             {
-                SetCell(BASE_LAYER, cellPosition, DUNGEON_SOURCE, _dungeon.AlternateGroundTiles.PickRandom());
-            }
-        }
-    }
-
-    public void SpawnEnemies()
-    {
-        if (Enemies.Count == 0)
-            return;
-
-        Array<Vector2I> spawnTiles = GetUsedCellsById(_tileLayerMap["EnemySpawn"], DUNGEON_SOURCE, _dungeon.EnemySpawnTile);
-        if (spawnTiles.Count == 0)
-            return;
-
-        foreach (EnemySpawner spawner in Enemies)
-        {
-            for (int i = 0; i < spawner.MaxSpawn; i++)
-            {
-                if (_rng.Randf() < spawner.SpawnChance)
-                {
-                    EnemyController enemy = (EnemyController)spawner.Scene.Instantiate();
-                    AddChild(enemy);
-                    enemy.Position = CalculateTilePosition(spawnTiles.PickRandom());
-                }
+                SetCell(BASE_LAYER, cellPosition, ROOM_SOURCE, _dungeon.AlternateGroundTiles.PickRandom());
             }
         }
     }
