@@ -86,7 +86,7 @@ public partial class EnemyController : CharacterBody2D
             GlobalPosition.X + _rng.RandiRange(-15, 15),
             GlobalPosition.Y + _rng.RandiRange(-15, 15)
         );
-        Owner.AddChild(lootItem);
+        GetParent().AddChild(lootItem);
     }
 
     public void TakeDamage(int damage)
@@ -113,7 +113,7 @@ public partial class EnemyController : CharacterBody2D
         projectile.Target = Player.player.GlobalPosition;
         projectile.Origin = GlobalPosition;
         projectile.ProjectileResource = EnemyResource.ProjectileResource;
-        Owner.AddChild(projectile);
+        GetParent().AddChild(projectile);
     }
 
     public float GetAnimationLength(string animationName)

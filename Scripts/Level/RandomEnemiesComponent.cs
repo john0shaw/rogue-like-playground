@@ -27,11 +27,17 @@ public partial class RandomEnemiesComponent : Node
 
 		foreach (EnemySpawner enemySpawner in enemies.GetChildren())
 		{
-			EnemyController enemy = (EnemyController)_enemyScene.Instantiate();
-			enemy.EnemyResource = enemySpawner.Enemy;
-			enemy.Position = rootPosition + Room.GetTilePosition(spawnLocations.PickRandom());
+			for (int i = enemySpawner.MinAmount; i <= enemySpawner.MaxAmount; i++)
+			{
+				if (GD.Randf() < (enemySpawner.SpawnChance * GameState.GetLevelEnemyMultiplier()))
+				{
+                    EnemyController enemy = (EnemyController)_enemyScene.Instantiate();
+                    enemy.EnemyResource = enemySpawner.Enemy;
+                    enemy.Position = rootPosition + Room.GetTilePosition(spawnLocations.PickRandom());
 
-			AddChild(enemy);
+                    AddChild(enemy);
+                }
+            }
 		}
 	}
 

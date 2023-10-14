@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RandomTileReplacementResource" load_steps=2 format=3 uid="uid://dieirbx7eeld8"]
+
+[ext_resource type="Script" path="res://Scripts/Level/RandomTileReplacementResource.cs" id="1_admb4"]
+
+[resource]
+script = ExtResource("1_admb4")
+BaseTile = Vector2i(5, 1)
+ReplacementTiles = [Vector2i(5, 3), Vector2i(6, 3)]
+ReplacementChance = 0.1

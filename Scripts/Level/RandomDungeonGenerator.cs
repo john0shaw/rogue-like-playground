@@ -162,13 +162,13 @@ public partial class RandomDungeonGenerator : Node2D
 
     private void AddRoom(Room room, Vector2 mapPosition)
     {
-        if (IsRoomAt(mapPosition))
-        {
-            Logger.Log("Duplicated room at " + mapPosition.ToString());
-        }
+        room.GlobalPosition = new Vector2(
+            mapPosition.X * Room.TILE_SIZE * Room.ROOM_TILES, 
+            mapPosition.Y * Room.TILE_SIZE * Room.ROOM_TILES
+        );
+        room.MapPosition = mapPosition;
 
         AddChild(room);
-        room.Setup(_generateTrackPosition, _rng);
 
         _continuousPath++;
         _rooms.Add(room);
@@ -202,11 +202,6 @@ public partial class RandomDungeonGenerator : Node2D
         _generateTrackPosition = GetRelativeLocation(newPathNode, _previousRoomConnection);
         _continuousPath = 0;
         newPathNode.SetConnection(_previousRoomConnection, true);
-    }
-
-    private Vector2 GetRoomGlobalPosition(Room room)
-    {
-        return new Vector2(room.MapPosition.X * RoomTileSize * TileSize, room.MapPosition.Y * RoomTileSize * TileSize);
     }
 
     private bool IsRoomAt(Vector2 position)

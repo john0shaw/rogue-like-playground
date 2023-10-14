@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DialogResource" load_steps=2 format=3 uid="uid://beqcvyuy67pw6"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/DialogResource.cs" id="1_xtm24"]
+
+[resource]
+script = ExtResource("1_xtm24")
+Speaker = "Bartender"
+Dialog = ["Hello!  Welcome to my bar.  We've seen the same faces over and over so many times before that it's nice to see a fresh one!", "Right now it's pretty empty around here - I think everyone's wandered off down the halls and they tend to get lost.", "If you can find them and lead them back, they can usually help you out!"]

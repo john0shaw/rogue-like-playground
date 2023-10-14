@@ -6,23 +6,24 @@ public partial class Room : TileMap
 {
     public const int TILE_SIZE = 16;
     public const int BASE_LAYER = 0;
-    public const int ROOM_SOURCE = 1;
+    public const int ROOM_SOURCE = 0;
     public const int ROOM_TILES = 27;
 
-	[ExportGroup("Available Connections")]
+    [ExportGroup("Connections")]
+	[ExportSubgroup("Available")]
 	[Export] public bool HasNorthConnection { get; private set; }
 	[Export] public bool HasEastConnection { get; private set; }
 	[Export] public bool HasSouthConnection { get; private set; }
 	[Export] public bool HasWestConnection { get; private set; }
 
-	[ExportGroup("Used Connections")]
+	[ExportSubgroup("Used")]
 	[Export] public bool IsNorthConnection { get; private set; }
     [Export] public bool IsEastConnection { get; private set; }
     [Export] public bool IsSouthConnection { get; private set; }
     [Export] public bool IsWestConnection { get; private set; }
 
-    [ExportGroup("Features")]
-    [Export] public Array<EnemySpawner> Enemies = new Array<EnemySpawner>();
+    [ExportGroup("Tile Overrides")]
+    [Export] public RandomTileReplacementResource RandomFloorTiles;
 
     public Vector2 MapPosition;
 
@@ -30,9 +31,6 @@ public partial class Room : TileMap
     public Connection UsedConnections = new Connection();
 
     Dictionary<string, int> _tileLayerMap = new Dictionary<string, int>();
-    RandomDungeonGenerator _dungeon;
-    RandomNumberGenerator _rng;
-    Array<Vector2I> _baseTiles;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -52,9 +50,14 @@ public partial class Room : TileMap
 			_tileLayerMap.Add(GetLayerName(i), i);
 		}
 
-        _dungeon = RandomDungeonGenerator.Instance;
+        RandomizeGround();
     }
 
+    /// <summary>
+    /// Enable or disable a connection to another room and set the layer state for display
+    /// </summary>
+    /// <param name="direction"></param>
+    /// <param name="state"></param>
     public void SetConnection(Direction direction, bool state)
     {
         UsedConnections.Set(direction, state);
@@ -75,11 +78,11 @@ public partial class Room : TileMap
         }
     }
 
-    private Vector2 CalculateGlobalPosition(Vector2 mapPosition)
-    {
-        return new Vector2(mapPosition.X * TILE_SIZE * ROOM_TILES, mapPosition.Y * TILE_SIZE * ROOM_TILES);
-    }
-
+    /// <summary>
+    /// Get a tiles relative position within the node based on a given x,y cell position
+    /// </summary>
+    /// <param name="tilePosition">Position of the tile in the room starting at (0,0)</param>
+    /// <returns>Relative positon within the node</returns>
     public static Vector2 GetTilePosition(Vector2 tilePosition)
     {
         return new Vector2(
@@ -88,33 +91,17 @@ public partial class Room : TileMap
         );
     }
 
-    public void Setup(Vector2 mapPosition, RandomNumberGenerator rng)
-    {
-        _rng = rng;
-        GlobalPosition = CalculateGlobalPosition(mapPosition);
-        MapPosition = mapPosition;
-
-        _baseTiles = GetUsedCellsById(BASE_LAYER, ROOM_SOURCE, atlasCoords: _dungeon.BaseGroundTile);
-
-        if (_tileLayerMap.ContainsKey("EnemySpawn"))
-            SetLayerModulate(_tileLayerMap["EnemySpawn"], new Color(1f, 1f, 1f, 0f));
-
-        RandomizeGround();
-    }
-
     public void RandomizeGround()
     {
-        foreach(Vector2I cellPosition in _baseTiles)
+        if (RandomFloorTiles is RandomTileReplacementResource)
         {
-            if (_rng.Randf() < 0.1f)
+            foreach (Vector2I baseTilePosition in GetUsedCellsById(BASE_LAYER, ROOM_SOURCE, RandomFloorTiles.BaseTile))
             {
-                SetCell(BASE_LAYER, cellPosition, ROOM_SOURCE, _dungeon.AlternateGroundTiles.PickRandom());
+                if (GD.Randf() < RandomFloorTiles.ReplacementChance)
+                {
+                    SetCell(BASE_LAYER, baseTilePosition, ROOM_SOURCE, RandomFloorTiles.ReplacementTiles.PickRandom());
+                }
             }
         }
     }
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
 }

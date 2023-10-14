@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ideif68yex50"]
+[gd_scene load_steps=4 format=3 uid="uid://ideif68yex50"]
 
 [ext_resource type="TileSet" uid="uid://bx36xmtqopq22" path="res://Art/Tilemaps/DungeonTiles.tres" id="1_vmwab"]
 [ext_resource type="Script" path="res://Scripts/Level/Room.cs" id="2_e11q1"]
+[ext_resource type="Resource" uid="uid://dieirbx7eeld8" path="res://Resources/Level/RandomTileReplacement/DungeonFloorTile.tres" id="3_d8142"]
 
 [node name="Room" type="TileMap"]
 position = Vector2(0, 1)
@@ -56,3 +57,4 @@ HasNorthConnection = true
 HasEastConnection = true
 HasSouthConnection = true
 HasWestConnection = true
+RandomFloorTiles = ExtResource("3_d8142")

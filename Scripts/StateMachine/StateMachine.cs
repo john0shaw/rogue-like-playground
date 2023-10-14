@@ -2,6 +2,7 @@ using Godot;
 using Godot.Collections;
 using System;
 
+[GlobalClass]
 public partial class StateMachine : Node
 {
 	[Signal] public delegate void TransitionedEventHandler(string stateName, Dictionary message = null);

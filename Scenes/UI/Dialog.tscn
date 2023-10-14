@@ -1,0 +1,126 @@
+[gd_scene load_steps=9 format=3 uid="uid://8xo0eqdn8pcn"]
+
+[ext_resource type="Script" path="res://Scripts/UI/Dialog.cs" id="1_6w41f"]
+[ext_resource type="Resource" uid="uid://beqcvyuy67pw6" path="res://Resources/Dialog/Bartender/FirstGreeting.tres" id="2_6cfkf"]
+[ext_resource type="Texture2D" uid="uid://t3au3slx5tim" path="res://Art/UI/DownArrow.png" id="3_hjfi1"]
+
+[sub_resource type="SystemFont" id="SystemFont_6qu0l"]
+font_names = PackedStringArray("Arial")
+font_weight = 800
+subpixel_positioning = 0
+
+[sub_resource type="SystemFont" id="SystemFont_0a2hm"]
+font_names = PackedStringArray("Arial")
+subpixel_positioning = 0
+
+[sub_resource type="Animation" id="Animation_lbqkk"]
+resource_name = "Bounce"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(575, -0.25, 0, 0.25, 0, 575, -0.25, 0, 0.25, 0, 575, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 0.6)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(190, -0.25, 0, 0.25, 0, 180, -0.25, 0, 0.25, 0, 190, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 0.6)
+}
+
+[sub_resource type="Animation" id="Animation_hs0n3"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(575, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(190, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t16mo"]
+_data = {
+"Bounce": SubResource("Animation_lbqkk"),
+"RESET": SubResource("Animation_hs0n3")
+}
+
+[node name="Dialog" type="ColorRect"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -295.0
+offset_top = -250.0
+offset_right = 295.0
+offset_bottom = -47.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.917647, 0.831373, 0.666667, 1)
+script = ExtResource("1_6w41f")
+DialogResource = ExtResource("2_6cfkf")
+
+[node name="Name" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 5.0
+offset_right = 424.0
+offset_bottom = 49.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = SubResource("SystemFont_6qu0l")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "asdad"
+scroll_active = false
+
+[node name="Text" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 68.0
+offset_right = 554.0
+offset_bottom = 165.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = SubResource("SystemFont_0a2hm")
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "asdasdasd"
+scroll_active = false
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Indicator" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(575, 190)
+texture = ExtResource("3_hjfi1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Indicator"]
+libraries = {
+"": SubResource("AnimationLibrary_t16mo")
+}

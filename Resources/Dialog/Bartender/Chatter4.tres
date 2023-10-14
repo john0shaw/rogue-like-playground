@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DialogResource" load_steps=2 format=3 uid="uid://bdh0kmw4gukl0"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/DialogResource.cs" id="1_ugpln"]
+
+[resource]
+script = ExtResource("1_ugpln")
+Speaker = "Bartender"
+Dialog = ["I love my regulars!  People just keep coming back."]

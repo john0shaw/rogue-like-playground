@@ -299,5 +299,7 @@ one_shot = true
 [node name="DefensePotion" type="Timer" parent="Timers"]
 one_shot = true
 
+[connection signal="body_entered" from="InteractableNode" to="." method="_on_interactable_node_body_entered"]
+[connection signal="body_exited" from="InteractableNode" to="." method="_on_interactable_node_body_exited"]
 [connection signal="timeout" from="Timers/SpeedPotion" to="." method="_on_speed_potion_timeout"]
 [connection signal="timeout" from="Timers/DefensePotion" to="." method="_on_defense_potion_timeout"]

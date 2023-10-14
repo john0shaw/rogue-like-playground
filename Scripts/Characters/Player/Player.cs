@@ -31,18 +31,19 @@ public partial class Player : CharacterBody2D
 	public bool TrackMouseEvents = true;
 	public List<Item> Inventory = new List<Item>();
 
-	private AnimationPlayer _animationPlayer;
-	private AnimationPlayer _effectAnimationPlayer;
-	private Sprite2D _sprite2D;
+	AnimationPlayer _animationPlayer;
+	AnimationPlayer _effectAnimationPlayer;
+	Sprite2D _sprite2D;
+	List<InteractableComponent> _nearbyInteractableComponents = new List<InteractableComponent>();
 
-	private Timer _speedPotionTimer;
-	private Timer _defensePotionTimer;
+	Timer _speedPotionTimer;
+	Timer _defensePotionTimer;
 
-	private float _tempSpeed;
-	private float _tempDefense;
+	float _tempSpeed;
+	float _tempDefense;
 
 	public Weapon EquipedWeapon;
-	private WeaponNode _weaponNode;
+	WeaponNode _weaponNode;
 
     public override void _Ready()
     {
@@ -142,12 +143,18 @@ public partial class Player : CharacterBody2D
 
 	private void RotateWeapon()
 	{
+		if (GameState.DialogOpen)
+			return;
+
         Vector2 mousePosition = GetGlobalMousePosition();
 		_weaponNode.RotateWeapon(Mathf.Atan2(mousePosition.Y - Position.Y, mousePosition.X - Position.X) + 1.571f);
 	}
 
     public override void _PhysicsProcess(double delta)
 	{
+		if (GameState.DialogOpen)
+			return;
+
 		Vector2 velocity = Velocity;
 
 		RotateWeapon();
@@ -175,12 +182,37 @@ public partial class Player : CharacterBody2D
 		{
             if (Input.IsActionJustPressed("Attack"))
             {
-                Attack();
+                if (_nearbyInteractableComponents.Count > 0)
+                {
+                    GetClosestInteractable()?.Interact();
+                }
+				else
+				{
+                    Attack();
+                }
             }
         }
 
 		Velocity = velocity;
 		MoveAndSlide();
+	}
+
+	public InteractableComponent GetClosestInteractable()
+	{
+		float closestDistance = float.PositiveInfinity;
+		InteractableComponent closestComponent = null;
+
+		foreach(InteractableComponent interactableComponent in _nearbyInteractableComponents)
+		{
+			float distanceToComponent = GlobalPosition.DistanceTo(interactableComponent.GetParent<Node2D>().GlobalPosition);
+            if (distanceToComponent < closestDistance)
+			{
+				closestDistance = distanceToComponent;
+				closestComponent = interactableComponent;
+			}
+		}
+
+		return closestComponent;
 	}
 
 	public void _on_speed_potion_timeout()
@@ -194,4 +226,34 @@ public partial class Player : CharacterBody2D
 		Logger.Log("Defense Potion Ended");
 		_tempDefense = 0;
 	}
+
+	/// <summary>
+	/// If something enters our interactable collider and has the right component, add it to our list
+	/// </summary>
+	/// <param name="node"></param>
+	public void _on_interactable_node_body_entered(Node node)
+	{
+		foreach (Node child in node.GetChildren())
+		{
+			if (child is InteractableComponent && !_nearbyInteractableComponents.Contains((InteractableComponent)child))
+			{
+				_nearbyInteractableComponents.Add((InteractableComponent)child);
+			}
+		}
+	}
+
+	/// <summary>
+	/// If something exits our interactable collider and has the right component, remove it from our list
+	/// </summary>
+	/// <param name="node"></param>
+	public void _on_interactable_node_body_exited(Node node)
+	{
+        foreach (Node child in node.GetChildren())
+        {
+            if (child is InteractableComponent && _nearbyInteractableComponents.Contains((InteractableComponent)child))
+            {
+                _nearbyInteractableComponents.Remove((InteractableComponent)child);
+            }
+        }
+    }
 }

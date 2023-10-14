@@ -3,6 +3,10 @@ using System;
 
 public partial class InGameUI : CanvasLayer
 {
+	public static InGameUI inGameUI;
+
+	PackedScene _dialogScene;
+
 	Label _statsHealth;
 	Label _statsStrength;
 	Label _statsDefence;
@@ -30,6 +34,10 @@ public partial class InGameUI : CanvasLayer
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		inGameUI = this;
+
+		_dialogScene = ResourceLoader.Load<PackedScene>("res://Scenes/UI/Dialog.tscn");
+
 		_debugPanel = GetNode<RichTextLabel>("Debug");
 		_inventoryPanel = GetNode<TileMap>("Inventory");
 		_inventoryGrid = GetNode<InventoryGrid>("Inventory/InventoryGrid");
@@ -72,6 +80,12 @@ public partial class InGameUI : CanvasLayer
 			_showStats = false;
 		}
 
+		if (GameState.DialogOpen)
+		{
+			_showStats = false;
+			_showInventory = false;
+		}
+
         if (_showDebug)
             _debugPanel.Show();
         else
@@ -108,6 +122,13 @@ public partial class InGameUI : CanvasLayer
 	{
 		_healthBar.SetSize(new Vector2((Player.player.Health / Player.player.MaxHealth) * _healthBarMaxWidth, _healthBar.Size.Y));
 		_manaBar.SetSize(new Vector2((Player.player.Mana / Player.player.MaxMana) * _manaBarMaxWidth, _manaBar.Size.Y));
+	}
+
+	public void SayDialog(DialogResource dialogResource)
+	{
+		Dialog dialog = (Dialog)_dialogScene.Instantiate();
+		dialog.DialogResource = dialogResource;
+		AddChild(dialog);
 	}
 
 	public void _on_player_changed_weapon()
