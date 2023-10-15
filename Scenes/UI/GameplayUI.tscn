@@ -194,3 +194,5 @@ offset_bottom = 43.0
 text = "Inventory"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

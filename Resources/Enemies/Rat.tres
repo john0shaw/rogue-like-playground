@@ -1,19 +1,21 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://dqg58c1jao45j"]
+[gd_resource type="Resource" script_class="EnemyResource" load_steps=4 format=3 uid="uid://dqg58c1jao45j"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/EnemyResource.cs" id="1_mo7ck"]
-[ext_resource type="AnimationLibrary" uid="uid://cip2gjb85d3hy" path="res://Resources/Enemies/Rat/AnimationLibrary.res" id="1_r5vbc"]
-[ext_resource type="SpriteFrames" uid="uid://clfe5q8xfv2f3" path="res://Resources/Enemies/Rat/SpriteFrames.tres" id="2_pdu4e"]
+[ext_resource type="AudioStream" uid="uid://baagtbbqqgj8v" path="res://Sounds/RatDeath.mp3" id="1_w7qfb"]
+[ext_resource type="Texture2D" uid="uid://ocipujfxu7ah" path="res://Art/Characters/Rat.png" id="1_yqe54"]
 
 [resource]
 script = ExtResource("1_mo7ck")
 Name = "Rat"
 MaxHealth = 2
 MoveSpeed = 50.0
-SpriteFrames = ExtResource("2_pdu4e")
-AnimationLibrary = ExtResource("1_r5vbc")
+Texture = ExtResource("1_yqe54")
+DieEffect = ExtResource("1_w7qfb")
 DetectionDistance = 150.0
 AttackDamage = 1
 AttackRange = 30.0
-AttackSpeed = 1.0
+AttackSpeed = 1.5
 IsRanged = false
+GoldMin = 1
+GoldMax = 4
 Loot = null

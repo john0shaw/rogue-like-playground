@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DialogResource" load_steps=2 format=3 uid="uid://cibiam3oo0oum"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/DialogResource.cs" id="1_hxl5b"]
+
+[resource]
+script = ExtResource("1_hxl5b")
+Speaker = ""
+Dialog = ["You've been on the road for days, travelling through wild country to make your way back home from the battle by the river.", "Soaking wet, you see a dim light off in the distance - it looks like a crossroads pub!", "As you approach, you see that there are no signs of any other visitors being in the area in many months.", "Warm orange light glows from the windows, almost calling you to go inside.", "The desire to have a warm meal and soft bed overwhealms you as you open the door."]

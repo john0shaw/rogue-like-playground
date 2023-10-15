@@ -13,33 +13,39 @@ public partial class RandomEnemiesComponent : Node
 	TileMap _spawnerTiles;
 	PackedScene _enemyScene;
 	Array<EnemySpawner> _enemySpawners;
+	Vector2 _rootPosition;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_enemyScene = ResourceLoader.Load<PackedScene>("res://Scenes/Characters/Enemies/Enemy.tscn");
+		_enemyScene = ResourceLoader.Load<PackedScene>("res://Scenes/Characters/Enemies/BasicEnemy.tscn");
 		_spawnerTiles = GetNode<TileMap>("SpawnLocations");
 		_spawnerTiles.SetLayerEnabled(0, false);
 
 		Node enemies = GetNode<Node>("Enemies");
 		Array<Vector2I> spawnLocations = _spawnerTiles.GetUsedCellsById(0, 0, SPAWNER_TILE);
-		Vector2 rootPosition = GetOwner<Node2D>().GlobalPosition;
+		_rootPosition = GetOwner<Node2D>().GlobalPosition;
 
 		foreach (EnemySpawner enemySpawner in enemies.GetChildren())
 		{
-			for (int i = enemySpawner.MinAmount; i <= enemySpawner.MaxAmount; i++)
+			for (int i = 0; i <= enemySpawner.MaxAmount; i++)
 			{
-				if (GD.Randf() < (enemySpawner.SpawnChance * GameState.GetLevelEnemyMultiplier()))
+				if (i <= enemySpawner.MinAmount || GD.Randf() < (enemySpawner.SpawnChance * GameState.GetLevelEnemyMultiplier()))
 				{
-                    EnemyController enemy = (EnemyController)_enemyScene.Instantiate();
-                    enemy.EnemyResource = enemySpawner.Enemy;
-                    enemy.Position = rootPosition + Room.GetTilePosition(spawnLocations.PickRandom());
-
-                    AddChild(enemy);
+                    SpawnEnemy(enemySpawner.Enemy, spawnLocations.PickRandom());
                 }
             }
 		}
 	}
+
+	void SpawnEnemy(EnemyResource enemyResource, Vector2I tilePosition)
+	{
+        EnemyController enemy = (EnemyController)_enemyScene.Instantiate();
+        enemy.EnemyResource = enemyResource;
+        enemy.Position = _rootPosition + Room.GetTilePosition(tilePosition);
+
+        AddChild(enemy);
+    }
 
 	public override string[] _GetConfigurationWarnings()
 	{

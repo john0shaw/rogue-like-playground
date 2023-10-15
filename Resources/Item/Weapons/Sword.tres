@@ -12,3 +12,4 @@ Name = "Sword"
 Value = 5
 Count = 1
 Texture = ExtResource("1_orcif")
+SpawnChance = 0.1

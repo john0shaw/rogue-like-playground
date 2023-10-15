@@ -1,0 +1,220 @@
+[gd_scene load_steps=17 format=3 uid="uid://b6ydu0yqgf06"]
+
+[ext_resource type="Script" path="res://Scripts/UI/MainMenu.cs" id="1_7d3kn"]
+[ext_resource type="Texture2D" uid="uid://cvptkt24ygp1" path="res://Art/UI/Title Screen/parallax-demon-woods-bg.png" id="1_bmjxj"]
+[ext_resource type="Texture2D" uid="uid://db0fkrj1dngfe" path="res://Art/UI/Title Screen/parallax-demon-woods-far-trees.png" id="2_51o48"]
+[ext_resource type="PackedScene" uid="uid://cer4yc8ksfohc" path="res://Scenes/Levels/Dungeon.tscn" id="2_ltjj7"]
+[ext_resource type="Resource" uid="uid://cibiam3oo0oum" path="res://Resources/Dialog/Story/GameIntro.tres" id="3_d8q50"]
+[ext_resource type="Texture2D" uid="uid://jrc5jxodcj1h" path="res://Art/UI/Title Screen/parallax-demon-woods-mid-trees.png" id="3_rs8xw"]
+[ext_resource type="Texture2D" uid="uid://dtfe448rlufc0" path="res://Art/UI/Title Screen/parallax-demon-woods-close-trees.png" id="4_3t83u"]
+[ext_resource type="PackedScene" uid="uid://8xo0eqdn8pcn" path="res://Scenes/UI/Dialog.tscn" id="4_5cod0"]
+[ext_resource type="Resource" uid="uid://cp26x02rw4ous" path="res://Resources/Dialog/Story/ExistingSave.tres" id="4_tvtbj"]
+[ext_resource type="Script" path="res://Scripts/UI/MainMenuUI.cs" id="5_122kl"]
+[ext_resource type="AudioStream" uid="uid://dx30vhkds3jk0" path="res://Sounds/UI/mouseover.ogg" id="6_3rvu8"]
+[ext_resource type="AudioStream" uid="uid://bevx5yimfh4xi" path="res://Sounds/Background/338986__drfx__music-box-melody-1.mp3" id="7_lyv1m"]
+[ext_resource type="AudioStream" uid="uid://tveder5eek3f" path="res://Sounds/UI/ui_click.ogg" id="7_x47r5"]
+
+[sub_resource type="Animation" id="Animation_tg0ip"]
+resource_name = "FadeOut"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/FadeCover:color:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/FadeCover:color:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/FadeCover:color:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/FadeCover:color:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_p1xi0"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/FadeCover:color:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/FadeCover:color:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/FadeCover:color:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/FadeCover:color:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a856x"]
+_data = {
+"FadeOut": SubResource("Animation_tg0ip"),
+"RESET": SubResource("Animation_p1xi0")
+}
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_7d3kn")
+DungeonScene = ExtResource("2_ltjj7")
+StartingDialog = ExtResource("3_d8q50")
+SaveWarningDialog = ExtResource("4_tvtbj")
+DialogScene = ExtResource("4_5cod0")
+CameraMoveSpeed = 25.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(600, 400)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("5_122kl")
+ButtonMouseOver = ExtResource("6_3rvu8")
+ButtonClick = ExtResource("7_x47r5")
+
+[node name="FadeCover" type="ColorRect" parent="UI"]
+z_index = 4096
+offset_right = 1200.0
+offset_bottom = 800.0
+color = Color(0, 0, 0, 0)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="UI"]
+
+[node name="BG" type="ParallaxLayer" parent="UI/ParallaxBackground"]
+motion_scale = Vector2(2, 2)
+motion_mirroring = Vector2(1200, 0)
+
+[node name="TextureRect" type="TextureRect" parent="UI/ParallaxBackground/BG"]
+offset_right = 1200.0
+offset_bottom = 800.0
+texture = ExtResource("1_bmjxj")
+
+[node name="FarTrees" type="ParallaxLayer" parent="UI/ParallaxBackground"]
+motion_scale = Vector2(1.75, 1.75)
+motion_mirroring = Vector2(1200, 0)
+
+[node name="TextureRect" type="TextureRect" parent="UI/ParallaxBackground/FarTrees"]
+offset_right = 1200.0
+offset_bottom = 800.0
+texture = ExtResource("2_51o48")
+
+[node name="MidTrees" type="ParallaxLayer" parent="UI/ParallaxBackground"]
+motion_scale = Vector2(1.5, 1.5)
+motion_mirroring = Vector2(1200, 0)
+
+[node name="TextureRect" type="TextureRect" parent="UI/ParallaxBackground/MidTrees"]
+offset_right = 1200.0
+offset_bottom = 800.0
+texture = ExtResource("3_rs8xw")
+
+[node name="CloseTrees" type="ParallaxLayer" parent="UI/ParallaxBackground"]
+motion_scale = Vector2(2, 2)
+motion_mirroring = Vector2(1200, 0)
+
+[node name="TextureRect" type="TextureRect" parent="UI/ParallaxBackground/CloseTrees"]
+offset_right = 1200.0
+offset_bottom = 800.0
+texture = ExtResource("4_3t83u")
+
+[node name="Buttons" type="VBoxContainer" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -155.2
+offset_top = -50.8
+offset_right = 139.8
+offset_bottom = 50.2
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="New Game" type="Button" parent="UI/Buttons"]
+layout_mode = 2
+text = "New Game"
+
+[node name="Continue" type="Button" parent="UI/Buttons"]
+layout_mode = 2
+text = "Continue"
+
+[node name="Exit" type="Button" parent="UI/Buttons"]
+layout_mode = 2
+text = "Exit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_a856x")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_lyv1m")
+autoplay = true
+
+[connection signal="mouse_entered" from="UI/Buttons/New Game" to="UI" method="_on_new_game_mouse_entered"]
+[connection signal="pressed" from="UI/Buttons/New Game" to="." method="_on_new_game_pressed"]
+[connection signal="mouse_entered" from="UI/Buttons/Continue" to="UI" method="_on_continue_mouse_entered"]
+[connection signal="pressed" from="UI/Buttons/Continue" to="." method="_on_continue_pressed"]
+[connection signal="mouse_entered" from="UI/Buttons/Exit" to="UI" method="_on_exit_mouse_entered"]
+[connection signal="pressed" from="UI/Buttons/Exit" to="." method="_on_exit_pressed"]

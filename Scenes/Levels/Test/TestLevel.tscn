@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=3 uid="uid://bqnotp4trnq1s"]
+
+[ext_resource type="Script" path="res://Scripts/Level/Dungeon.cs" id="1_s87tm"]
+[ext_resource type="PackedScene" uid="uid://dn2mj5b26joea" path="res://Scenes/UI/GameplayUI.tscn" id="2_61u1p"]
+[ext_resource type="PackedScene" uid="uid://cweu7bowvqa71" path="res://Scenes/Levels/SpecialRooms/Spawn.tscn" id="3_hk0vr"]
+[ext_resource type="PackedScene" uid="uid://dk48k57ophom0" path="res://Scenes/Characters/Player.tscn" id="4_txaau"]
+[ext_resource type="Resource" uid="uid://bmo7b8akcdern" path="res://Resources/Item/Weapons/Hammer.tres" id="5_vh74a"]
+[ext_resource type="PackedScene" uid="uid://0awgfexwxjql" path="res://Scenes/Levels/RandomRooms/Cells_E-W.tscn" id="6_fesxi"]
+[ext_resource type="PackedScene" uid="uid://pv60l6qnp5hf" path="res://Scenes/Characters/NPCs/Bartender.tscn" id="7_1tr1e"]
+
+[node name="TestLevel" type="Node2D"]
+script = ExtResource("1_s87tm")
+
+[node name="GameplayUI" parent="." instance=ExtResource("2_61u1p")]
+
+[node name="Room" parent="." instance=ExtResource("3_hk0vr")]
+
+[node name="Player" parent="." instance=ExtResource("4_txaau")]
+unique_name_in_owner = true
+position = Vector2(184, 121)
+collision_mask = 9
+StartingWeapon = ExtResource("5_vh74a")
+
+[node name="Cells" parent="." instance=ExtResource("6_fesxi")]
+position = Vector2(0, 449)
+IsNorthConnection = true
+
+[node name="Bartender" parent="." instance=ExtResource("7_1tr1e")]
+
+[connection signal="ChangedWeapon" from="Player" to="GameplayUI" method="_on_player_changed_weapon"]
+[connection signal="InventoryUpdated" from="Player" to="GameplayUI" method="_on_player_inventory_updated"]

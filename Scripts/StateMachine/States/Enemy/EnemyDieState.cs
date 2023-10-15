@@ -23,6 +23,7 @@ public partial class EnemyDieState : EnemyState
             
             _animationRemainingLength -= (float)delta;
             _enemyController.PlayAnimation(EnemyController.DIE_ANIMATION);
+            _enemyController.PlaySound(_enemyController.EnemyResource.DieEffect);
         }
         else
         {

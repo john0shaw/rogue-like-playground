@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogResource" load_steps=2 format=3 uid="uid://cp26x02rw4ous"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/DialogResource.cs" id="1_g2hdc"]
+
+[resource]
+script = ExtResource("1_g2hdc")
+Speaker = ""
+Dialog = ["There is an existing save file - would you like to overwrite it?"]
+Confirm = true

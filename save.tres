@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Resources/GameStateResource.cs" id="1_g7661"]
+
+[resource]
+script = ExtResource("1_g7661")
+Level = 5
+Gold = 0
+Inventory = []

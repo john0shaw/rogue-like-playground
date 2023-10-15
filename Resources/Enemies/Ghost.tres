@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EnemyResource" load_steps=4 format=3 uid="uid://damxy4nu1yau8"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/EnemyResource.cs" id="1_ay8je"]
+[ext_resource type="Texture2D" uid="uid://cljy5nwlw0pd8" path="res://Art/Characters/Ghost.png" id="1_g8rte"]
+[ext_resource type="AudioStream" uid="uid://baagtbbqqgj8v" path="res://Sounds/RatDeath.mp3" id="1_i4qq1"]
+
+[resource]
+script = ExtResource("1_ay8je")
+Name = "Ghost"
+MaxHealth = 3
+MoveSpeed = 75.0
+Texture = ExtResource("1_g8rte")
+DieEffect = ExtResource("1_i4qq1")
+DetectionDistance = 100.0
+AttackDamage = 1
+AttackRange = 30.0
+AttackSpeed = 1.0
+IsRanged = false
+GoldMin = 2
+GoldMax = 4
+Loot = null

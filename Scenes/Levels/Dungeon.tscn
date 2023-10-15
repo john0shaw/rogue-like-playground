@@ -1,14 +1,116 @@
-[gd_scene load_steps=4 format=3 uid="uid://rsqiq66hi8dn"]
+[gd_scene load_steps=9 format=3 uid="uid://cer4yc8ksfohc"]
 
-[ext_resource type="Script" path="res://Scripts/Level/Dungeon.cs" id="1_6t468"]
-[ext_resource type="Script" path="res://Scripts/Level/RandomDungeonGenerator.cs" id="2_6opxo"]
-[ext_resource type="PackedScene" uid="uid://cgq4ak8hjvqa8" path="res://Scenes/Utilities/OverviewCamera.tscn" id="3_5y6ge"]
+[ext_resource type="Script" path="res://Scripts/Level/Dungeon.cs" id="1_abqjq"]
+[ext_resource type="Script" path="res://Scripts/Level/RandomDungeonGenerator.cs" id="2_cxsqx"]
+[ext_resource type="PackedScene" uid="uid://dk48k57ophom0" path="res://Scenes/Characters/Player.tscn" id="3_ypx37"]
+[ext_resource type="PackedScene" uid="uid://dn2mj5b26joea" path="res://Scenes/UI/GameplayUI.tscn" id="4_vuu38"]
+[ext_resource type="AudioStream" uid="uid://dg2xa88hwtyt2" path="res://Sounds/Background/Goblins_Den_(Regular).wav" id="5_6ybgk"]
+
+[sub_resource type="Animation" id="Animation_e1jsb"]
+resource_name = "FadeIn"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameplayUI/ColorRect:color:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameplayUI/ColorRect:color:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GameplayUI/ColorRect:color:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GameplayUI/ColorRect:color:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_jyhs6"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameplayUI/ColorRect:color:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameplayUI/ColorRect:color:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GameplayUI/ColorRect:color:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GameplayUI/ColorRect:color:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qrbib"]
+_data = {
+"FadeIn": SubResource("Animation_e1jsb"),
+"RESET": SubResource("Animation_jyhs6")
+}
 
 [node name="Dungeon" type="Node2D"]
-script = ExtResource("1_6t468")
+script = ExtResource("1_abqjq")
 
 [node name="RandomDungeonGenerator" type="Node2D" parent="."]
-script = ExtResource("2_6opxo")
+script = ExtResource("2_cxsqx")
 DungeonPartsLocation = "res://Scenes/Levels/RandomRooms"
 RoomTileSize = 27
 BaseGroundTile = Vector2i(5, 1)
@@ -16,26 +118,23 @@ AlternateGroundTiles = [Vector2i(4, 3), Vector2i(5, 3), Vector2i(6, 3)]
 BaseWallTile = Vector2i(4, 3)
 EnemySpawnTile = Vector2i(0, 5)
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="GameplayUI" parent="." instance=ExtResource("4_vuu38")]
 
-[node name="HFlowContainer" type="HFlowContainer" parent="UI"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 97.0
-grow_vertical = 0
+[node name="ColorRect" type="ColorRect" parent="GameplayUI"]
+offset_right = 1200.0
+offset_bottom = 800.0
+color = Color(0, 0, 0, 1)
 
-[node name="NumRooms" type="SpinBox" parent="UI/HFlowContainer"]
-layout_mode = 2
-min_value = 20.0
-value = 20.0
+[node name="Player" parent="." instance=ExtResource("3_ypx37")]
 
-[node name="Button" type="Button" parent="UI/HFlowContainer"]
-layout_mode = 2
-text = "Regenerate"
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_6ybgk")
+autoplay = true
 
-[node name="OverviewCamera" parent="." instance=ExtResource("3_5y6ge")]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qrbib")
+}
 
-[connection signal="value_changed" from="UI/HFlowContainer/NumRooms" to="RandomDungeonGenerator" method="_on_num_rooms_value_changed"]
-[connection signal="pressed" from="UI/HFlowContainer/Button" to="RandomDungeonGenerator" method="_on_button_pressed"]
+[connection signal="ChangedWeapon" from="Player" to="GameplayUI" method="_on_player_changed_weapon"]
+[connection signal="InventoryUpdated" from="Player" to="GameplayUI" method="_on_player_inventory_updated"]

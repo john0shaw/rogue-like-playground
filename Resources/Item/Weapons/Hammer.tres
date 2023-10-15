@@ -12,3 +12,4 @@ Name = "Hammer"
 Value = 10
 Count = 1
 Texture = ExtResource("1_vv3r0")
+SpawnChance = 0.1

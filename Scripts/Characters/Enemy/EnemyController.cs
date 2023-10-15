@@ -22,12 +22,15 @@ public partial class EnemyController : CharacterBody2D
     // Nodes
 	StateMachine _stateMachine;
     AnimationPlayer _animationPlayer;
-    AnimatedSprite2D _animatedSprite2D;
+    AnimationPlayer _effectAnimationPlayer;
+    AudioStreamPlayer2D _audioStreamPlayer2D;
+    Sprite2D _sprite2D;
 
     // Internal
     RandomNumberGenerator _rng;
     PackedScene _pickupableItemScene;
     PackedScene _projectileScene;
+    Item _goldItem;
 
     public override void _Ready()
     {
@@ -39,19 +42,33 @@ public partial class EnemyController : CharacterBody2D
         _healthBar = GetNode<HealthBar>("HealthBar");
 
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-        _animationPlayer.AddAnimationLibrary("Enemy", EnemyResource.AnimationLibrary);
+        _effectAnimationPlayer = GetNode<AnimationPlayer>("EffectAnimationPlayer");
+        _audioStreamPlayer2D = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
 
-        _animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-        _animatedSprite2D.SpriteFrames = EnemyResource.SpriteFrames;
+        _sprite2D = GetNode<Sprite2D>("Sprite2D");
 
         _pickupableItemScene = ResourceLoader.Load<PackedScene>("res://Scenes/Interactable/PickupableItem.tscn");
         _projectileScene = ResourceLoader.Load<PackedScene>("res://Scenes/Interactable/Projectile.tscn");
+        _goldItem = ResourceLoader.Load <Item>("res://Resources/Item/Gold.tres");
+
+        _sprite2D.Texture = EnemyResource.Texture;
 
         MaxHealth = EnemyResource.MaxHealth;
         Health = MaxHealth;
 
         _healthBar.MaxHealth = MaxHealth;
         _healthBar.Health = Health;
+
+        if (GameState.DebugEnemies)
+        {
+            _healthBar.Show();
+            _stateNameLabel.Show();
+        }
+        else
+        {
+            _healthBar.Hide();
+            _stateNameLabel.Hide();
+        }
     }
 
     public override void _Process(double delta)
@@ -61,20 +78,18 @@ public partial class EnemyController : CharacterBody2D
 
     public void GenerateLoot()
     {
-        foreach(Loot loot in EnemyResource.Loot)
+        // Spawn Gold
+        int goldToSpawn = ((int)GD.Randi() % (EnemyResource.GoldMax - EnemyResource.GoldMin)) + EnemyResource.GoldMin;
+        for (int i = 0; i <= goldToSpawn; i++)
         {
-            if (loot.MaxSpawn == 1)
-            {
-                // Use SpawnChance
-                if (_rng.Randf() < loot.SpawnChance)
-                    SpawnLoot(loot.Item);
-            }
-            else
-            {
-                // Use Min to Max
-                for (int i = 0; i < _rng.RandiRange(loot.MinSpawn, loot.MaxSpawn); i++)
-                    SpawnLoot(loot.Item);
-            }
+            SpawnLoot(_goldItem);
+        }
+
+        // Spawn Items
+        foreach (Item loot in EnemyResource.Loot)
+        {
+            if (_rng.Randf() < loot.SpawnChance)
+                SpawnLoot(loot);
         }
     }
 
@@ -91,8 +106,12 @@ public partial class EnemyController : CharacterBody2D
 
     public void TakeDamage(int damage)
     {
+        if (Health <= 0)
+            return;
+
         Health -= damage;
         _healthBar.Health = Health;
+        _effectAnimationPlayer.Play("Hit");
 
         if (Health <= 0)
         {
@@ -118,28 +137,19 @@ public partial class EnemyController : CharacterBody2D
 
     public float GetAnimationLength(string animationName)
     {
-        animationName = "Enemy/" + animationName;
-
         float animationPlayerLength = 0f;
-        float animatedSpriteLength = 0f;
 
         if (_animationPlayer.HasAnimation(animationName))
         {
             animationPlayerLength = _animationPlayer.GetAnimation(animationName).Length;
         }
 
-        if (_animatedSprite2D.SpriteFrames.HasAnimation(animationName))
-        {
-            animatedSpriteLength = (float)_animatedSprite2D.SpriteFrames.GetFrameCount(animationName) / (float)_animatedSprite2D.SpriteFrames.GetAnimationSpeed(animationName);
-        }
 
-        return Mathf.Max(animationPlayerLength, animatedSpriteLength);
+        return animationPlayerLength;
     }
 
     public void PlayAnimation(string animationName, bool forwards = true)
     {
-        animationName = "Enemy/" + animationName;
-
         if (_animationPlayer.HasAnimation(animationName))
         {
             if (forwards)
@@ -147,17 +157,15 @@ public partial class EnemyController : CharacterBody2D
             else
                 _animationPlayer.PlayBackwards(animationName);
         }
- 
-        if (_animatedSprite2D.SpriteFrames.HasAnimation(animationName))
-        {
-            if (_animatedSprite2D.Animation != animationName)
-                _animatedSprite2D.Animation = animationName;
+    }
 
-            if (forwards)
-                _animatedSprite2D.Play(animationName);
-            else
-                _animatedSprite2D.PlayBackwards(animationName);
-        }  
+    public void PlaySound(AudioStream audioStream)
+    {
+        if (!_audioStreamPlayer2D.Playing)
+        {
+            _audioStreamPlayer2D.Stream = audioStream;
+            _audioStreamPlayer2D.Play();
+        }
     }
 
     public void _on_state_machine_transitioned(string stateName)

@@ -1,8 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://8xo0eqdn8pcn"]
+[gd_scene load_steps=13 format=3 uid="uid://8xo0eqdn8pcn"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Dialog.cs" id="1_6w41f"]
 [ext_resource type="Resource" uid="uid://beqcvyuy67pw6" path="res://Resources/Dialog/Bartender/FirstGreeting.tres" id="2_6cfkf"]
+[ext_resource type="AudioStream" uid="uid://bo28leivtfcwb" path="res://Sounds/UI/chatter.ogg" id="3_2cn6u"]
+[ext_resource type="AudioStream" uid="uid://dx30vhkds3jk0" path="res://Sounds/UI/mouseover.ogg" id="3_7kbp7"]
 [ext_resource type="Texture2D" uid="uid://t3au3slx5tim" path="res://Art/UI/DownArrow.png" id="3_hjfi1"]
+[ext_resource type="AudioStream" uid="uid://cpalx15i1jv3p" path="res://Sounds/UI/next.ogg" id="4_1d5vb"]
+[ext_resource type="AudioStream" uid="uid://tveder5eek3f" path="res://Sounds/UI/ui_click.ogg" id="4_67c2y"]
 
 [sub_resource type="SystemFont" id="SystemFont_6qu0l"]
 font_names = PackedStringArray("Arial")
@@ -86,6 +90,10 @@ grow_vertical = 0
 color = Color(0.917647, 0.831373, 0.666667, 1)
 script = ExtResource("1_6w41f")
 DialogResource = ExtResource("2_6cfkf")
+ButtonHover = ExtResource("3_7kbp7")
+ButtonClick = ExtResource("4_67c2y")
+CursorSound = ExtResource("3_2cn6u")
+NextSound = ExtResource("4_1d5vb")
 
 [node name="Name" type="RichTextLabel" parent="."]
 layout_mode = 0
@@ -97,20 +105,20 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = SubResource("SystemFont_6qu0l")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "asdad"
+text = "Speaker"
 scroll_active = false
 
 [node name="Text" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 27.0
-offset_top = 68.0
-offset_right = 554.0
-offset_bottom = 165.0
+offset_left = 28.0
+offset_top = 50.0
+offset_right = 555.0
+offset_bottom = 147.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = SubResource("SystemFont_0a2hm")
 theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
-text = "asdasdasd"
+text = "Text"
 scroll_active = false
 
 [node name="Timer" type="Timer" parent="."]
@@ -124,3 +132,24 @@ texture = ExtResource("3_hjfi1")
 libraries = {
 "": SubResource("AnimationLibrary_t16mo")
 }
+
+[node name="Buttons" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 156.0
+offset_right = 358.0
+offset_bottom = 196.0
+
+[node name="Confirm" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Confirm"
+
+[node name="Cancel" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "Cancel
+"
+
+[connection signal="mouse_entered" from="Buttons/Confirm" to="." method="_on_confirm_mouse_entered"]
+[connection signal="pressed" from="Buttons/Confirm" to="." method="_on_confirm_pressed"]
+[connection signal="mouse_entered" from="Buttons/Cancel" to="." method="_on_cancel_mouse_entered"]
+[connection signal="pressed" from="Buttons/Cancel" to="." method="_on_cancel_pressed"]

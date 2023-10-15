@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://rsqiq66hi8dn"]
+
+[ext_resource type="Script" path="res://Scripts/Level/Dungeon.cs" id="1_6t468"]
+[ext_resource type="Script" path="res://Scripts/Level/RandomDungeonGenerator.cs" id="2_6opxo"]
+[ext_resource type="PackedScene" uid="uid://cgq4ak8hjvqa8" path="res://Scenes/Utilities/OverviewCamera.tscn" id="3_5y6ge"]
+
+[node name="Dungeon" type="Node2D"]
+script = ExtResource("1_6t468")
+
+[node name="RandomDungeonGenerator" type="Node2D" parent="."]
+script = ExtResource("2_6opxo")
+DungeonPartsLocation = "res://Scenes/Levels/RandomRooms"
+RoomTileSize = 27
+BaseGroundTile = Vector2i(5, 1)
+AlternateGroundTiles = [Vector2i(4, 3), Vector2i(5, 3), Vector2i(6, 3)]
+BaseWallTile = Vector2i(4, 3)
+EnemySpawnTile = Vector2i(0, 5)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HFlowContainer" type="HFlowContainer" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 97.0
+grow_vertical = 0
+
+[node name="NumRooms" type="SpinBox" parent="UI/HFlowContainer"]
+layout_mode = 2
+min_value = 20.0
+value = 20.0
+
+[node name="Button" type="Button" parent="UI/HFlowContainer"]
+layout_mode = 2
+text = "Regenerate"
+
+[node name="OverviewCamera" parent="." instance=ExtResource("3_5y6ge")]
+
+[connection signal="value_changed" from="UI/HFlowContainer/NumRooms" to="RandomDungeonGenerator" method="_on_num_rooms_value_changed"]
+[connection signal="pressed" from="UI/HFlowContainer/Button" to="RandomDungeonGenerator" method="_on_button_pressed"]

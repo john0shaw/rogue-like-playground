@@ -20,6 +20,7 @@ public partial class InGameUI : CanvasLayer
 	TileMap _inventoryPanel;
 	InventoryGrid _inventoryGrid;
 	HUD _hud;
+	AudioStreamPlayer _audioStreamPlayer;
 
 	ColorRect _healthBar;
 	float _healthBarMaxWidth;
@@ -42,6 +43,7 @@ public partial class InGameUI : CanvasLayer
 		_inventoryPanel = GetNode<TileMap>("Inventory");
 		_inventoryGrid = GetNode<InventoryGrid>("Inventory/InventoryGrid");
 		_hud = GetNode<HUD>("HUD");
+		_audioStreamPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 
 		_statsPanel = GetNode<TileMap>("Stats");
 		_statsHealth = GetNode<Label>("Stats/Health");
@@ -128,6 +130,7 @@ public partial class InGameUI : CanvasLayer
 	{
 		Dialog dialog = (Dialog)_dialogScene.Instantiate();
 		dialog.DialogResource = dialogResource;
+		dialog.UIAudioPlayer = _audioStreamPlayer;
 		AddChild(dialog);
 	}
 

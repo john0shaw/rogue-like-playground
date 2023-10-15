@@ -1,7 +1,7 @@
-[gd_resource type="Resource" load_steps=5 format=3 uid="uid://dliglrots2n8v"]
+[gd_resource type="Resource" script_class="EnemyResource" load_steps=5 format=3 uid="uid://dliglrots2n8v"]
 
-[ext_resource type="AnimationLibrary" uid="uid://ruw1h4gkfnty" path="res://Resources/Enemies/Spider/AnimationLibrary.res" id="1_10wau"]
-[ext_resource type="SpriteFrames" uid="uid://defe0cdql43sd" path="res://Resources/Enemies/Spider/SpriteFrames.tres" id="2_1kjs3"]
+[ext_resource type="AudioStream" uid="uid://baagtbbqqgj8v" path="res://Sounds/RatDeath.mp3" id="1_nu6if"]
+[ext_resource type="Texture2D" uid="uid://bunaxq0fcwuip" path="res://Art/Characters/Spider.png" id="2_44d3j"]
 [ext_resource type="Resource" uid="uid://cyk5f6ogl08ua" path="res://Resources/Projectiles/Web.tres" id="2_s0e01"]
 [ext_resource type="Script" path="res://Scripts/Resources/EnemyResource.cs" id="3_v1m6r"]
 
@@ -10,12 +10,14 @@ script = ExtResource("3_v1m6r")
 Name = "Spider"
 MaxHealth = 4
 MoveSpeed = 25.0
-SpriteFrames = ExtResource("2_1kjs3")
-AnimationLibrary = ExtResource("1_10wau")
+Texture = ExtResource("2_44d3j")
+DieEffect = ExtResource("1_nu6if")
 DetectionDistance = 150.0
 AttackDamage = 1
 AttackRange = 100.0
 AttackSpeed = 1.0
 IsRanged = true
 ProjectileResource = ExtResource("2_s0e01")
+GoldMin = 5
+GoldMax = 8
 Loot = null

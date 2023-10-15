@@ -17,7 +17,7 @@ public partial class RandomDungeonGenerator : Node2D
     [Export] public Vector2I EnemySpawnTile;
 
     [ExportGroup("Dungeon Generator")]
-    [Export] public int MaxRooms = 10;
+    [Export] public int MaxRooms = 5;
     [Export] public int MaxContinuousPath = 5;
     [Export] public int MaxWidth = 5;
     [Export] public int MaxHeight = 5;
@@ -152,10 +152,18 @@ public partial class RandomDungeonGenerator : Node2D
 
         if (Player.player is Player)
         {
-            Player.player.GlobalPosition = new Vector2(
-                RoomTileSize * TileSize / 2,
-                RoomTileSize * TileSize / 2
-            );
+            Marker2D spawnMarker = _rooms[0].GetNode<Marker2D>("PlayerSpawn");
+            if (spawnMarker is Marker2D)
+            {
+                Player.player.GlobalPosition = spawnMarker.GlobalPosition;
+            }
+            else
+            {
+                Player.player.GlobalPosition = new Vector2(
+                    RoomTileSize * TileSize / 2,
+                    RoomTileSize * TileSize / 2
+                );  
+            }
         }
         
     }
