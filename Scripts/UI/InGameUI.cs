@@ -10,8 +10,6 @@ public partial class InGameUI : CanvasLayer
 	Label _statsHealth;
 	Label _statsStrength;
 	Label _statsDefence;
-	Label _statsMagic;
-	Label _statsLuck;
 	Label _statsGold;
 	Label _statsLevel;
 
@@ -25,9 +23,6 @@ public partial class InGameUI : CanvasLayer
 
 	ColorRect _healthBar;
 	float _healthBarMaxWidth;
-
-	ColorRect _manaBar;
-	float _manaBarMaxWidth;
 
 	bool _showDebug = false;
 	bool _showStats = false;
@@ -51,17 +46,12 @@ public partial class InGameUI : CanvasLayer
 		_statsHealth = GetNode<Label>("Stats/Health");
         _statsStrength = GetNode<Label>("Stats/Strength");
         _statsDefence = GetNode<Label>("Stats/Defence");
-        _statsMagic = GetNode<Label>("Stats/Magic");
-        _statsLuck = GetNode<Label>("Stats/Luck");
 		_statsLevel = GetNode<Label>("Stats/Level");
 
         _statsGold = GetNode<Label>("Stats/Gold");
 
 		_healthBar = GetNode<ColorRect>("HUD/Health");
 		_healthBarMaxWidth = _healthBar.Size.X;
-
-		_manaBar = GetNode<ColorRect>("HUD/Mana");
-		_manaBarMaxWidth = _manaBar.Size.X;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -115,8 +105,6 @@ public partial class InGameUI : CanvasLayer
 		_statsHealth.Text = Player.player.MaxHealth.ToString();
 		_statsStrength.Text = Player.player.Strength.ToString();
 		_statsDefence.Text = Player.player.Defence.ToString();
-		_statsMagic.Text = Player.player.Magic.ToString();
-		_statsLuck.Text = Player.player.Luck.ToString();
 
 		_statsGold.Text = Player.player.Gold.ToString();
 		_statsLevel.Text = GameState.Level.ToString();
@@ -127,7 +115,6 @@ public partial class InGameUI : CanvasLayer
 	private void UpdatePlayer()
 	{
 		_healthBar.SetSize(new Vector2((Player.player.Health / Player.player.MaxHealth) * _healthBarMaxWidth, _healthBar.Size.Y));
-		_manaBar.SetSize(new Vector2((Player.player.Mana / Player.player.MaxMana) * _manaBarMaxWidth, _manaBar.Size.Y));
 	}
 
 	public Dialog SayDialog(DialogResource dialogResource)

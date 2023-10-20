@@ -240,7 +240,7 @@ script = ExtResource("5_c0co3")
 visible = false
 position = Vector2(0, 5)
 sprite_frames = SubResource("SpriteFrames_txxu6")
-frame_progress = 0.734944
+frame_progress = 0.830918
 
 [node name="Fade" type="CanvasLayer" parent="ExitDoor"]
 
@@ -255,6 +255,6 @@ libraries = {
 }
 
 [node name="Merchant" parent="." instance=ExtResource("9_rc45k")]
-position = Vector2(96, 94)
+position = Vector2(95, 147)
 
 [connection signal="interacted" from="ExitDoor/InteractableComponent" to="ExitDoor" method="_on_interactable_component_interacted"]

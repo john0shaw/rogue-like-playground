@@ -45,7 +45,11 @@ public partial class Merchant : NPCNode
     public override void Interact()
     {
 		Dialog dialog = SayCurrentDialog();
-        dialog.DialogFinished += OpenShop;
+        NPCDialogState state = (NPCDialogState)_dialogStateMachine.State;
+
+        if (GameState.Level > 1)
+            dialog.DialogFinished += OpenShop;
+
 		_dialogStateMachine.TransitionTo("RandomChatter");
     }
 

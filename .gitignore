@@ -2,3 +2,5 @@
 .godot/
 # Visual Studio specific
 .vs/
+# Project specific
+save.tres

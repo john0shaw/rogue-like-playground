@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 public partial class RandomDungeonGenerator : Node2D
 {
+    const int MIN_ROOMS = 5;
+    const int MAX_ROOMS = 20;
+
     [Export] public string DungeonPartsLocation;
 
     [ExportGroup("Tile Configuration")]
@@ -12,15 +15,10 @@ public partial class RandomDungeonGenerator : Node2D
     [Export] public int TileSize = 16;
     [Export] public Vector2I BaseGroundTile;
     [Export] public Array<Vector2I> AlternateGroundTiles = new Array<Vector2I>();
-    [Export] public Vector2I BaseWallTile;
-    [Export] public Array<Vector2I> AlternateWallTiles = new Array<Vector2I>();
-    [Export] public Vector2I EnemySpawnTile;
 
     [ExportGroup("Dungeon Generator")]
     [Export] public int MaxRooms = 5;
     [Export] public int MaxContinuousPath = 3;
-    [Export] public int MaxWidth = 5;
-    [Export] public int MaxHeight = 5;
 
     public static RandomDungeonGenerator Instance;
 
@@ -49,6 +47,8 @@ public partial class RandomDungeonGenerator : Node2D
         _numberRoomsToGenerate = MaxRooms;
         _rng = new RandomNumberGenerator();
         _rng.Randomize();
+
+        MaxRooms = MIN_ROOMS + Math.Min(MAX_ROOMS - MIN_ROOMS, Mathf.FloorToInt(GameState.Level / 3));
 
         _availableRooms = new RoomDefinitionList(_rng);
         LoadRoomDefinitions();

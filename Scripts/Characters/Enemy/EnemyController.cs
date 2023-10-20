@@ -104,7 +104,7 @@ public partial class EnemyController : CharacterBody2D
         GetParent().AddChild(lootItem);
     }
 
-    public void TakeDamage(int damage, Vector2 damageSourcePosition)
+    public void TakeDamage(float damage, Vector2 damageSourcePosition)
     {
         if (Health <= 0)
             return;

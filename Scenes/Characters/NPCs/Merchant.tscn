@@ -192,7 +192,7 @@ script = ExtResource("5_4vw51")
 visible = false
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_pf0b4")
-frame_progress = 0.771485
+frame_progress = 0.442159
 
 [node name="DialogStateMachine" type="Node" parent="."]
 script = ExtResource("8_rubia")
@@ -213,6 +213,7 @@ DialogResources = [ExtResource("10_1h7ju")]
 [node name="Shop" type="CanvasLayer" parent="."]
 process_mode = 2
 layer = 5
+visible = false
 script = ExtResource("15_ujl0t")
 
 [node name="TileMap" type="TileMap" parent="Shop"]

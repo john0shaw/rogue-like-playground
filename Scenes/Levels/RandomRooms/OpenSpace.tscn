@@ -72,7 +72,7 @@ layer_0/tile_data = PackedInt32Array(1441795, 0, 0, 1507331, 0, 0, 1572867, 0, 0
 
 [node name="Enemies" type="Node" parent="RandomEnemiesComponent"]
 
-[node name="EnemySpawner" type="Node" parent="RandomEnemiesComponent/Enemies"]
+[node name="Bat" type="Node" parent="RandomEnemiesComponent/Enemies"]
 script = ExtResource("5_vir6w")
 Enemy = ExtResource("6_y45h7")
 SpawnChance = 0.3

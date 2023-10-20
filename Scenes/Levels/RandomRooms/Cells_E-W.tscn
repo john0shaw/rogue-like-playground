@@ -78,6 +78,8 @@ layer_0/tile_data = PackedInt32Array(917508, 0, 0, 983044, 0, 0, 1048580, 0, 0, 
 script = ExtResource("3_oskkm")
 Enemy = ExtResource("4_6n18n")
 SpawnChance = 0.5
+MinAmount = 1
+MaxAmount = 3
 
 [node name="Spider" type="Node" parent="RandomEnemiesComponent/Enemies"]
 script = ExtResource("3_oskkm")

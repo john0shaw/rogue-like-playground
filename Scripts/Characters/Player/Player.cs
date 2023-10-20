@@ -16,11 +16,8 @@ public partial class Player : CharacterBody2D
 	[Export] public const float Speed = 100.0f;
 	[Export] public Weapon StartingWeapon;
 	[Export] public float MaxHealth;
-	[Export] public float MaxMana;
     [Export] public int Strength;
 	[Export] public int Defence;
-	[Export] public int Magic;
-	[Export] public int Luck;
 
 	[ExportGroup("SFX")]
 	[Export] public AudioStream TradeSound;
@@ -68,7 +65,6 @@ public partial class Player : CharacterBody2D
 		AddItem(StartingWeapon);
 
         Health = MaxHealth;
-		Mana = MaxMana;
     }
 
 	public int GetItemCountByID(int ID)
@@ -103,7 +99,7 @@ public partial class Player : CharacterBody2D
 	{
 		Logger.Log("Took " + damage + " damage");
 		_effectAnimationPlayer.Play("Hit");
-		Health -= damage;
+		Health -= (damage - GameState.PlayerDefenceDamageReduction());
 
 		// Knockback
 		GlobalPosition -= (GlobalPosition.DirectionTo(damageSourcePosition) * 4);
@@ -135,9 +131,6 @@ public partial class Player : CharacterBody2D
 		{
 			case Potion.PotionEffect.Health:
 				Health = Mathf.Min((Health + potion.Strength), MaxHealth);
-				break;
-			case Potion.PotionEffect.Mana:
-				Mana = Mathf.Min((Mana + potion.Strength), MaxMana);
 				break;
 			case Potion.PotionEffect.Defense:
 				_tempDefense = potion.Strength;

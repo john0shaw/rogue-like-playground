@@ -51,7 +51,7 @@ public partial class WeaponNode : Node2D
 		if (node is EnemyController)
 		{
             EnemyController enemy = (EnemyController)node;
-			enemy.TakeDamage(_weapon.Damage, GlobalPosition);
+			enemy.TakeDamage(_weapon.Damage * GameState.PlayerStrengthMultiplier(), GlobalPosition);
 		}
 	}
 }

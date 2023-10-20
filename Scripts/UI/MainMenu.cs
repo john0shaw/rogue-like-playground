@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class MainMenu : Node2D
@@ -42,7 +43,17 @@ public partial class MainMenu : Node2D
 
 	public void NewGame()
 	{
-		GameState.Save();
+		GameStateResource newSave = new GameStateResource
+		{
+			Level = 1,
+			Gold = 0,
+			Inventory = new Array<Item>(),
+			MaxHealth = 10,
+			Health = 10,
+			Strength = 1,
+			Defence = 1
+		};
+		GameState.Save(newSave);
 
         Dialog dialog = (Dialog)DialogScene.Instantiate();
         dialog.UIAudioPlayer = _audioStreamPlayer;

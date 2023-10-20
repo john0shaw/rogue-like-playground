@@ -28,7 +28,7 @@ public partial class RandomEnemiesComponent : Node
 
 		foreach (EnemySpawner enemySpawner in enemies.GetChildren())
 		{
-			if (enemySpawner.Enemy.MinSpawnLevel >= GameState.Level)
+			if (enemySpawner.Enemy.MinSpawnLevel > GameState.Level)
 				continue;
 
 			EnemyResource enemyResource = (EnemyResource)enemySpawner.Enemy.Duplicate();
