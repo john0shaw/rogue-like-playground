@@ -7,12 +7,13 @@
 [resource]
 script = ExtResource("1_mo7ck")
 Name = "Rat"
-MaxHealth = 2
+MaxHealth = 1.0
 MoveSpeed = 50.0
+MinSpawnLevel = 1
 Texture = ExtResource("1_yqe54")
 DieEffect = ExtResource("1_w7qfb")
 DetectionDistance = 150.0
-AttackDamage = 1
+AttackDamage = 1.0
 AttackRange = 30.0
 AttackSpeed = 1.5
 IsRanged = false

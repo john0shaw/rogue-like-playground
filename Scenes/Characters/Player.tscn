@@ -1,10 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://dk48k57ophom0"]
+[gd_scene load_steps=18 format=3 uid="uid://dk48k57ophom0"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/Player.cs" id="1_xud6c"]
 [ext_resource type="Resource" uid="uid://d281piwbn84bb" path="res://Resources/Item/Weapons/Sword.tres" id="2_56d4m"]
 [ext_resource type="Texture2D" uid="uid://dfo6xvwnt0eyd" path="res://Art/Characters/Player.png" id="2_jt5nk"]
+[ext_resource type="AudioStream" uid="uid://p3fo0b67yvsc" path="res://Sounds/UI/Sold.wav" id="3_ub25h"]
 [ext_resource type="PackedScene" uid="uid://gr483yme2cvr" path="res://Scenes/Characters/Weapon.tscn" id="4_2jo8h"]
+[ext_resource type="AudioStream" uid="uid://cvt4cjnatyltj" path="res://Sounds/UI/DrinkPotion.wav" id="4_aqttd"]
 [ext_resource type="AudioStream" uid="uid://rrekdsq0l5kh" path="res://Sounds/12_Player_Movement_SFX/61_Hit_03.wav" id="4_mu4df"]
+[ext_resource type="AudioStream" uid="uid://bq1q1mo0jcu10" path="res://Sounds/UI/Equip.mp3" id="5_y31e6"]
 
 [sub_resource type="Animation" id="Animation_nul5h"]
 resource_name = "Idle"
@@ -255,6 +258,9 @@ Strength = 1
 Defence = 1
 Magic = 1
 Luck = 1
+TradeSound = ExtResource("3_ub25h")
+DrinkSound = ExtResource("4_aqttd")
+EquipSound = ExtResource("5_y31e6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_jt5nk")
@@ -298,6 +304,8 @@ one_shot = true
 
 [node name="DefensePotion" type="Timer" parent="Timers"]
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="body_entered" from="InteractableNode" to="." method="_on_interactable_node_body_entered"]
 [connection signal="body_exited" from="InteractableNode" to="." method="_on_interactable_node_body_exited"]

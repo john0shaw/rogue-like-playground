@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 public partial class InventoryGrid : HFlowContainer
 {
+	[Signal] public delegate void button_pressedEventHandler();
+
+	[Export] public InventoryButton.ModeEnum Mode;
+
 	List<InventoryButton> _inventoryButtons = new List<InventoryButton>();
 	PackedScene _inventoryItemButton;
 
@@ -16,6 +20,8 @@ public partial class InventoryGrid : HFlowContainer
 		{
 			InventoryButton _button = (InventoryButton)_inventoryItemButton.Instantiate();
 			_button.InventoryIndex = i;
+			_button.Mode = Mode;
+			_button.Pressed += Update;
 			_inventoryButtons.Add(_button);
 			AddChild(_button);
 		}
@@ -23,6 +29,7 @@ public partial class InventoryGrid : HFlowContainer
 
 	public void Update()
 	{
+		EmitSignal("button_pressed");
 		int positionTrack = 0;
 		foreach (InventoryButton _button in _inventoryButtons)
 		{
@@ -30,6 +37,11 @@ public partial class InventoryGrid : HFlowContainer
 				_button.SetItem(Player.player.Inventory[positionTrack]);
 			else
 				_button.Clear();
+
+			if (_button.Item == Player.player.EquipedWeapon)
+				_button.Disabled = true;
+			else
+				_button.Disabled = false;
 
 			positionTrack++;
 		}

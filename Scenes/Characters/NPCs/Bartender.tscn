@@ -1,15 +1,18 @@
-[gd_scene load_steps=20 format=3 uid="uid://pv60l6qnp5hf"]
+[gd_scene load_steps=24 format=3 uid="uid://pv60l6qnp5hf"]
 
-[ext_resource type="Script" path="res://Scripts/Characters/NPC/NPCNode.cs" id="1_0ixcr"]
+[ext_resource type="Script" path="res://Scripts/Characters/NPC/Bartender.cs" id="1_6hgok"]
 [ext_resource type="Texture2D" uid="uid://dapaqab16x26q" path="res://Art/Characters/Bartender.png" id="2_o5ln5"]
 [ext_resource type="Texture2D" uid="uid://dsrcqu0gq77cd" path="res://Art/UI/InteractableIndicator.png" id="3_sg4rv"]
 [ext_resource type="Script" path="res://Scripts/Characters/DialogIndicator.cs" id="4_r8ebl"]
 [ext_resource type="Script" path="res://Scripts/Interactable/InteractableComponent.cs" id="5_oixoi"]
+[ext_resource type="Texture2D" uid="uid://xnx0d5guldb1" path="res://Art/Interactable/Indicator/NoClick.png" id="6_oxu0s"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/StateMachine.cs" id="6_v6tys"]
+[ext_resource type="Texture2D" uid="uid://dkha2xybwmnn1" path="res://Art/Interactable/Indicator/LeftClick.png" id="7_clgbk"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/States/NPC/NPCDialogState.cs" id="7_sp7l5"]
 [ext_resource type="Resource" uid="uid://beqcvyuy67pw6" path="res://Resources/Dialog/Bartender/FirstGreeting.tres" id="8_haxur"]
 [ext_resource type="Resource" uid="uid://cwokc3orhl2vh" path="res://Resources/Dialog/Bartender/Chatter1.tres" id="9_vyyy1"]
 [ext_resource type="Resource" uid="uid://d03sjtsrv7523" path="res://Resources/Dialog/Bartender/Chatter2.tres" id="10_iy6bx"]
+[ext_resource type="Resource" uid="uid://rb5ua6pauhuy" path="res://Resources/Dialog/Bartender/SecondGreetings.tres" id="11_0nabg"]
 [ext_resource type="Resource" uid="uid://ba5hnsbc6sjvt" path="res://Resources/Dialog/Bartender/Chatter3.tres" id="11_1x7q1"]
 [ext_resource type="Resource" uid="uid://bdh0kmw4gukl0" path="res://Resources/Dialog/Bartender/Chatter4.tres" id="12_3cihq"]
 
@@ -130,11 +133,24 @@ _data = {
 "UpDown": SubResource("Animation_ssaqn")
 }
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_pf0b4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_oxu0s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_clgbk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Bartender" type="CharacterBody2D"]
-position = Vector2(100, 113)
 collision_layer = 9
 collision_mask = 9
-script = ExtResource("1_0ixcr")
+script = ExtResource("1_6hgok")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_o5ln5")
@@ -160,8 +176,14 @@ libraries = {
 "": SubResource("AnimationLibrary_xmiqr")
 }
 
-[node name="InteractableComponent" type="Node" parent="."]
+[node name="InteractableComponent" type="Node2D" parent="."]
 script = ExtResource("5_oixoi")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="InteractableComponent"]
+visible = false
+position = Vector2(0, -24)
+sprite_frames = SubResource("SpriteFrames_pf0b4")
+frame_progress = 0.888412
 
 [node name="DialogStateMachine" type="Node" parent="."]
 script = ExtResource("6_v6tys")
@@ -171,9 +193,15 @@ InitialState = NodePath("FirstGreetings")
 script = ExtResource("7_sp7l5")
 DialogResources = [ExtResource("8_haxur")]
 
+[node name="SecondGreetings" type="Node" parent="DialogStateMachine"]
+script = ExtResource("7_sp7l5")
+DialogResources = [ExtResource("11_0nabg")]
+
 [node name="RandomChatter" type="Node" parent="DialogStateMachine"]
 script = ExtResource("7_sp7l5")
 DialogResources = [ExtResource("9_vyyy1"), ExtResource("10_iy6bx"), ExtResource("11_1x7q1"), ExtResource("12_3cihq")]
 
 [connection signal="visibility_changed" from="DialogIndicator" to="DialogIndicator" method="_on_visibility_changed"]
-[connection signal="Interacted" from="InteractableComponent" to="." method="_on_interactable_component_interacted"]
+[connection signal="entered_range" from="InteractableComponent" to="." method="_on_interactable_component_entered_range"]
+[connection signal="exited_range" from="InteractableComponent" to="." method="_on_interactable_component_exited_range"]
+[connection signal="interacted" from="InteractableComponent" to="." method="_on_interactable_component_interacted"]

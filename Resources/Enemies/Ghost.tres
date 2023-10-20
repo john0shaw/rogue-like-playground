@@ -7,12 +7,13 @@
 [resource]
 script = ExtResource("1_ay8je")
 Name = "Ghost"
-MaxHealth = 3
+MaxHealth = 2.0
 MoveSpeed = 75.0
+MinSpawnLevel = 1
 Texture = ExtResource("1_g8rte")
 DieEffect = ExtResource("1_i4qq1")
 DetectionDistance = 100.0
-AttackDamage = 1
+AttackDamage = 2.0
 AttackRange = 30.0
 AttackSpeed = 1.0
 IsRanged = false

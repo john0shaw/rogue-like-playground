@@ -6,3 +6,4 @@
 script = ExtResource("1_ugpln")
 Speaker = "Bartender"
 Dialog = ["I love my regulars!  People just keep coming back."]
+Confirm = false

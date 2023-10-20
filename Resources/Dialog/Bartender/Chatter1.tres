@@ -6,3 +6,4 @@
 script = ExtResource("1_6x1l3")
 Speaker = "Bartender"
 Dialog = ["You should really get out there and explore!"]
+Confirm = false

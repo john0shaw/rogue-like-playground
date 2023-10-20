@@ -8,8 +8,9 @@ public partial class EnemyResource : Resource
     [Export] public string Name;
 
     [ExportGroup("Stats")]
-    [Export] public int MaxHealth;
+    [Export] public float MaxHealth;
     [Export] public float MoveSpeed;
+    [Export] public int MinSpawnLevel;
 
     [ExportGroup("Media")]
     [Export] public Texture2D Texture;
@@ -17,7 +18,7 @@ public partial class EnemyResource : Resource
 
     [ExportGroup("Combat")]
     [Export] public float DetectionDistance;
-    [Export] public int AttackDamage;
+    [Export] public float AttackDamage;
     [Export] public float AttackRange;
     [Export] public float AttackSpeed;
     [Export] public bool IsRanged;

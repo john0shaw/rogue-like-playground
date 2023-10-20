@@ -42,6 +42,8 @@ public partial class MainMenu : Node2D
 
 	public void NewGame()
 	{
+		GameState.Save();
+
         Dialog dialog = (Dialog)DialogScene.Instantiate();
         dialog.UIAudioPlayer = _audioStreamPlayer;
         dialog.DialogResource = StartingDialog;
@@ -77,8 +79,6 @@ public partial class MainMenu : Node2D
 	public async void _on_continue_pressed()
 	{
         _uiLayer.PlayButtonMouseClickEffect();
-        GameState.Load();
-
         _animationPlayer.Play("FadeOut");
         await ToSignal(_animationPlayer, "animation_finished");
 

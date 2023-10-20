@@ -8,12 +8,13 @@
 [resource]
 script = ExtResource("3_v1m6r")
 Name = "Spider"
-MaxHealth = 4
+MaxHealth = 3.0
 MoveSpeed = 25.0
+MinSpawnLevel = 1
 Texture = ExtResource("2_44d3j")
 DieEffect = ExtResource("1_nu6if")
 DetectionDistance = 150.0
-AttackDamage = 1
+AttackDamage = 3.0
 AttackRange = 100.0
 AttackSpeed = 1.0
 IsRanged = true

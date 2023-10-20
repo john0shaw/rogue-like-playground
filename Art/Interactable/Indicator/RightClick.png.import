@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0migvksxc02j"
-path="res://.godot/imported/Key.png-b23b1e2a904f48a98ea24a99e848d4df.ctex"
+uid="uid://di5l2xdrdt8jd"
+path="res://.godot/imported/RightClick.png-e22c06fb4fd9f42464f437254ec1576c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Items/Key.png"
-dest_files=["res://.godot/imported/Key.png-b23b1e2a904f48a98ea24a99e848d4df.ctex"]
+source_file="res://Art/Interactable/Indicator/RightClick.png"
+dest_files=["res://.godot/imported/RightClick.png-e22c06fb4fd9f42464f437254ec1576c.ctex"]
 
 [params]
 

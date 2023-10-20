@@ -6,3 +6,4 @@
 script = ExtResource("1_e0l8v")
 Speaker = "Bartender"
 Dialog = ["Where does the time go?"]
+Confirm = false

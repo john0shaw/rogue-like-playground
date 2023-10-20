@@ -13,12 +13,13 @@ public partial class InGameUI : CanvasLayer
 	Label _statsMagic;
 	Label _statsLuck;
 	Label _statsGold;
-	Label _statsKeys;
+	Label _statsLevel;
 
     RichTextLabel _debugPanel;
     TileMap _statsPanel;
 	TileMap _inventoryPanel;
 	InventoryGrid _inventoryGrid;
+	Label _inventoryGold;
 	HUD _hud;
 	AudioStreamPlayer _audioStreamPlayer;
 
@@ -42,6 +43,7 @@ public partial class InGameUI : CanvasLayer
 		_debugPanel = GetNode<RichTextLabel>("Debug");
 		_inventoryPanel = GetNode<TileMap>("Inventory");
 		_inventoryGrid = GetNode<InventoryGrid>("Inventory/InventoryGrid");
+		_inventoryGold = GetNode<Label>("Inventory/Gold");
 		_hud = GetNode<HUD>("HUD");
 		_audioStreamPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 
@@ -51,9 +53,9 @@ public partial class InGameUI : CanvasLayer
         _statsDefence = GetNode<Label>("Stats/Defence");
         _statsMagic = GetNode<Label>("Stats/Magic");
         _statsLuck = GetNode<Label>("Stats/Luck");
+		_statsLevel = GetNode<Label>("Stats/Level");
 
         _statsGold = GetNode<Label>("Stats/Gold");
-        _statsKeys = GetNode<Label>("Stats/Keys");
 
 		_healthBar = GetNode<ColorRect>("HUD/Health");
 		_healthBarMaxWidth = _healthBar.Size.X;
@@ -117,7 +119,9 @@ public partial class InGameUI : CanvasLayer
 		_statsLuck.Text = Player.player.Luck.ToString();
 
 		_statsGold.Text = Player.player.Gold.ToString();
-		_statsKeys.Text = Player.player.Keys.ToString();
+		_statsLevel.Text = GameState.Level.ToString();
+
+		_inventoryGold.Text = Player.player.Gold.ToString();
 	}
 
 	private void UpdatePlayer()
@@ -126,12 +130,14 @@ public partial class InGameUI : CanvasLayer
 		_manaBar.SetSize(new Vector2((Player.player.Mana / Player.player.MaxMana) * _manaBarMaxWidth, _manaBar.Size.Y));
 	}
 
-	public void SayDialog(DialogResource dialogResource)
+	public Dialog SayDialog(DialogResource dialogResource)
 	{
 		Dialog dialog = (Dialog)_dialogScene.Instantiate();
 		dialog.DialogResource = dialogResource;
 		dialog.UIAudioPlayer = _audioStreamPlayer;
 		AddChild(dialog);
+
+		return dialog;
 	}
 
 	public void _on_player_changed_weapon()

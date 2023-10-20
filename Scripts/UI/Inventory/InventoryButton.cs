@@ -3,29 +3,44 @@ using System;
 
 public partial class InventoryButton : TextureButton
 {
-	public int InventoryIndex;
+	public enum ModeEnum
+	{
+		Inventory,
+		Shop
+	};
 
-	Item _item;
+	public int InventoryIndex;
+	public ModeEnum Mode;
+	
+
+	public Item Item;
+	Label _label;
 	Sprite2D _sprite2D;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_sprite2D = GetNode<Sprite2D>("Sprite2D");
+		_label = GetNode<Label>("Label");
+
+		_sprite2D.Show();
+		_label.Hide();
+		
 		Disabled = true;
 	}
 
 	public void SetItem(Item item)
 	{
-		_item = item;
+		Item = item;
 		_sprite2D.Texture = item.Texture;
-        if (item is Weapon or Consumable)
-			Disabled = false;
+		_label.Text = item.Name;
+		Disabled = false;
 	}
 
 	public void Clear()
 	{
-		_item = null;
+		Item = null;
+		_label.Text = "";
 		_sprite2D.Texture = null;
 		Disabled = true;
 	}
@@ -33,28 +48,42 @@ public partial class InventoryButton : TextureButton
 	public void _on_mouse_entered()
 	{
 		Player.player.TrackMouseEvents = false;
+		_sprite2D.Hide();
+		_label.Show();
 	}
 
 	public void _on_mouse_exited()
 	{
 		Player.player.TrackMouseEvents = true;
+		_sprite2D.Show();
+		_label.Hide();
 	}
 
 	public void _on_pressed()
 	{
-		if (_item is Weapon)
+		if (Mode == ModeEnum.Inventory)
 		{
-            Player.player.SetWeapon((Weapon)_item);
-        }	
-		else if (_item is Consumable)
-		{
-			if (_item is Potion)
-				Player.player.DrinkPotion((Potion)_item);
-			else
-				Logger.Log("Unknown Consumable used - " + _item.Name);
+            if (Item is Weapon)
+            {
+                Player.player.SetWeapon((Weapon)Item);
+            }
+            else if (Item is Consumable)
+            {
+                if (Item is Potion)
+                    Player.player.DrinkPotion((Potion)Item);
+                else
+                    Logger.Log("Unknown Consumable used - " + Item.Name);
 
-			Player.player.RemoveItemAt(InventoryIndex);
+                Player.player.RemoveItemAt(InventoryIndex);
+            }
         }
-			
+		else if (Mode == ModeEnum.Shop)
+		{
+			if (Item != Player.player.EquipedWeapon)
+			{
+                Player.player.SellItem(Item);
+                Player.player.RemoveItemAt(InventoryIndex);
+            }
+		}
 	}
 }

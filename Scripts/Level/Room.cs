@@ -30,7 +30,7 @@ public partial class Room : TileMap
     public Connection AvailableConnections = new Connection();
     public Connection UsedConnections = new Connection();
 
-    Dictionary<string, int> _tileLayerMap = new Dictionary<string, int>();
+    protected Dictionary<string, int> _tileLayerMap = new Dictionary<string, int>();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

@@ -28,11 +28,19 @@ public partial class RandomEnemiesComponent : Node
 
 		foreach (EnemySpawner enemySpawner in enemies.GetChildren())
 		{
-			for (int i = 0; i <= enemySpawner.MaxAmount; i++)
+			if (enemySpawner.Enemy.MinSpawnLevel >= GameState.Level)
+				continue;
+
+			EnemyResource enemyResource = (EnemyResource)enemySpawner.Enemy.Duplicate();
+
+            enemyResource.MaxHealth *= GameState.EnemyHealthMultiplier();
+            enemyResource.AttackDamage *= GameState.EnemyDamageMultiplier();
+
+            for (int i = 0; i <= enemySpawner.MaxAmount; i++)
 			{
-				if (i <= enemySpawner.MinAmount || GD.Randf() < (enemySpawner.SpawnChance * GameState.GetLevelEnemyMultiplier()))
+				if (i <= (enemySpawner.MinAmount * GameState.EnemySpawnMultiplier()) || GD.Randf() < (enemySpawner.SpawnChance * GameState.EnemySpawnMultiplier()))
 				{
-                    SpawnEnemy(enemySpawner.Enemy, spawnLocations.PickRandom());
+                    SpawnEnemy(enemyResource, spawnLocations.PickRandom());
                 }
             }
 		}
@@ -41,7 +49,8 @@ public partial class RandomEnemiesComponent : Node
 	void SpawnEnemy(EnemyResource enemyResource, Vector2I tilePosition)
 	{
         EnemyController enemy = (EnemyController)_enemyScene.Instantiate();
-        enemy.EnemyResource = enemyResource;
+
+		enemy.EnemyResource = enemyResource;
         enemy.Position = _rootPosition + Room.GetTilePosition(tilePosition);
 
         AddChild(enemy);

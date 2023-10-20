@@ -6,3 +6,4 @@
 script = ExtResource("1_jci1h")
 Speaker = "Bartender"
 Dialog = ["I've got nothing more for you right now."]
+Confirm = false

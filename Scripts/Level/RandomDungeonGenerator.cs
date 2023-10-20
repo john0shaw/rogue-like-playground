@@ -18,7 +18,7 @@ public partial class RandomDungeonGenerator : Node2D
 
     [ExportGroup("Dungeon Generator")]
     [Export] public int MaxRooms = 5;
-    [Export] public int MaxContinuousPath = 5;
+    [Export] public int MaxContinuousPath = 3;
     [Export] public int MaxWidth = 5;
     [Export] public int MaxHeight = 5;
 
@@ -243,6 +243,27 @@ public partial class RandomDungeonGenerator : Node2D
         }
 
         return location;
+    }
+
+    Room GetRandomRoomWithOpening(Direction direction)
+    {
+        Array<Room> roomsWithConnection = new Array<Room>();
+
+        foreach (Room room in _rooms)
+        {
+            if (room.AvailableConnections.Get(direction) && ! room.UsedConnections.Get(direction))
+            {
+                roomsWithConnection.Add(room);
+            }
+        }
+
+        if (roomsWithConnection.Count == 0)
+        {
+            Logger.Log("No rooms with " + direction.ToString() + " connection available for ending room");
+            return null;
+        }
+
+        return roomsWithConnection.PickRandom();
     }
 
     private Direction GetRandomRoomDirection(Room room)

@@ -44,7 +44,7 @@ public partial class Projectile : CharacterBody2D
 			{
 				if (collision.GetCollider() is Player)
 				{
-					Player.player.TakeDamage(_damage);
+					Player.player.TakeDamage(_damage, GlobalPosition);
 				}
 
 				QueueFree();

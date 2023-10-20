@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogResource" load_steps=2 format=3 uid="uid://byacglngw5a0h"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/DialogResource.cs" id="1_11g6c"]
+
+[resource]
+script = ExtResource("1_11g6c")
+Speaker = "Merchant"
+Dialog = ["If you find anything shiny on your exploring, be sure to sell them to me!"]
+Confirm = false

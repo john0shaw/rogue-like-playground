@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogResource" load_steps=2 format=3 uid="uid://belaykv1p2mwm"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/DialogResource.cs" id="1_oe7jp"]
+
+[resource]
+script = ExtResource("1_oe7jp")
+Speaker = "Merchant"
+Dialog = ["I can't believe we're back here!", "I don't know about you, but one minute I was looking through the door and saw the road...", "But as soon as I stepped through I was here again!", "You seem strong, you should keep exploring and see if there is a way out of here!", "In the meantime, I'll buy any random junk you find and I'll have weapons from time to time to give you an edge."]
+Confirm = false

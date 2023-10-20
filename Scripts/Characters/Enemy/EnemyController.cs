@@ -104,7 +104,7 @@ public partial class EnemyController : CharacterBody2D
         GetParent().AddChild(lootItem);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Vector2 damageSourcePosition)
     {
         if (Health <= 0)
             return;
@@ -113,15 +113,19 @@ public partial class EnemyController : CharacterBody2D
         _healthBar.Health = Health;
         _effectAnimationPlayer.Play("Hit");
 
+        // Knockback
+        GlobalPosition -= (GlobalPosition.DirectionTo(damageSourcePosition) * 4);
+
         if (Health <= 0)
         {
             _stateMachine.TransitionTo("Die");
         }
+
     }
 
     public void MeleeAttackPlayer()
     {
-        Player.player.TakeDamage(EnemyResource.AttackDamage);
+        Player.player.TakeDamage(EnemyResource.AttackDamage, GlobalPosition);
     }
 
     public void RangedAttackPlayer()

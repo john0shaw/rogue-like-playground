@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cweu7bowvqa71"]
 
 [ext_resource type="TileSet" uid="uid://bx36xmtqopq22" path="res://Art/Tilemaps/DungeonTiles.tres" id="1_q11pu"]
-[ext_resource type="Script" path="res://Scripts/Level/Room.cs" id="2_5vi8y"]
-[ext_resource type="Resource" uid="uid://dieirbx7eeld8" path="res://Resources/Level/RandomTileReplacement/DungeonFloorTile.tres" id="3_43471"]
+[ext_resource type="Script" path="res://Scripts/Level/Room/SpawnRoom.cs" id="2_raif3"]
+[ext_resource type="PackedScene" uid="uid://daf85xyrrc13a" path="res://Scenes/Characters/NPCs/Merchant.tscn" id="3_qvave"]
 [ext_resource type="PackedScene" uid="uid://pv60l6qnp5hf" path="res://Scenes/Characters/NPCs/Bartender.tscn" id="4_jc7ov"]
 
 [node name="Room" type="TileMap"]
@@ -60,9 +60,11 @@ layer_7/y_sort_enabled = false
 layer_7/y_sort_origin = 0
 layer_7/z_index = 0
 layer_7/tile_data = PackedInt32Array()
-script = ExtResource("2_5vi8y")
-HasWestConnection = true
-RandomFloorTiles = ExtResource("3_43471")
+script = ExtResource("2_raif3")
+HasSouthConnection = true
+
+[node name="Merchant" parent="." instance=ExtResource("3_qvave")]
+position = Vector2(250, 223)
 
 [node name="Bartender" parent="." instance=ExtResource("4_jc7ov")]
 position = Vector2(104, 121)

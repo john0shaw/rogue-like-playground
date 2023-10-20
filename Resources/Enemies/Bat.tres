@@ -7,12 +7,13 @@
 [resource]
 script = ExtResource("1_nxjur")
 Name = "Bat"
-MaxHealth = 1
+MaxHealth = 1.0
 MoveSpeed = 75.0
+MinSpawnLevel = 1
 Texture = ExtResource("1_p4tpw")
 DieEffect = ExtResource("1_hhhui")
 DetectionDistance = 200.0
-AttackDamage = 1
+AttackDamage = 1.0
 AttackRange = 30.0
 AttackSpeed = 1.0
 IsRanged = false

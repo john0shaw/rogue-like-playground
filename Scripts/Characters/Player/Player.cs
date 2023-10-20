@@ -12,15 +12,20 @@ public partial class Player : CharacterBody2D
 
     public static Player player;
 
+	[ExportGroup("Stats")]
 	[Export] public const float Speed = 100.0f;
 	[Export] public Weapon StartingWeapon;
-
 	[Export] public float MaxHealth;
 	[Export] public float MaxMana;
     [Export] public int Strength;
 	[Export] public int Defence;
 	[Export] public int Magic;
 	[Export] public int Luck;
+
+	[ExportGroup("SFX")]
+	[Export] public AudioStream TradeSound;
+	[Export] public AudioStream DrinkSound;
+	[Export] public AudioStream EquipSound;
 
     public float Health;
 	public float Mana;
@@ -29,10 +34,11 @@ public partial class Player : CharacterBody2D
 	public int Gold;
 
 	public bool TrackMouseEvents = true;
-	public List<Item> Inventory = new List<Item>();
+	public Array<Item> Inventory = new Array<Item>();
 
 	AnimationPlayer _animationPlayer;
 	AnimationPlayer _effectAnimationPlayer;
+	AudioStreamPlayer _audioStreamPlayer;
 	Sprite2D _sprite2D;
 	List<InteractableComponent> _nearbyInteractableComponents = new List<InteractableComponent>();
 
@@ -51,13 +57,14 @@ public partial class Player : CharacterBody2D
 
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_effectAnimationPlayer = GetNode<AnimationPlayer>("EffectAnimationPlayer");
+		_audioStreamPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		_sprite2D = GetNode<Sprite2D>("Sprite2D");
 		_weaponNode = GetNode<WeaponNode>("Weapon");
 
 		_speedPotionTimer = GetNode<Timer>("Timers/SpeedPotion");
 		_defensePotionTimer = GetNode<Timer>("Timers/DefensePotion");
 
-		SetWeapon(StartingWeapon);
+		SetWeapon(StartingWeapon, false);
 		AddItem(StartingWeapon);
 
         Health = MaxHealth;
@@ -92,11 +99,14 @@ public partial class Player : CharacterBody2D
 		return false;
 	}
 
-	public void TakeDamage(float damage)
+	public void TakeDamage(float damage, Vector2 damageSourcePosition)
 	{
 		Logger.Log("Took " + damage + " damage");
 		_effectAnimationPlayer.Play("Hit");
 		Health -= damage;
+
+		// Knockback
+		GlobalPosition -= (GlobalPosition.DirectionTo(damageSourcePosition) * 4);
 	}
 
 	public void Attack()
@@ -104,10 +114,17 @@ public partial class Player : CharacterBody2D
 		_weaponNode.Attack();
 	}
 
-	public void SetWeapon(Weapon weapon)
+	public void SetWeapon(Weapon weapon, bool playSound = true)
 	{
 		_weaponNode.SetWeapon(weapon);
 		EquipedWeapon = weapon;
+
+		if (playSound)
+		{
+            _audioStreamPlayer.Stream = EquipSound;
+            _audioStreamPlayer.Play();
+        }
+
 		EmitSignal("ChangedWeapon");
 	}
 
@@ -132,7 +149,34 @@ public partial class Player : CharacterBody2D
 				break;
 		}
 
-		Logger.Log("Drank a " + potion.Effect.ToString() + " potion");
+		_audioStreamPlayer.Stream = DrinkSound;
+		_audioStreamPlayer.Play();
+	}
+
+	public void SellItem(Item item)
+	{
+		if (Inventory.Contains(item))
+		{
+			Gold += item.Value;
+			_audioStreamPlayer.Stream = TradeSound;
+			_audioStreamPlayer.Play();
+		}
+	}
+
+	public bool BuyItem(ItemByLevel item)
+	{
+		if (Gold >= item.Cost)
+		{
+			if (AddItem(item.Weapon))
+			{
+                _audioStreamPlayer.Stream = TradeSound;
+                _audioStreamPlayer.Play();
+				Gold -= item.Cost;
+				return true;
+            }
+		}
+		
+		return false;
 	}
 
 	public void RemoveItemAt(int index)
@@ -235,9 +279,15 @@ public partial class Player : CharacterBody2D
 	{
 		foreach (Node child in node.GetChildren())
 		{
-			if (child is InteractableComponent && !_nearbyInteractableComponents.Contains((InteractableComponent)child))
+			if (child is InteractableComponent)
 			{
-				_nearbyInteractableComponents.Add((InteractableComponent)child);
+				InteractableComponent component = (InteractableComponent)child;
+				if (!_nearbyInteractableComponents.Contains(component))
+				{
+                    _nearbyInteractableComponents.Add(component);
+					component.EnteredRange();
+					component.EmitSignal("entered_range");
+                }
 			}
 		}
 	}
@@ -250,9 +300,15 @@ public partial class Player : CharacterBody2D
 	{
         foreach (Node child in node.GetChildren())
         {
-            if (child is InteractableComponent && _nearbyInteractableComponents.Contains((InteractableComponent)child))
+            if (child is InteractableComponent)
             {
-                _nearbyInteractableComponents.Remove((InteractableComponent)child);
+                InteractableComponent component = (InteractableComponent)child;
+                if (_nearbyInteractableComponents.Contains(component))
+                {
+                    _nearbyInteractableComponents.Remove(component);
+					component.ExitedRange();
+					component.EmitSignal("exited_range");
+                }
             }
         }
     }

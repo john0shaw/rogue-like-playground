@@ -93,8 +93,11 @@ public partial class Dialog : ColorRect
 		{
 			if (_finished)
 			{
-				PlayUIAudio(NextSound);
-                NextPhrase();
+				if (!(DialogResource.Confirm && _buttonsContainer.Visible))
+				{
+                    PlayUIAudio(NextSound);
+                    NextPhrase();
+                }
             }
 			else if (_text.VisibleCharacters > 3)
 				_text.VisibleCharacters = _text.Text.Length;

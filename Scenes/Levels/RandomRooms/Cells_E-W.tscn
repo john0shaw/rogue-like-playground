@@ -58,9 +58,7 @@ layer_6/y_sort_origin = 0
 layer_6/z_index = 0
 layer_6/tile_data = PackedInt32Array()
 script = ExtResource("2_24ix3")
-HasNorthConnection = true
 HasEastConnection = true
-HasSouthConnection = true
 HasWestConnection = true
 RandomFloorTiles = ExtResource("3_fb0io")
 

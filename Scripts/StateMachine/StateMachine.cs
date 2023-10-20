@@ -42,8 +42,11 @@ public partial class StateMachine : Node
 	public void TransitionTo(string toState, Dictionary message = null)
 	{
 		if (!HasNode(toState))
-			return;
-
+		{
+			Logger.Log(Name + ": No state matching " + toState);
+            return;
+        }
+			
 		State.Exit();
 		State = GetNode<State>(toState);
 		State.Enter(message);
