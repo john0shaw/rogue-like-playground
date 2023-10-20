@@ -27,5 +27,5 @@ public partial class EnemyResource : Resource
     [ExportGroup("Loot")]
     [Export] public int GoldMin;
     [Export] public int GoldMax;
-    [Export] public Array<Item> Loot;
+    [Export] public Array<Item> Loot = new Array<Item>();
 }

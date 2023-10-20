@@ -1,9 +1,13 @@
-[gd_resource type="Resource" script_class="EnemyResource" load_steps=5 format=3 uid="uid://dliglrots2n8v"]
+[gd_resource type="Resource" script_class="EnemyResource" load_steps=9 format=3 uid="uid://dliglrots2n8v"]
 
 [ext_resource type="AudioStream" uid="uid://baagtbbqqgj8v" path="res://Sounds/RatDeath.mp3" id="1_nu6if"]
 [ext_resource type="Texture2D" uid="uid://bunaxq0fcwuip" path="res://Art/Characters/Spider.png" id="2_44d3j"]
+[ext_resource type="Resource" uid="uid://3rr7it5b7hpo" path="res://Resources/Item/Consumables/HealthPotion.tres" id="2_12606"]
 [ext_resource type="Resource" uid="uid://cyk5f6ogl08ua" path="res://Resources/Projectiles/Web.tres" id="2_s0e01"]
+[ext_resource type="Resource" uid="uid://din75sfjvqvem" path="res://Resources/Item/Consumables/DefencePotion.tres" id="3_rkkby"]
 [ext_resource type="Script" path="res://Scripts/Resources/EnemyResource.cs" id="3_v1m6r"]
+[ext_resource type="Resource" uid="uid://cwo7201kqwtwt" path="res://Resources/Item/Junk/DiamondRing.tres" id="4_hjdar"]
+[ext_resource type="Resource" uid="uid://chadq0igs10v7" path="res://Resources/Item/Junk/GoldRing.tres" id="5_ljcj5"]
 
 [resource]
 script = ExtResource("3_v1m6r")
@@ -21,4 +25,4 @@ IsRanged = true
 ProjectileResource = ExtResource("2_s0e01")
 GoldMin = 5
 GoldMax = 8
-Loot = null
+Loot = [ExtResource("2_12606"), ExtResource("3_rkkby"), ExtResource("4_hjdar"), ExtResource("5_ljcj5")]

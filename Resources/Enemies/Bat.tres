@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="EnemyResource" load_steps=4 format=3 uid="uid://bxy63pmxses4v"]
+[gd_resource type="Resource" script_class="EnemyResource" load_steps=6 format=3 uid="uid://bxy63pmxses4v"]
 
 [ext_resource type="AudioStream" uid="uid://baagtbbqqgj8v" path="res://Sounds/RatDeath.mp3" id="1_hhhui"]
 [ext_resource type="Script" path="res://Scripts/Resources/EnemyResource.cs" id="1_nxjur"]
 [ext_resource type="Texture2D" uid="uid://cbnif8meh8swa" path="res://Art/Characters/Bat.png" id="1_p4tpw"]
+[ext_resource type="Resource" uid="uid://cpgpalg5ru2n1" path="res://Resources/Item/Consumables/SpeedPotion.tres" id="2_avl16"]
+[ext_resource type="Resource" uid="uid://chadq0igs10v7" path="res://Resources/Item/Junk/GoldRing.tres" id="3_wyx4r"]
 
 [resource]
 script = ExtResource("1_nxjur")
@@ -19,4 +21,4 @@ AttackSpeed = 1.0
 IsRanged = false
 GoldMin = 1
 GoldMax = 3
-Loot = null
+Loot = [ExtResource("2_avl16"), ExtResource("3_wyx4r")]
