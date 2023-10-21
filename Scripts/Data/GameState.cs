@@ -35,7 +35,8 @@ static class GameState
                 MaxHealth = Player.player.MaxHealth,
                 Health = Player.player.Health,
                 Strength = Player.player.Strength,
-                Defence = Player.player.Defence
+                Defence = Player.player.Defence,
+                EquippedWeapon = Player.player.EquipedWeapon
             };
         }
         
@@ -52,6 +53,7 @@ static class GameState
         Player.player.Health = save.Health;
         Player.player.Strength = save.Strength;
         Player.player.Defence = save.Defence;
+        Player.player.SetWeapon(save.EquippedWeapon, false);
 
         Player.player.EmitSignal("InventoryUpdated");
 

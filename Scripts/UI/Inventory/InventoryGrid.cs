@@ -22,6 +22,7 @@ public partial class InventoryGrid : HFlowContainer
 			_button.InventoryIndex = i;
 			_button.Mode = Mode;
 			_button.Pressed += Update;
+			_button.Pressed += _on_inventory_button_pressed;
 			_inventoryButtons.Add(_button);
 			AddChild(_button);
 		}
@@ -29,7 +30,6 @@ public partial class InventoryGrid : HFlowContainer
 
 	public void Update()
 	{
-		EmitSignal("button_pressed");
 		int positionTrack = 0;
 		foreach (InventoryButton _button in _inventoryButtons)
 		{
@@ -45,5 +45,10 @@ public partial class InventoryGrid : HFlowContainer
 
 			positionTrack++;
 		}
+	}
+
+	public void _on_inventory_button_pressed()
+	{
+		EmitSignal("button_pressed");
 	}
 }

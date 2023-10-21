@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public partial class Player : CharacterBody2D
 {
 	public const int INVENTORY_SIZE = 25;
+	public const string StartingWeaponResource = "res://Resources/Item/Weapons/Dagger.tres";
 
     [Signal] public delegate void InventoryUpdatedEventHandler();
 	[Signal] public delegate void ChangedWeaponEventHandler();
@@ -15,12 +16,11 @@ public partial class Player : CharacterBody2D
 
 	[ExportGroup("Stats")]
 	[Export] public const float Speed = 100.0f;
-	[Export] public Weapon StartingWeapon;
 	[Export] public float MaxHealth;
     [Export] public int Strength;
 	[Export] public int Defence;
 
-	[ExportGroup("SFX")]
+    [ExportGroup("SFX")]
 	[Export] public AudioStream TradeSound;
 	[Export] public AudioStream DrinkSound;
 	[Export] public AudioStream EquipSound;
@@ -61,11 +61,6 @@ public partial class Player : CharacterBody2D
 
 		_speedPotionTimer = GetNode<Timer>("Timers/SpeedPotion");
 		_defensePotionTimer = GetNode<Timer>("Timers/DefensePotion");
-
-		SetWeapon(StartingWeapon, false);
-		AddItem(StartingWeapon);
-
-        Health = MaxHealth;
     }
 
 	public int GetItemCountByID(int ID)

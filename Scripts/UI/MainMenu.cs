@@ -53,6 +53,10 @@ public partial class MainMenu : Node2D
 			Strength = 1,
 			Defence = 1
 		};
+		Weapon startingWeapon = ResourceLoader.Load<Weapon>(Player.StartingWeaponResource);
+		newSave.Inventory.Add(startingWeapon);
+		newSave.EquippedWeapon = startingWeapon;
+
 		GameState.Save(newSave);
 
         Dialog dialog = (Dialog)DialogScene.Instantiate();
@@ -118,7 +122,7 @@ public partial class MainMenu : Node2D
 	public async void _on_save_warning_cancel()
 	{
 		_animationPlayer.Play("FadeOut");
-		await ToSignal(_animationPlayer, "animationFinished");
+		await ToSignal(_animationPlayer, "animation_finished");
 		GetTree().ReloadCurrentScene();
 	}
 }

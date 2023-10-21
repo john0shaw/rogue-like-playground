@@ -1,8 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://dk48k57ophom0"]
+[gd_scene load_steps=19 format=3 uid="uid://dk48k57ophom0"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/Player.cs" id="1_xud6c"]
 [ext_resource type="Texture2D" uid="uid://dfo6xvwnt0eyd" path="res://Art/Characters/Player.png" id="2_jt5nk"]
-[ext_resource type="Resource" uid="uid://d281piwbn84bb" path="res://Resources/Item/Weapons/Dagger.tres" id="2_yrvtv"]
 [ext_resource type="AudioStream" uid="uid://p3fo0b67yvsc" path="res://Sounds/UI/Sold.wav" id="3_ub25h"]
 [ext_resource type="PackedScene" uid="uid://gr483yme2cvr" path="res://Scenes/Characters/Weapon.tscn" id="4_2jo8h"]
 [ext_resource type="AudioStream" uid="uid://cvt4cjnatyltj" path="res://Sounds/UI/DrinkPotion.wav" id="4_aqttd"]
@@ -359,7 +358,6 @@ radius = 20.0
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_xud6c")
-StartingWeapon = ExtResource("2_yrvtv")
 MaxHealth = 10.0
 Strength = 1
 Defence = 1
