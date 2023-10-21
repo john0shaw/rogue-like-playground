@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://ideif68yex50"]
+[gd_scene load_steps=19 format=3 uid="uid://ideif68yex50"]
 
 [ext_resource type="TileSet" uid="uid://bx36xmtqopq22" path="res://Art/Tilemaps/DungeonTiles.tres" id="1_vmwab"]
 [ext_resource type="Script" path="res://Scripts/Level/Room/FinishRoom.cs" id="2_gw5bs"]
+[ext_resource type="Resource" uid="uid://dieirbx7eeld8" path="res://Resources/Level/RandomTileReplacement/DungeonFloorTile.tres" id="3_p22xa"]
 [ext_resource type="Script" path="res://Scripts/Interactable/ExitDoor.cs" id="4_3flq3"]
 [ext_resource type="Texture2D" uid="uid://cpccjs777kwj4" path="res://Art/Interactable/ExitDoor.png" id="4_e8dtx"]
 [ext_resource type="Script" path="res://Scripts/Interactable/InteractableComponent.cs" id="5_c0co3"]
@@ -215,6 +216,7 @@ HasNorthConnection = true
 HasEastConnection = true
 HasSouthConnection = true
 HasWestConnection = true
+RandomFloorTiles = ExtResource("3_p22xa")
 
 [node name="ExitDoor" type="StaticBody2D" parent="."]
 position = Vector2(96, 38)
@@ -241,7 +243,7 @@ script = ExtResource("5_c0co3")
 visible = false
 position = Vector2(0, 5)
 sprite_frames = SubResource("SpriteFrames_txxu6")
-frame_progress = 0.489129
+frame_progress = 0.781204
 
 [node name="Fade" type="CanvasLayer" parent="ExitDoor"]
 

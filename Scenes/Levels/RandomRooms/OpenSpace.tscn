@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbw2a3wy0skty"]
+[gd_scene load_steps=8 format=3 uid="uid://dbw2a3wy0skty"]
 
 [ext_resource type="TileSet" uid="uid://bx36xmtqopq22" path="res://Art/Tilemaps/DungeonTiles.tres" id="1_l8sgg"]
 [ext_resource type="Script" path="res://Scripts/Level/Room.cs" id="2_aupni"]
 [ext_resource type="Script" path="res://Scripts/Level/RandomEnemiesComponent.cs" id="3_vb0mc"]
+[ext_resource type="Resource" uid="uid://dieirbx7eeld8" path="res://Resources/Level/RandomTileReplacement/DungeonFloorTile.tres" id="3_wwgqk"]
 [ext_resource type="TileSet" uid="uid://b2jmwey6366jk" path="res://Art/Tilemaps/Symbols.tres" id="4_8pl2r"]
 [ext_resource type="Script" path="res://Scripts/Level/EnemySpawner.cs" id="5_vir6w"]
 [ext_resource type="Resource" uid="uid://bxy63pmxses4v" path="res://Resources/Enemies/Bat.tres" id="6_y45h7"]
@@ -59,6 +60,7 @@ HasNorthConnection = true
 HasEastConnection = true
 HasSouthConnection = true
 HasWestConnection = true
+RandomFloorTiles = ExtResource("3_wwgqk")
 
 [node name="RandomEnemiesComponent" type="Node" parent="."]
 script = ExtResource("3_vb0mc")
