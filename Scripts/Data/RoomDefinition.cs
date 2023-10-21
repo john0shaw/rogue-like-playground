@@ -15,6 +15,7 @@ public class RoomDefinition
 
     public RoomDefinition(string filePath)
     {
+        GD.Print(filePath);
         PackedScene = ResourceLoader.Load<PackedScene>(filePath);
         Room room = (Room)PackedScene.Instantiate();
 

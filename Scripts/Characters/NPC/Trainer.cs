@@ -23,7 +23,7 @@ public partial class Trainer : NPCNode
 		Dialog dialog = SayCurrentDialog();
         NPCDialogState state = (NPCDialogState)_dialogStateMachine.State;
 
-        if (GameState.Level > 1)
+        if (GameState.Level > 2)
             dialog.DialogFinished += OpenShop;
 
 		_dialogStateMachine.TransitionTo("RandomChatter");

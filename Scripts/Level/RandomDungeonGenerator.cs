@@ -319,6 +319,9 @@ public partial class RandomDungeonGenerator : Node2D
         string filename = dirAccess.GetNext();
         while (filename != "")
         {
+            if (filename.EndsWith(".remap"))
+                filename = filename.TrimSuffix(".remap");
+
             _availableRooms.Add(new RoomDefinition(DungeonPartsLocation + "/" + filename));
             filename = dirAccess.GetNext();
         }
