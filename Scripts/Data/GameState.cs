@@ -63,6 +63,12 @@ static class GameState
         return FileAccess.FileExists(SAVE_LOCATION);
     }
 
+    public static void ClearSave()
+    {
+        if (FileAccess.FileExists(SAVE_LOCATION))
+            DirAccess.RemoveAbsolute(SAVE_LOCATION);
+    }
+
     private static float GetMultiplier(float multiplier)
     {
         return (1 - multiplier) + ((float)Level * multiplier);

@@ -195,7 +195,7 @@ script = ExtResource("5_4vw51")
 visible = false
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_pf0b4")
-frame_progress = 0.919509
+frame_progress = 0.171802
 
 [node name="DialogStateMachine" type="Node" parent="."]
 script = ExtResource("8_rubia")

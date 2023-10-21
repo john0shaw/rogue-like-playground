@@ -76,6 +76,7 @@ _data = {
 }
 
 [node name="Dialog" type="ColorRect"]
+z_index = 99
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

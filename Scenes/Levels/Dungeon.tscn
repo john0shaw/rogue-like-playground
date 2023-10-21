@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cer4yc8ksfohc"]
+[gd_scene load_steps=10 format=3 uid="uid://cer4yc8ksfohc"]
 
 [ext_resource type="Script" path="res://Scripts/Level/Dungeon.cs" id="1_abqjq"]
+[ext_resource type="Resource" uid="uid://bndntjhbwg8e7" path="res://Resources/Dialog/Story/YouDied.tres" id="2_07epj"]
 [ext_resource type="Script" path="res://Scripts/Level/RandomDungeonGenerator.cs" id="2_cxsqx"]
 [ext_resource type="PackedScene" uid="uid://dk48k57ophom0" path="res://Scenes/Characters/Player.tscn" id="3_ypx37"]
 [ext_resource type="PackedScene" uid="uid://dn2mj5b26joea" path="res://Scenes/UI/GameplayUI.tscn" id="4_vuu38"]
@@ -108,6 +109,7 @@ _data = {
 
 [node name="Dungeon" type="Node2D"]
 script = ExtResource("1_abqjq")
+DeathDialog = ExtResource("2_07epj")
 
 [node name="RandomDungeonGenerator" type="Node2D" parent="."]
 script = ExtResource("2_cxsqx")
@@ -138,3 +140,4 @@ libraries = {
 
 [connection signal="ChangedWeapon" from="Player" to="GameplayUI" method="_on_player_changed_weapon"]
 [connection signal="InventoryUpdated" from="Player" to="GameplayUI" method="_on_player_inventory_updated"]
+[connection signal="died" from="Player" to="." method="_on_player_died"]

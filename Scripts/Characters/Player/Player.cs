@@ -9,6 +9,7 @@ public partial class Player : CharacterBody2D
 
     [Signal] public delegate void InventoryUpdatedEventHandler();
 	[Signal] public delegate void ChangedWeaponEventHandler();
+	[Signal] public delegate void diedEventHandler();
 
     public static Player player;
 
@@ -95,11 +96,20 @@ public partial class Player : CharacterBody2D
 		return false;
 	}
 
-	public void TakeDamage(float damage, Vector2 damageSourcePosition)
+	public async void TakeDamage(float damage, Vector2 damageSourcePosition)
 	{
+		if (Health <= 0) return;
+
 		Logger.Log("Took " + damage + " damage");
 		_effectAnimationPlayer.Play("Hit");
 		Health -= (damage - GameState.PlayerDefenceDamageReduction());
+
+		if (Health <= 0)
+		{
+			_effectAnimationPlayer.Play("Die");
+			await ToSignal(_effectAnimationPlayer, "animation_finished");
+			EmitSignal("died");
+		}
 
 		// Knockback
 		GlobalPosition -= (GlobalPosition.DirectionTo(damageSourcePosition) * 4);

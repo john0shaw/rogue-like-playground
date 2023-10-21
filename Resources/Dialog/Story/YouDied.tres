@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogResource" load_steps=2 format=3 uid="uid://bndntjhbwg8e7"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/DialogResource.cs" id="1_735j0"]
+
+[resource]
+script = ExtResource("1_735j0")
+Speaker = ""
+Dialog = ["You have died..."]
+Confirm = false
