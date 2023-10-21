@@ -2,7 +2,7 @@
 using Godot;
 static class GameState
 {
-    const string SAVE_LOCATION = "res://save.tres";
+    const string SAVE_LOCATION = "user://save.tres";
 
     const float SPAWN_MULTIPLIER = 0.25f;
     const float HEALTH_MULTIPLIER = 0.1f;
@@ -67,6 +67,7 @@ static class GameState
 
     public static void ClearSave()
     {
+        GD.Print("Clearing Save");
         if (FileAccess.FileExists(SAVE_LOCATION))
             DirAccess.RemoveAbsolute(SAVE_LOCATION);
     }
