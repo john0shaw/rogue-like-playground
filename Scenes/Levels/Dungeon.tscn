@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cer4yc8ksfohc"]
+[gd_scene load_steps=12 format=3 uid="uid://cer4yc8ksfohc"]
 
 [ext_resource type="Script" path="res://Scripts/Level/Dungeon.cs" id="1_abqjq"]
 [ext_resource type="Resource" uid="uid://bndntjhbwg8e7" path="res://Resources/Dialog/Story/YouDied.tres" id="2_07epj"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dk48k57ophom0" path="res://Scenes/Characters/Player.tscn" id="3_ypx37"]
 [ext_resource type="PackedScene" uid="uid://dn2mj5b26joea" path="res://Scenes/UI/GameplayUI.tscn" id="4_vuu38"]
 [ext_resource type="AudioStream" uid="uid://dg2xa88hwtyt2" path="res://Sounds/Background/Goblins_Den_(Regular).wav" id="5_6ybgk"]
+[ext_resource type="Script" path="res://Scripts/UI/PauseScreen.cs" id="7_opp8h"]
 
 [sub_resource type="Animation" id="Animation_e1jsb"]
 resource_name = "FadeIn"
@@ -107,6 +108,9 @@ _data = {
 "RESET": SubResource("Animation_jyhs6")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_ue2tl"]
+font_size = 48
+
 [node name="Dungeon" type="Node2D"]
 script = ExtResource("1_abqjq")
 DeathDialog = ExtResource("2_07epj")
@@ -138,6 +142,44 @@ libraries = {
 "": SubResource("AnimationLibrary_qrbib")
 }
 
+[node name="PauseScreen" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("7_opp8h")
+
+[node name="ColorRect" type="ColorRect" parent="PauseScreen"]
+offset_right = 1200.0
+offset_bottom = 800.0
+color = Color(0, 0, 0, 0.501961)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseScreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.5
+offset_top = -70.0
+offset_right = 84.5
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PauseScreen/VBoxContainer"]
+layout_mode = 2
+text = "Paused"
+label_settings = SubResource("LabelSettings_ue2tl")
+
+[node name="QuitToMenu" type="Button" parent="PauseScreen/VBoxContainer"]
+layout_mode = 2
+text = "Quit To Menu"
+
+[node name="QuitToDesktop" type="Button" parent="PauseScreen/VBoxContainer"]
+layout_mode = 2
+text = "Quit To Desktop
+"
+
 [connection signal="ChangedWeapon" from="Player" to="GameplayUI" method="_on_player_changed_weapon"]
 [connection signal="InventoryUpdated" from="Player" to="GameplayUI" method="_on_player_inventory_updated"]
 [connection signal="died" from="Player" to="." method="_on_player_died"]
+[connection signal="pressed" from="PauseScreen/VBoxContainer/QuitToMenu" to="PauseScreen" method="_on_quit_to_menu_pressed"]
+[connection signal="pressed" from="PauseScreen/VBoxContainer/QuitToDesktop" to="PauseScreen" method="_on_quit_to_desktop_pressed"]
