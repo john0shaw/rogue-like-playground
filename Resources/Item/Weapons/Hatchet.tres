@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dpk0t2vlwy33a"]
+
+[ext_resource type="Texture2D" uid="uid://dvqy5426vcnf3" path="res://Art/Weapons/Hatchet.png" id="1_3ul51"]
+[ext_resource type="Script" path="res://Scripts/Resources/Item/Weapon.cs" id="2_ko5e0"]
+
+[resource]
+script = ExtResource("2_ko5e0")
+AttackType = 0
+Damage = 2
+ID = 11
+Name = "Hatchet"
+Value = 10
+Count = 1
+Texture = ExtResource("1_3ul51")
+SpawnChance = 0.1

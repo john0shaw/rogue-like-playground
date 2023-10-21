@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://08by8c353x37"]
+
+[ext_resource type="Texture2D" uid="uid://sv22nclp4c8o" path="res://Art/Weapons/BattleAxe.png" id="1_43g37"]
+[ext_resource type="Script" path="res://Scripts/Resources/Item/Weapon.cs" id="2_k2ssv"]
+
+[resource]
+script = ExtResource("2_k2ssv")
+AttackType = 0
+Damage = 4
+ID = 12
+Name = "Battle Axe"
+Value = 30
+Count = 1
+Texture = ExtResource("1_43g37")
+SpawnChance = 0.1

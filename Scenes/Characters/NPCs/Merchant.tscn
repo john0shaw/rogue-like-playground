@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://daf85xyrrc13a"]
+[gd_scene load_steps=34 format=3 uid="uid://daf85xyrrc13a"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/NPC/Merchant.cs" id="1_23m72"]
 [ext_resource type="Texture2D" uid="uid://bmagevsxp3qrh" path="res://Art/Characters/Merchant.png" id="2_nscgw"]
@@ -19,8 +19,11 @@
 [ext_resource type="Script" path="res://Scripts/UI/Inventory/InventoryGrid.cs" id="16_f4iih"]
 [ext_resource type="Script" path="res://Scripts/UI/NPCs/ItemByLevel.cs" id="18_psc0d"]
 [ext_resource type="Texture2D" uid="uid://sv22nclp4c8o" path="res://Art/Weapons/BattleAxe.png" id="18_sk6pb"]
-[ext_resource type="Resource" uid="uid://d281piwbn84bb" path="res://Resources/Item/Weapons/Sword.tres" id="19_2sue7"]
+[ext_resource type="Resource" uid="uid://cv37k4dhml2s3" path="res://Resources/Item/Weapons/Sword.tres" id="19_2sue7"]
+[ext_resource type="Resource" uid="uid://d281piwbn84bb" path="res://Resources/Item/Weapons/Dagger.tres" id="20_1jup5"]
 [ext_resource type="Resource" uid="uid://bmo7b8akcdern" path="res://Resources/Item/Weapons/Hammer.tres" id="20_kkjbv"]
+[ext_resource type="Resource" uid="uid://dpk0t2vlwy33a" path="res://Resources/Item/Weapons/Hatchet.tres" id="22_653yu"]
+[ext_resource type="Resource" uid="uid://08by8c353x37" path="res://Resources/Item/Weapons/BattleAxe.tres" id="24_gpv3k"]
 
 [sub_resource type="Animation" id="Animation_ix7gw"]
 resource_name = "Idle"
@@ -192,7 +195,7 @@ script = ExtResource("5_4vw51")
 visible = false
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_pf0b4")
-frame_progress = 0.442159
+frame_progress = 0.919509
 
 [node name="DialogStateMachine" type="Node" parent="."]
 script = ExtResource("8_rubia")
@@ -314,9 +317,9 @@ text = "g"
 
 [node name="AvailableWeapons" type="Node" parent="Shop"]
 
-[node name="Sword" type="Node" parent="Shop/AvailableWeapons"]
+[node name="Dagger" type="Node" parent="Shop/AvailableWeapons"]
 script = ExtResource("18_psc0d")
-Weapon = ExtResource("19_2sue7")
+Weapon = ExtResource("20_1jup5")
 Cost = 50
 MinLevel = 1
 
@@ -325,6 +328,24 @@ script = ExtResource("18_psc0d")
 Weapon = ExtResource("20_kkjbv")
 Cost = 75
 MinLevel = 2
+
+[node name="Hatchet" type="Node" parent="Shop/AvailableWeapons"]
+script = ExtResource("18_psc0d")
+Weapon = ExtResource("22_653yu")
+Cost = 75
+MinLevel = 3
+
+[node name="Sword" type="Node" parent="Shop/AvailableWeapons"]
+script = ExtResource("18_psc0d")
+Weapon = ExtResource("19_2sue7")
+Cost = 100
+MinLevel = 4
+
+[node name="Battle Axe" type="Node" parent="Shop/AvailableWeapons"]
+script = ExtResource("18_psc0d")
+Weapon = ExtResource("24_gpv3k")
+Cost = 150
+MinLevel = 5
 
 [node name="Label" type="Label" parent="Shop"]
 offset_right = 74.0

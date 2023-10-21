@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://gr483yme2cvr"]
 
-[ext_resource type="Texture2D" uid="uid://fcdyo3sc8mwr" path="res://Art/Weapons/Sword.png" id="1_fjrgm"]
+[ext_resource type="Texture2D" uid="uid://fcdyo3sc8mwr" path="res://Art/Weapons/Dagger.png" id="1_fjrgm"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/WeaponNode.cs" id="1_k1evk"]
 [ext_resource type="AudioStream" uid="uid://b7m6kjdhgnqbp" path="res://Sounds/Stab.wav" id="3_wjbdn"]
 [ext_resource type="AudioStream" uid="uid://x13sbuiwbuq4" path="res://Sounds/Swing.wav" id="4_e2uho"]

@@ -115,8 +115,6 @@ DungeonPartsLocation = "res://Scenes/Levels/RandomRooms"
 RoomTileSize = 27
 BaseGroundTile = Vector2i(5, 1)
 AlternateGroundTiles = [Vector2i(4, 3), Vector2i(5, 3), Vector2i(6, 3)]
-BaseWallTile = Vector2i(4, 3)
-EnemySpawnTile = Vector2i(0, 5)
 
 [node name="GameplayUI" parent="." instance=ExtResource("4_vuu38")]
 

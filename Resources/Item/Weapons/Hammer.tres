@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_6k1fk")
 AttackType = 0
-Damage = 1
+Damage = 2
 ID = 2
 Name = "Hammer"
 Value = 10

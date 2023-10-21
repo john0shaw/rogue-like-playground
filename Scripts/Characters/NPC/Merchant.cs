@@ -132,7 +132,10 @@ public partial class Merchant : NPCNode
     public void _on_buy_pressed()
     {
         if (Player.player.BuyItem(_weaponForSale))
+        {
             ClearSellItem();
+            _inventoryGrid.Update();
+        }
     }
 
     public void _on_inventory_grid_button_pressed()
