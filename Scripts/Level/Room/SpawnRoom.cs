@@ -4,6 +4,7 @@ using System;
 public partial class SpawnRoom : Room
 {
 	Merchant _merchant;
+	Trainer _trainer;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -11,11 +12,20 @@ public partial class SpawnRoom : Room
 		base._Ready();
 
 		_merchant = GetNode<Merchant>("Merchant");
+		_trainer = GetNode<Trainer>("Trainer");
+
+		_merchant.Disable();
+		_trainer.Disable();
 
 
-		if (GameState.Level < 2)
+		if (GameState.Level > 1)
 		{
-			_merchant.Disable();
+			_merchant.Enable();
+		}
+
+		if (GameState.Level > 2)
+		{
+			_trainer.Enable();
 		}
 	}
 

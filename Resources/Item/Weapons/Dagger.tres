@@ -1,15 +1,15 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://d281piwbn84bb"]
 
-[ext_resource type="Texture2D" uid="uid://fcdyo3sc8mwr" path="res://Art/Weapons/Dagger.png" id="1_orcif"]
-[ext_resource type="Script" path="res://Scripts/Resources/Item/Weapon.cs" id="2_hls4f"]
+[ext_resource type="Texture2D" uid="uid://fcdyo3sc8mwr" path="res://Art/Weapons/Dagger.png" id="1_0gltr"]
+[ext_resource type="Script" path="res://Scripts/Resources/Item/Weapon.cs" id="2_hgxap"]
 
 [resource]
-script = ExtResource("2_hls4f")
+script = ExtResource("2_hgxap")
 AttackType = 1
 Damage = 1
 ID = 1
-Name = "Sword"
+Name = "Dagger"
 Value = 5
 Count = 1
-Texture = ExtResource("1_orcif")
+Texture = ExtResource("1_0gltr")
 SpawnChance = 0.1

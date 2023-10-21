@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogResource" load_steps=2 format=3 uid="uid://cylpnpvs51ldl"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/DialogResource.cs" id="1_7arer"]
+
+[resource]
+script = ExtResource("1_7arer")
+Speaker = "Trainer"
+Dialog = ["I hate all of these rats!"]
+Confirm = false

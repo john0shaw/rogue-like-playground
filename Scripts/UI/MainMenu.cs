@@ -53,7 +53,7 @@ public partial class MainMenu : Node2D
 			Strength = 1,
 			Defence = 1
 		};
-		Weapon startingWeapon = ResourceLoader.Load<Weapon>(Player.StartingWeaponResource);
+		Weapon startingWeapon = ResourceLoader.Load<Weapon>(Player.StartingWeaponResource, cacheMode:ResourceLoader.CacheMode.Replace);
 		newSave.Inventory.Add(startingWeapon);
 		newSave.EquippedWeapon = startingWeapon;
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ideif68yex50"]
+[gd_scene load_steps=18 format=3 uid="uid://ideif68yex50"]
 
 [ext_resource type="TileSet" uid="uid://bx36xmtqopq22" path="res://Art/Tilemaps/DungeonTiles.tres" id="1_vmwab"]
 [ext_resource type="Script" path="res://Scripts/Level/Room/FinishRoom.cs" id="2_gw5bs"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://xnx0d5guldb1" path="res://Art/Interactable/Indicator/NoClick.png" id="6_sm5ml"]
 [ext_resource type="Texture2D" uid="uid://dkha2xybwmnn1" path="res://Art/Interactable/Indicator/LeftClick.png" id="7_420li"]
 [ext_resource type="PackedScene" uid="uid://daf85xyrrc13a" path="res://Scenes/Characters/NPCs/Merchant.tscn" id="9_rc45k"]
+[ext_resource type="PackedScene" uid="uid://bti2aw0bl1u26" path="res://Scenes/Characters/NPCs/Trainer.tscn" id="9_xyim2"]
 
 [sub_resource type="Animation" id="Animation_ye4f5"]
 resource_name = "Glow"
@@ -240,7 +241,7 @@ script = ExtResource("5_c0co3")
 visible = false
 position = Vector2(0, 5)
 sprite_frames = SubResource("SpriteFrames_txxu6")
-frame_progress = 0.715726
+frame_progress = 0.489129
 
 [node name="Fade" type="CanvasLayer" parent="ExitDoor"]
 
@@ -256,5 +257,8 @@ libraries = {
 
 [node name="Merchant" parent="." instance=ExtResource("9_rc45k")]
 position = Vector2(95, 147)
+
+[node name="Trainer" parent="." instance=ExtResource("9_xyim2")]
+position = Vector2(96, 147)
 
 [connection signal="interacted" from="ExitDoor/InteractableComponent" to="ExitDoor" method="_on_interactable_component_interacted"]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cweu7bowvqa71"]
+[gd_scene load_steps=6 format=3 uid="uid://cweu7bowvqa71"]
 
 [ext_resource type="TileSet" uid="uid://bx36xmtqopq22" path="res://Art/Tilemaps/DungeonTiles.tres" id="1_q11pu"]
 [ext_resource type="Script" path="res://Scripts/Level/Room/SpawnRoom.cs" id="2_raif3"]
 [ext_resource type="PackedScene" uid="uid://daf85xyrrc13a" path="res://Scenes/Characters/NPCs/Merchant.tscn" id="3_qvave"]
 [ext_resource type="PackedScene" uid="uid://pv60l6qnp5hf" path="res://Scenes/Characters/NPCs/Bartender.tscn" id="4_jc7ov"]
+[ext_resource type="PackedScene" uid="uid://bti2aw0bl1u26" path="res://Scenes/Characters/NPCs/Trainer.tscn" id="5_0l38t"]
 
 [node name="Room" type="TileMap"]
 position = Vector2(0, 1)
@@ -71,3 +72,6 @@ position = Vector2(104, 121)
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
 position = Vector2(176, 83)
+
+[node name="Trainer" parent="." instance=ExtResource("5_0l38t")]
+position = Vector2(72, 171)

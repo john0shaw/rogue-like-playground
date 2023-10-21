@@ -24,6 +24,7 @@ public partial class Player : CharacterBody2D
 	[Export] public AudioStream TradeSound;
 	[Export] public AudioStream DrinkSound;
 	[Export] public AudioStream EquipSound;
+	[Export] public AudioStream PowerUpSound;
 
     public float Health;
 	public float Mana;
@@ -83,7 +84,7 @@ public partial class Player : CharacterBody2D
 		}
         else if(Inventory.Count < INVENTORY_SIZE)
         {
-            Inventory.Add(item);
+            Inventory.Add((Item)item.Duplicate());
             EmitSignal("InventoryUpdated");
 			return true;
         }
@@ -161,7 +162,41 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
-	public bool BuyItem(ItemByLevel item)
+	public void UpgradeHealth(int cost)
+	{
+		if (Gold >= cost)
+		{
+			_audioStreamPlayer.Stream = PowerUpSound;
+			_audioStreamPlayer.Play();
+			Gold -= cost;
+			MaxHealth++;
+			Health = MaxHealth;
+		}
+	}
+
+    public void UpgradeStrength(int cost)
+    {
+        if (Gold >= cost)
+        {
+            _audioStreamPlayer.Stream = PowerUpSound;
+            _audioStreamPlayer.Play();
+            Gold -= cost;
+            Strength++;
+        }
+    }
+
+    public void UpgradeDefence(int cost)
+    {
+        if (Gold >= cost)
+        {
+            _audioStreamPlayer.Stream = PowerUpSound;
+            _audioStreamPlayer.Play();
+            Gold -= cost;
+            Defence++;
+        }
+    }
+
+    public bool BuyItem(ItemByLevel item)
 	{
 		if (Gold >= item.Cost)
 		{

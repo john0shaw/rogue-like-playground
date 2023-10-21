@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dk48k57ophom0"]
+[gd_scene load_steps=20 format=3 uid="uid://dk48k57ophom0"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/Player.cs" id="1_xud6c"]
 [ext_resource type="Texture2D" uid="uid://dfo6xvwnt0eyd" path="res://Art/Characters/Player.png" id="2_jt5nk"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://gr483yme2cvr" path="res://Scenes/Characters/Weapon.tscn" id="4_2jo8h"]
 [ext_resource type="AudioStream" uid="uid://cvt4cjnatyltj" path="res://Sounds/UI/DrinkPotion.wav" id="4_aqttd"]
 [ext_resource type="AudioStream" uid="uid://rrekdsq0l5kh" path="res://Sounds/12_Player_Movement_SFX/61_Hit_03.wav" id="4_mu4df"]
+[ext_resource type="AudioStream" uid="uid://dldkrgxqsy463" path="res://Sounds/PowerUp.mp3" id="5_k1oep"]
 [ext_resource type="AudioStream" uid="uid://bq1q1mo0jcu10" path="res://Sounds/UI/Equip.mp3" id="5_y31e6"]
 [ext_resource type="AudioStream" uid="uid://dx1ehgrl13ro8" path="res://Sounds/Damage.wav" id="8_w0ydd"]
 
@@ -364,6 +365,7 @@ Defence = 1
 TradeSound = ExtResource("3_ub25h")
 DrinkSound = ExtResource("4_aqttd")
 EquipSound = ExtResource("5_y31e6")
+PowerUpSound = ExtResource("5_k1oep")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_jt5nk")

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogResource" load_steps=2 format=3 uid="uid://dduxmi3oomdt2"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/DialogResource.cs" id="1_txot3"]
+
+[resource]
+script = ExtResource("1_txot3")
+Speaker = "Trainer"
+Dialog = ["I can't believe you've stumbled across me, what luck!", "I've been wandering these halls and I must have taken a wrong turn and wound up lost.", "If you could help me through the door here, I'll be able to help train you."]
+Confirm = false
