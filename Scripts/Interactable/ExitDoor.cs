@@ -7,6 +7,8 @@ public partial class ExitDoor : StaticBody2D
 	InteractableComponent _interactable;
 	AnimationPlayer _fadeAnimationPlayer;
 
+	bool _opened = false;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -23,6 +25,10 @@ public partial class ExitDoor : StaticBody2D
 
 	public async void _on_interactable_component_interacted()
 	{
+		if (_opened)
+			return;
+
+		_opened = true;
 		GameState.Level++;
 		GameState.Save();
 		_fadeAnimationPlayer.Play("Fade");
